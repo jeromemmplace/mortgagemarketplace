@@ -643,14 +643,14 @@
       "missingItems": "",
       "deck": {
         "pptx": {
-          "url": "https://docs.google.com/presentation/d/1jmFo1J5_D6sLyYS95b0m5FH_4_I2vr9W/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
+          "url": "https://raw.githubusercontent.com/jeromemmplace/mortgagemarketplace/main/assets/pptx/p177516622_Mastering-VA-Loans-The-Realtors-Competitive-Edge.pptx",
           "status": "Added",
-          "notes": ""
+          "notes": "Mastering-VA-Loans-The-Realtors-Competitive-Edge.pptx"
         },
         "pdf": {
-          "url": "https://drive.google.com/file/d/1BiXBsDtGloEtfxkxVMvRPWz9vq7xskzs/view?usp=drive_link",
+          "url": "https://raw.githubusercontent.com/jeromemmplace/mortgagemarketplace/main/assets/pdf/p177516622_Mastering-VA-Loans-The-Realtors-Competitive-Edge.pdf",
           "status": "Added",
-          "notes": ""
+          "notes": "Mastering-VA-Loans-The-Realtors-Competitive-Edge.pdf"
         }
       },
       "funnel": {
@@ -1267,7 +1267,7 @@
       "icon": "📅",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-02",
+      "lastUpdated": "2026-04-04",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -1278,9 +1278,9 @@
           "notes": "Placeholder"
         },
         "pdf": {
-          "url": "",
+          "url": "https://drive.google.com/file/d/1Tu1U5BMRvR3BYK1XXHA6FzLPM6HUFTr9/view?usp=sharing",
           "status": "Added",
-          "notes": "Placeholder"
+          "notes": ""
         }
       },
       "funnel": {
