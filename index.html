@@ -43,7 +43,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .file-actions{display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;}
 .resource-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}.resource-header h4{font-size:14px;font-weight:700;color:var(--navy);}
 .resource-list{display:flex;flex-direction:column;gap:10px;}
-.resource-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);}
+.resource-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);flex-wrap:wrap;}
 .resource-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}.resource-icon.funnel{background:#dbeafe;color:#2563eb;}.resource-icon.marketing{background:#fce7f3;color:#db2777;}.resource-icon.workflow{background:#d1fae5;color:#059669;}.resource-icon.checkin{background:#fef3c7;color:#d97706;}.resource-icon.email{background:#ede9fe;color:#7c3aed;}.resource-icon.canva{background:#e0f2fe;color:#0284c7;}.resource-icon.bonus{background:#fef3c7;color:#b45309;}
 .resource-info{flex:1;min-width:0;}.resource-label{font-size:13px;font-weight:600;color:var(--gray-800);}.resource-note{font-size:11px;color:var(--gray-500);margin-top:2px;}
 .resource-badge{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}.rb-added{background:var(--green-bg);color:#1a8a4a;}.rb-missing{background:var(--red-bg);color:#c0392b;}.rb-review{background:var(--orange-bg);color:#b37a00;}.rb-draft{background:var(--purple-bg);color:#6c3483;}.rb-final{background:var(--blue-pale);color:#1a6aab;}
@@ -51,36 +51,36 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .btn-dl{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--navy);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;}.btn-dl:hover{background:var(--navy-light);}
 .btn-placeholder{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;background:var(--gray-200);color:var(--gray-500);display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:none;cursor:default;}
 .btn-edit{background:var(--gold);color:var(--navy-dark);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition);}.btn-edit:hover{background:var(--gold-dark);}
-.btn-rename{background:none;border:1px solid var(--gray-300);color:var(--gray-600);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition);}.btn-rename:hover{background:var(--gray-100);color:var(--navy);}
-.btn-delete-res{background:none;border:1px solid var(--red-bg);color:var(--red);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition);}.btn-delete-res:hover{background:var(--red-bg);}
+.btn-rename{background:none;border:1px solid var(--gray-300);color:var(--gray-600);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-rename:hover{background:var(--gray-100);color:var(--navy);}
+.btn-delete-res{background:none;border:1px solid var(--red-bg);color:var(--red);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-delete-res:hover{background:var(--red-bg);}
+.btn-upload{background:var(--green);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-upload:hover{background:#27ae60;}
+.btn-replace{background:var(--orange);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-replace:hover{background:#e08e0b;}
 .btn-add-res{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:2px dashed var(--gray-300);background:var(--white);color:var(--gray-600);transition:var(--transition);margin-top:12px;}.btn-add-res:hover{border-color:var(--gold);color:var(--gold);background:#fffdf5;}
-.edit-row{display:none;gap:8px;align-items:center;padding:10px 14px;background:#fffbe6;border:1px solid var(--gold-light);border-radius:var(--radius-sm);margin-top:6px;}.edit-row.visible{display:flex;}
+.edit-row{display:none;gap:8px;align-items:center;padding:10px 14px;background:#fffbe6;border:1px solid var(--gold-light);border-radius:var(--radius-sm);margin-top:6px;width:100%;}.edit-row.visible{display:flex;}
 .edit-row input{flex:1;padding:8px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;}.edit-row input:focus{outline:none;border-color:var(--blue);}
 .edit-row select{padding:8px 10px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:12px;}
 .btn-save-url{background:var(--green);color:var(--white);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;}.btn-save-url:hover{background:#27ae60;}
 .btn-cancel-url{background:var(--gray-200);color:var(--gray-700);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;}
 .admin-only{display:none!important;}body.is-admin .admin-only{display:flex!important;}
 .tab-notes-area{margin-top:14px;}.tab-notes-area label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-500);margin-bottom:4px;display:block;}
-.save-indicator{font-size:11px;color:var(--green);font-weight:600;opacity:0;transition:opacity 0.3s;}.save-indicator.show{opacity:1;}
-/* PREVIEW MODAL */
+.save-indicator{font-size:11px;color:var(--green);font-weight:600;opacity:0;transition:opacity 0.3s;white-space:nowrap;}.save-indicator.show{opacity:1;}
 .prev-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.85);z-index:300;align-items:center;justify-content:center;padding:20px;}.prev-overlay.show{display:flex;}
 .prev-modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:1060px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.4);overflow:hidden;}
-.prev-head{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--navy);color:var(--white);flex-shrink:0;}
-.prev-head h3{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:12px;}
+.prev-head{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--navy);color:var(--white);flex-shrink:0;}.prev-head h3{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:12px;}
 .prev-btns{display:flex;gap:8px;align-items:center;}
 .prev-btn-dl{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;color:var(--navy-dark);background:var(--gold);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}.prev-btn-dl:hover{background:var(--gold-dark);}
 .prev-btn-tab{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;color:var(--white);background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:5px;}.prev-btn-tab:hover{background:rgba(255,255,255,0.25);}
 .prev-close{background:none;border:none;color:var(--white);font-size:22px;cursor:pointer;opacity:0.7;padding:0 4px;}.prev-close:hover{opacity:1;}
 .prev-body{flex:1;position:relative;background:var(--gray-100);}.prev-body iframe{width:100%;height:100%;border:none;}
-.prev-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;color:var(--gray-600);font-size:14px;text-align:center;padding:24px;}.prev-fallback .pfi{font-size:48px;opacity:0.4;}
-/* LOGIN */
-.login-ov{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.7);z-index:250;align-items:center;justify-content:center;}.login-ov.show{display:flex;}
-.login-box{background:var(--white);border-radius:var(--radius-lg);width:90%;max-width:380px;box-shadow:var(--shadow-lg);overflow:hidden;}
-.login-hd{background:var(--navy);color:var(--white);padding:20px 24px;text-align:center;}.login-hd h3{font-size:16px;font-weight:700;margin-bottom:4px;}.login-hd p{font-size:12px;opacity:0.7;}
-.login-bd{padding:24px;}.login-bd input{width:100%;padding:12px 14px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:14px;margin-bottom:14px;}.login-bd input:focus{outline:none;border-color:var(--gold);}
-.btn-login{width:100%;padding:12px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;}.btn-login:hover{background:var(--gold-dark);}
-.login-err{color:var(--red);font-size:12px;text-align:center;margin-top:8px;display:none;}
-/* ADD MODAL */
+.prev-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;color:var(--gray-600);font-size:14px;text-align:center;padding:24px;}
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.7);z-index:250;align-items:center;justify-content:center;}.modal-ov.show{display:flex;}
+.modal-box{background:var(--white);border-radius:var(--radius-lg);width:90%;max-width:420px;box-shadow:var(--shadow-lg);overflow:hidden;}
+.modal-hd{background:var(--navy);color:var(--white);padding:20px 24px;text-align:center;}.modal-hd h3{font-size:16px;font-weight:700;margin-bottom:4px;}.modal-hd p{font-size:12px;opacity:0.7;}
+.modal-bd{padding:24px;}.modal-bd label{display:block;font-size:12px;font-weight:600;color:var(--gray-700);margin-bottom:5px;}
+.modal-bd input{width:100%;padding:10px 14px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;margin-bottom:14px;}.modal-bd input:focus{outline:none;border-color:var(--gold);}
+.btn-modal{width:100%;padding:12px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:8px;}.btn-modal:hover{background:var(--gold-dark);}
+.btn-modal.secondary{background:var(--gray-200);color:var(--gray-700);}.btn-modal.danger{background:var(--red);color:var(--white);}
+.modal-err{color:var(--red);font-size:12px;text-align:center;margin-top:8px;display:none;}
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.6);z-index:200;align-items:center;justify-content:center;}.modal-overlay.show{display:flex;}
 .modal{background:var(--white);border-radius:var(--radius-lg);width:90%;max-width:640px;max-height:85vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
 .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--gray-200);background:var(--navy);color:var(--white);border-radius:var(--radius-lg) var(--radius-lg) 0 0;}.modal-head h3{font-size:16px;font-weight:700;}
@@ -89,17 +89,25 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .form-group input,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;background:var(--gray-50);}.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--blue);background:var(--white);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--gray-200);}.btn-cancel{padding:9px 18px;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-700);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;}.btn-save{padding:9px 18px;border:none;background:var(--gold);color:var(--navy-dark);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;}.btn-save:hover{background:var(--gold-dark);}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:var(--white);padding:12px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:400;}.toast.show{transform:translateY(0);opacity:1;}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:var(--white);padding:12px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:400;}.toast.show{transform:translateY(0);opacity:1;}.toast.error{background:var(--red);}
+.loading-bar{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:999;transition:width 0.3s;width:0;}.loading-bar.active{width:60%;}.loading-bar.done{width:100%;}
+.error-state{text-align:center;padding:60px 24px;color:var(--gray-600);}.error-state .err-icon{font-size:48px;margin-bottom:16px;opacity:0.5;}.error-state h3{font-size:18px;color:var(--navy);margin-bottom:8px;}.error-state p{font-size:14px;max-width:480px;margin:0 auto;line-height:1.6;}
 @media(max-width:768px){.top-bar{padding:12px 16px;flex-wrap:wrap;gap:8px;}.summary-strip{padding:14px 16px;gap:12px;}.toolbar{padding:12px 16px;}.project-grid{padding:16px;}.overview-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.search-box{max-width:100%;}.card-header{padding:12px 14px;}.tab-panel{padding:14px;}.deck-files-strip{flex-direction:column;}.deck-file-card{min-width:0;}.prev-modal{height:75vh;}}
 </style>
 </head>
 <body>
+<div class="loading-bar" id="loadingBar"></div>
 <header class="top-bar">
-  <div class="top-bar-left"><div class="logo-mark" id="logoMark">M</div><div><h1 id="headerTitle">Mortgage Marketplace LLC</h1><div class="subtitle" id="headerSub">Presentation Tracker &amp; Resource Hub</div></div><button class="btn-top admin-only" style="margin-left:8px;padding:5px 8px;font-size:11px;" onclick="editHeader()">&#9998;</button></div>
+  <div class="top-bar-left">
+    <div class="logo-mark" id="logoMark">M</div>
+    <div><h1 id="headerTitle">Mortgage Marketplace LLC</h1><div class="subtitle" id="headerSub">Presentation Tracker &amp; Resource Hub</div></div>
+    <button class="btn-top admin-only" style="padding:5px 8px;font-size:11px;" onclick="editHeader()">&#9998;</button>
+  </div>
   <div class="top-bar-right">
-    <span class="save-indicator admin-only" id="saveIndicator">All changes saved</span>
+    <span class="save-indicator admin-only" id="saveIndicator">Saved</span>
     <button class="btn-top gold admin-only" onclick="openAddModal()">+ Add Presentation</button>
-    <button class="btn-top admin-only" onclick="openSettingsModal()">&#9881; Settings</button>
+    <button class="btn-top admin-only" onclick="openSettings()">&#9881; Settings</button>
+    <button class="btn-top admin-only" onclick="syncFromGitHub()">&#8635; Sync</button>
     <button class="btn-top" id="adminBtn" onclick="toggleAdmin()">&#128274; Admin</button>
   </div>
 </header>
@@ -107,180 +115,394 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <div class="toolbar">
   <div class="search-box"><span class="icon">&#128269;</span><input type="text" id="searchInput" placeholder="Search presentations..." oninput="applyFilters()"></div>
   <select class="filter-select" id="statusFilter" onchange="applyFilters()"><option value="">All Statuses</option><option value="Complete">Complete</option><option value="In Progress">In Progress</option><option value="Needs Review">Needs Review</option><option value="Not Started">Not Started</option><option value="Missing Assets">Missing Assets</option><option value="Waiting on Link">Waiting on Link</option><option value="Waiting on Approval">Waiting on Approval</option></select>
-  <select class="filter-select" id="categoryFilter" onchange="applyFilters()"><option value="">All Categories</option><option value="deck-missing">Missing Deck Files</option><option value="funnel-missing">Missing Funnel</option><option value="marketing-missing">Missing Marketing</option><option value="workflow-missing">Missing Workflow</option><option value="checkin-missing">Missing Check-in</option></select>
   <div class="toolbar-spacer"></div>
   <button class="btn-action btn-expand" onclick="toggleAll(false)">&#9660; Expand All</button>
   <button class="btn-action btn-expand" onclick="toggleAll(true)">&#9650; Collapse All</button>
 </div>
-<div class="project-grid" id="projectGrid"></div>
-<!-- LOGIN -->
-<div class="login-ov" id="loginOv"><div class="login-box"><div class="login-hd"><h3>&#128274; Admin Access</h3><p>Enter password to manage resources</p></div><div class="login-bd"><input type="password" id="adminPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"><button class="btn-login" onclick="doLogin()">Unlock Admin Mode</button><div class="login-err" id="loginErr">Incorrect password</div></div></div></div>
-<!-- ADD MODAL -->
-<div class="modal-overlay" id="modalOverlay"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add New Presentation</h3><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>Presentation Title</label><input type="text" id="fTitle" placeholder="e.g. YouTube Secrets for Real Estate"></div><div class="form-group"><label>Short Description</label><input type="text" id="fDesc" placeholder="Brief description of this class"></div><div class="form-row"><div class="form-group"><label>Owner</label><input type="text" id="fOwner" value="Mike Gillett"></div><div class="form-group"><label>Status</label><select id="fStatus"><option>Complete</option><option>In Progress</option><option>Needs Review</option><option>Not Started</option><option>Missing Assets</option><option>Waiting on Link</option><option>Waiting on Approval</option></select></div></div><div class="form-group"><label>Emoji Icon</label><input type="text" id="fIcon" value="&#128218;" maxlength="4" style="width:60px;"></div></div><div class="modal-foot"><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="savePresentation()">Save Presentation</button></div></div></div>
-<!-- SETTINGS MODAL -->
-<div class="modal-overlay" id="settingsOverlay"><div class="modal"><div class="modal-head"><h3>GitHub Sync Settings</h3><button class="modal-close" onclick="closeSettingsModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>GitHub Token</label><input type="password" id="ghToken" placeholder="Paste GitHub token"></div><div class="form-row"><div class="form-group"><label>Repo Owner</label><input type="text" id="ghOwner" value="jeromemmplace"></div><div class="form-group"><label>Repo Name</label><input type="text" id="ghRepo" value="mortgagemarketplace"></div></div><div class="form-row"><div class="form-group"><label>Branch</label><input type="text" id="ghBranch" value="main"></div><div class="form-group"><label>Data File Path</label><input type="text" id="ghPath" value="data.json"></div></div><div style="font-size:12px;color:var(--gray-600);line-height:1.45;">Public visitors read from data.json in the repo. Admin saves write back to the same file through the GitHub API. Use Import Legacy Browser Data one time only if your old progress still lives in this browser.</div></div><div class="modal-foot"><button class="btn-cancel" onclick="importLegacyLocalData()">Import Legacy Browser Data</button><button class="btn-cancel" onclick="closeSettingsModal()">Cancel</button><button class="btn-save" onclick="saveGitHubSettings()">Save Settings</button></div></div></div>
-<!-- PREVIEW -->
+<div class="project-grid" id="projectGrid"><div style="text-align:center;padding:48px;color:var(--gray-500);">Loading...</div></div>
+
+<div class="modal-ov" id="loginOv"><div class="modal-box"><div class="modal-hd"><h3>&#128274; Admin Access</h3><p>Enter password to manage resources</p></div><div class="modal-bd"><input type="password" id="adminPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"><button class="btn-modal" onclick="doLogin()">Unlock Admin Mode</button><div class="modal-err" id="loginErr">Incorrect password</div></div></div></div>
+
+<div class="modal-ov" id="settingsOv"><div class="modal-box" style="max-width:480px;"><div class="modal-hd"><h3>&#9881; GitHub Settings</h3><p>Connect to GitHub for shared storage</p></div><div class="modal-bd">
+  <label>GitHub Personal Access Token</label><input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
+  <label>Repo Owner</label><input type="text" id="cfgOwner" placeholder="jeromemmplace">
+  <label>Repo Name</label><input type="text" id="cfgRepo" placeholder="mortgagemarketplace">
+  <label>Branch</label><input type="text" id="cfgBranch" value="main">
+  <label>data.json Path</label><input type="text" id="cfgDataPath" value="data.json">
+  <p style="font-size:11px;color:var(--gray-500);margin:-8px 0 14px;">Token needs "repo" scope. <a href="https://github.com/settings/tokens/new?scopes=repo&description=Presentation+Tracker" target="_blank" style="color:var(--blue);">Generate one here</a></p>
+  <button class="btn-modal" onclick="saveSettings()">Save Settings</button>
+  <button class="btn-modal secondary" onclick="testConnection()">Test Connection</button>
+  <button class="btn-modal secondary" onclick="importLegacy()">Import Legacy Browser Data</button>
+  <button class="btn-modal secondary" onclick="closeSettings()">Cancel</button>
+</div></div></div>
+
+<div class="modal-overlay" id="modalOverlay"><div class="modal"><div class="modal-head"><h3>Add New Presentation</h3><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>Presentation Title</label><input type="text" id="fTitle" placeholder="e.g. YouTube Secrets for Real Estate"></div><div class="form-group"><label>Short Description</label><input type="text" id="fDesc" placeholder="Brief description of this class"></div><div class="form-row"><div class="form-group"><label>Owner</label><input type="text" id="fOwner" value="Mike Gillett"></div><div class="form-group"><label>Status</label><select id="fStatus"><option>Complete</option><option>In Progress</option><option>Needs Review</option><option>Not Started</option><option>Missing Assets</option><option>Waiting on Link</option><option>Waiting on Approval</option></select></div></div><div class="form-group"><label>Emoji Icon</label><input type="text" id="fIcon" value="&#128218;" maxlength="4" style="width:60px;"></div></div><div class="modal-foot"><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="addPresentation()">Save Presentation</button></div></div></div>
+
 <div class="prev-overlay" id="prevOv"><div class="prev-modal"><div class="prev-head"><h3 id="prevTitle">Preview</h3><div class="prev-btns"><a class="prev-btn-dl" id="prevDl" href="#" target="_blank">&#11015; Download</a><a class="prev-btn-tab" id="prevTab" href="#" target="_blank">&#8599; Open in New Tab</a><button class="prev-close" onclick="closePrev()">&times;</button></div></div><div class="prev-body" id="prevBody"></div></div></div>
+
 <div class="toast" id="toast"></div>
+
 <script>
-const ADMIN_PASS='mm2026';let isAdmin=false;
-function toggleAdmin(){if(isAdmin){isAdmin=false;document.body.classList.remove('is-admin');document.getElementById('adminBtn').innerHTML='&#128274; Admin';document.getElementById('adminBtn').className='btn-top';renderAll();showToast('Viewer mode');return;}document.getElementById('loginOv').classList.add('show');document.getElementById('adminPass').value='';document.getElementById('loginErr').style.display='none';setTimeout(()=>document.getElementById('adminPass').focus(),100);}
-function doLogin(){if(document.getElementById('adminPass').value===ADMIN_PASS){isAdmin=true;document.body.classList.add('is-admin');document.getElementById('loginOv').classList.remove('show');document.getElementById('adminBtn').innerHTML='&#128275; Logout';document.getElementById('adminBtn').className='btn-top logout';renderAll();showToast('Admin mode activated');}else{document.getElementById('loginErr').style.display='block';}}
-function openPrev(url,label){document.getElementById('prevTitle').textContent=label;document.getElementById('prevDl').href=url;document.getElementById('prevTab').href=url;const body=document.getElementById('prevBody');const ext=url.split('.').pop().split('?')[0].toLowerCase();const ok=url.includes('canva.com')||url.includes('google.com')||url.includes('gamma.app')||url.includes('connectionincorporated.com')||['pdf','html','htm'].includes(ext);body.innerHTML=ok?'<iframe src="'+url+'" allow="fullscreen"></iframe>':'<div class="prev-fallback"><div class="pfi">&#128196;</div><div>Preview not available for this file type.<br>Use the buttons above to download or open in a new tab.</div></div>';document.getElementById('prevOv').classList.add('show');}
-function closePrev(){document.getElementById('prevOv').classList.remove('show');document.getElementById('prevBody').innerHTML='';}
-const DEFAULTS=[{t:'YouTube Secrets for Real Estate',d:'Build and grow a YouTube channel that generates real estate leads.',i:'\u{1F3AC}'},{t:'LinkedIn for Real Estate Agents',d:'Leverage LinkedIn to connect with referral partners and clients.',i:'\u{1F517}'},{t:'Instagram for Real Estate Agents',d:'Use Instagram to build your brand and attract local buyers and sellers.',i:'\u{1F4F7}'},{t:'VA Home Loans',d:'VA loan program education for realtors working with veterans.',i:'\u{1F393}'},{t:'Database Marketing',d:'Turn your existing database into a consistent lead generation engine.',i:'\u{1F4C8}'},{t:'Business Planning',d:'Annual and quarterly planning framework for real estate professionals.',i:'\u{1F4CB}'},{t:'12 Week Year',d:'Implement the 12 Week Year productivity system for agents.',i:'\u{1F4C5}'},{t:'Down Payment Assistance',d:'Down payment assistance programs realtors should know.',i:'\u{1F4B0}'},{t:'Investor Financing',d:'Financing strategies for real estate investors.',i:'\u{1F4BC}'},{t:'Renovation Loans',d:'Renovation and rehab loan options for buyers and investors.',i:'\u{1F3E0}'},{t:'AI for Realtors',d:'AI tools and workflows to save time and win more deals.',i:'\u{1F916}'},{t:'Facebook Marketing/Lead Gen',d:'Facebook ad strategies and lead generation for real estate.',i:'\u{1F4F0}'},{t:'Getting Found in AI Search',d:'How to optimize for AI search engines as a real estate professional.',i:'\u{1F50D}'}];
-function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Feed Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Email Banner',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Bonus / Lead Magnet',url:'',status:'Added',notes:'Placeholder',group:'bonus'},{label:'Promotional Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Thank You Email - After Attending Class',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Missed Class Email',url:'',status:'Added',notes:'Placeholder',group:'emails'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'},{label:'Automation Doc',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
-const LEGACY_SK='mm_presentation_tracker';
-let presentations=[];
-let saveTimeout;
-let lastLoadedSha='';
+/* ═══════════════════════════════════
+   CONFIG — localStorage for settings ONLY
+═══════════════════════════════════ */
+const ADMIN_PASS='mm2026';
+const DEF={owner:'jeromemmplace',repo:'mortgagemarketplace',branch:'main',dataPath:'data.json'};
+let isAdmin=false, presentations=[], dataSha=null, saving=false;
 
-function showSavedIndicator(msg='All changes saved'){
-  const s=document.getElementById('saveIndicator');
-  if(s){
-    s.textContent=msg;
-    s.classList.add('show');
-    setTimeout(()=>{s.textContent='All changes saved';s.classList.remove('show');},2000);
-  }
+function getCfg(){return{
+  token:localStorage.getItem('mm_gh_token')||'',
+  owner:localStorage.getItem('mm_gh_owner')||DEF.owner,
+  repo:localStorage.getItem('mm_gh_repo')||DEF.repo,
+  branch:localStorage.getItem('mm_gh_branch')||DEF.branch,
+  dataPath:localStorage.getItem('mm_gh_datapath')||DEF.dataPath
+};}
+function saveCfg(c){
+  localStorage.setItem('mm_gh_token',c.token);localStorage.setItem('mm_gh_owner',c.owner);
+  localStorage.setItem('mm_gh_repo',c.repo);localStorage.setItem('mm_gh_branch',c.branch);
+  localStorage.setItem('mm_gh_datapath',c.dataPath);
 }
 
-async function loadData(){
-  const settings = loadGitHubSettings();
-  const publicPath = (settings.path || 'data.json').replace(/^\/+/, '');
-  const publicUrl = './' + publicPath + '?ts=' + Date.now();
+/* ═══════════════════════════════════
+   GITHUB API
+═══════════════════════════════════ */
+function rawUrl(path){const c=getCfg();return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path||c.dataPath}?t=${Date.now()}`;}
+function apiUrl(path){const c=getCfg();return`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}`;}
+function apiH(){const c=getCfg();const h={'Content-Type':'application/json'};if(c.token)h['Authorization']='token '+c.token;return h;}
+
+/* Check if a URL points to a file inside this repo */
+function isRepoFile(url){
+  if(!url)return false;
+  const c=getCfg();
+  return url.includes(`raw.githubusercontent.com/${c.owner}/${c.repo}/`)||url.includes(`github.com/${c.owner}/${c.repo}/`);
+}
+/* Extract repo path from a raw GitHub URL */
+function repoPathFromUrl(url){
+  const c=getCfg();
+  const prefix=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/`;
+  if(url.startsWith(prefix))return url.substring(prefix.length).split('?')[0];
+  return null;
+}
+
+async function fetchDataFromGitHub(){
+  setLoading(true);
+  const c=getCfg();
   try{
-    const res = await fetch(publicUrl, {cache:'no-store'});
-    if(res.ok){
-      const data = await res.json();
-      if(Array.isArray(data.presentations)){
-        presentations = data.presentations;
-      }else if(Array.isArray(data)){
-        presentations = data;
-      }else{
-        presentations = DEFAULTS.map(d=>makePresentation(d.t,d.d,d.i));
-      }
-      renderAll();
-      return;
-    }
-  }catch(e){}
-  presentations = DEFAULTS.map(d=>makePresentation(d.t,d.d,d.i));
-  renderAll();
+    const res=await fetch(rawUrl());
+    if(!res.ok)throw new Error('data.json not found (HTTP '+res.status+')');
+    const data=await res.json();
+    if(data.presentations){presentations=data.presentations;if(data.header){saveHeaderLocal(data.header);applyHeader();}}
+    else if(Array.isArray(data)){presentations=data;}
+    try{const mr=await fetch(apiUrl(c.dataPath)+'?ref='+c.branch);if(mr.ok){const m=await mr.json();dataSha=m.sha;}}catch(e){}
+    runMigration();setLoading(false);return true;
+  }catch(e){console.error('Fetch failed:',e);setLoading(false);return false;}
 }
 
-async function getFileMeta(settings){
-  const apiUrl = `https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/contents/${settings.path}?ref=${encodeURIComponent(settings.branch)}`;
-  const res = await fetch(apiUrl,{
-    headers:{
-      'Accept':'application/vnd.github+json',
-      'Authorization':'Bearer ' + settings.token
-    }
+async function saveDataToGitHub(){
+  if(saving)return false;const c=getCfg();
+  if(!c.token){showToast('Set GitHub token in Settings first','error');return false;}
+  saving=true;setSaveStatus('Saving...');
+  try{
+    const hd=loadHeaderLocal();
+    const payload=JSON.stringify({presentations,header:hd},null,2);
+    const content=btoa(unescape(encodeURIComponent(payload)));
+    const body={message:'Update tracker — '+new Date().toISOString().slice(0,16),content,branch:c.branch};
+    if(dataSha)body.sha=dataSha;
+    const res=await fetch(apiUrl(c.dataPath),{method:'PUT',headers:apiH(),body:JSON.stringify(body)});
+    if(!res.ok){const err=await res.json();throw new Error(err.message||'Save failed');}
+    const result=await res.json();dataSha=result.content.sha;
+    setSaveStatus('Saved to GitHub');saving=false;return true;
+  }catch(e){console.error('Save error:',e);setSaveStatus('Save failed!',true);showToast('Save failed: '+e.message,'error');saving=false;return false;}
+}
+
+async function uploadFileToGitHub(filePath,fileContent,commitMsg){
+  const c=getCfg();if(!c.token){showToast('Set GitHub token first','error');return null;}
+  try{
+    let sha=null;
+    try{const ck=await fetch(apiUrl(filePath)+'?ref='+c.branch,{headers:apiH()});if(ck.ok){const m=await ck.json();sha=m.sha;}}catch(e){}
+    const body={message:commitMsg||'Upload '+filePath,content:fileContent,branch:c.branch};
+    if(sha)body.sha=sha;
+    const res=await fetch(apiUrl(filePath),{method:'PUT',headers:apiH(),body:JSON.stringify(body)});
+    if(!res.ok){const err=await res.json();throw new Error(err.message);}
+    return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${filePath}`;
+  }catch(e){showToast('Upload failed: '+e.message,'error');return null;}
+}
+
+async function deleteFileFromGitHub(filePath){
+  const c=getCfg();if(!c.token)return false;
+  try{
+    const ck=await fetch(apiUrl(filePath)+'?ref='+c.branch,{headers:apiH()});
+    if(!ck.ok)return false;const m=await ck.json();
+    const res=await fetch(apiUrl(filePath),{method:'DELETE',headers:apiH(),body:JSON.stringify({message:'Delete '+filePath,sha:m.sha,branch:c.branch})});
+    return res.ok;
+  }catch(e){return false;}
+}
+
+async function renameFileInGitHub(oldPath,newPath){
+  const c=getCfg();if(!c.token)return null;
+  try{
+    // Fetch old file content
+    const ck=await fetch(apiUrl(oldPath)+'?ref='+c.branch,{headers:apiH()});
+    if(!ck.ok)return null;const m=await ck.json();
+    // Create new file with same content
+    const res=await fetch(apiUrl(newPath),{method:'PUT',headers:apiH(),body:JSON.stringify({message:'Rename '+oldPath+' to '+newPath,content:m.content,branch:c.branch})});
+    if(!res.ok)return null;
+    // Delete old file
+    await fetch(apiUrl(oldPath),{method:'DELETE',headers:apiH(),body:JSON.stringify({message:'Delete old '+oldPath,sha:m.sha,branch:c.branch})});
+    return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${newPath}`;
+  }catch(e){showToast('Rename failed: '+e.message,'error');return null;}
+}
+
+/* ═══════════════════════════════════
+   HEADER
+═══════════════════════════════════ */
+function loadHeaderLocal(){try{const r=localStorage.getItem('mm_tracker_header');if(r)return JSON.parse(r);}catch(e){}return{title:'Mortgage Marketplace LLC',subtitle:'Presentation Tracker & Resource Hub',logo:'M'};}
+function saveHeaderLocal(hd){try{localStorage.setItem('mm_tracker_header',JSON.stringify(hd));}catch(e){}}
+function applyHeader(){const hd=loadHeaderLocal();document.getElementById('headerTitle').textContent=hd.title;document.getElementById('headerSub').textContent=hd.subtitle;document.getElementById('logoMark').textContent=hd.logo;document.title=hd.title+' | '+hd.subtitle;}
+function editHeader(){if(!isAdmin)return;const hd=loadHeaderLocal();const t=prompt('Company / Site Title:',hd.title);if(t===null)return;const s=prompt('Subtitle:',hd.subtitle);if(s===null)return;const l=prompt('Logo Letter (1-2 chars):',hd.logo);if(l===null)return;hd.title=t.trim()||'Mortgage Marketplace LLC';hd.subtitle=s.trim()||'Presentation Tracker & Resource Hub';hd.logo=l.trim().substring(0,2)||'M';saveHeaderLocal(hd);applyHeader();saveDataToGitHub();showToast('Header updated');}
+
+/* ═══════════════════════════════════
+   MIGRATION
+═══════════════════════════════════ */
+function runMigration(){
+  presentations.forEach(p=>{if(!p.marketing)return;const labels=p.marketing.resources.map(r=>r.label);
+    const needed=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Story Post',group:'canva'},{label:'Instagram Feed Post',group:'canva'},{label:'Email Banner',group:'canva'},{label:'Class Bonus / Lead Magnet',group:'bonus'},{label:'Promotional Email 1',group:'emails'},{label:'Promotional Email 2',group:'emails'},{label:'Promotional Email 3',group:'emails'},{label:'Confirmation & Reminders Email 1',group:'emails'},{label:'Confirmation & Reminders Email 2',group:'emails'},{label:'Confirmation & Reminders Email 3',group:'emails'},{label:'Thank You Email - After Attending Class',group:'emails'},{label:'Missed Class Email',group:'emails'}];
+    needed.forEach(n=>{if(!labels.includes(n.label))p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});});
+    p.marketing.resources.forEach(r=>{if(!r.group){const eL=['Promotional Email 1','Promotional Email 2','Promotional Email 3','Confirmation & Reminders Email 1','Confirmation & Reminders Email 2','Confirmation & Reminders Email 3','Thank You Email - After Attending Class','Missed Class Email'];const cL=['Class Flyer','Facebook Post','Instagram Story Post','Instagram Feed Post','Email Banner','Email Banners','Social Graphics'];const bL=['Class Bonus / Lead Magnet','AI Content System & Playbook'];if(eL.includes(r.label))r.group='emails';else if(cL.includes(r.label))r.group='canva';else if(bL.includes(r.label))r.group='bonus';else r.group='canva';}});
   });
-  if(res.status===404) return {sha:'', exists:false, apiUrl};
-  if(!res.ok){
-    const txt = await res.text();
-    throw new Error('GitHub read failed: ' + txt);
-  }
-  const data = await res.json();
-  return {sha:data.sha || '', exists:true, apiUrl};
 }
 
-async function saveData(){
-  if(!isAdmin) return;
-  const settings = loadGitHubSettings();
-  if(!settings.token || !settings.owner || !settings.repo || !settings.branch || !settings.path){
-    showToast('Complete GitHub settings first');
-    return;
-  }
-  try{
-    const meta = await getFileMeta(settings);
-    const payload = {
-      message: 'Update tracker data',
-      content: btoa(unescape(encodeURIComponent(JSON.stringify({presentations}, null, 2)))),
-      branch: settings.branch
-    };
-    if(meta.exists && meta.sha) payload.sha = meta.sha;
-    const res = await fetch(meta.apiUrl,{
-      method:'PUT',
-      headers:{
-        'Accept':'application/vnd.github+json',
-        'Authorization':'Bearer ' + settings.token,
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
-    if(!res.ok){
-      const txt = await res.text();
-      throw new Error(txt);
-    }
-    const out = await res.json();
-    lastLoadedSha = out.content && out.content.sha ? out.content.sha : '';
-    showSavedIndicator();
-  }catch(e){
-    console.error(e);
-    showToast('GitHub save failed');
-  }
-}
-// Migrate: update existing presentations to new marketing structure
-presentations.forEach(p=>{if(!p.marketing)return;const labels=p.marketing.resources.map(r=>r.label);const needed=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Story Post',group:'canva'},{label:'Instagram Feed Post',group:'canva'},{label:'Email Banner',group:'canva'},{label:'Class Bonus / Lead Magnet',group:'bonus'},{label:'Promotional Email 1',group:'emails'},{label:'Promotional Email 2',group:'emails'},{label:'Promotional Email 3',group:'emails'},{label:'Confirmation & Reminders Email 1',group:'emails'},{label:'Confirmation & Reminders Email 2',group:'emails'},{label:'Confirmation & Reminders Email 3',group:'emails'},{label:'Thank You Email - After Attending Class',group:'emails'},{label:'Missed Class Email',group:'emails'}];needed.forEach(n=>{if(!labels.includes(n.label)){p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});}});p.marketing.resources.forEach(r=>{if(!r.group){const emailLabels=['Promotional Email 1','Promotional Email 2','Promotional Email 3','Confirmation & Reminders Email 1','Confirmation & Reminders Email 2','Confirmation & Reminders Email 3','Thank You Email - After Attending Class','Missed Class Email'];const canvaLabels=['Class Flyer','Facebook Post','Instagram Story Post','Instagram Feed Post','Email Banner','Email Banners','Social Graphics'];const bonusLabels=['Class Bonus / Lead Magnet','AI Content System & Playbook'];if(emailLabels.includes(r.label))r.group='emails';else if(canvaLabels.includes(r.label))r.group='canva';else if(bonusLabels.includes(r.label))r.group='bonus';else r.group='canva';}});});
+/* ═══════════════════════════════════
+   HELPERS
+═══════════════════════════════════ */
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function statusBadge(s){const m={'Complete':'badge-complete','In Progress':'badge-progress','Needs Review':'badge-review','Not Started':'badge-not-started','Missing Assets':'badge-missing','Waiting on Link':'badge-waiting-link','Waiting on Approval':'badge-waiting-approval'};return'<span class="badge '+(m[s]||'badge-not-started')+'">'+s+'</span>';}
 function resBadge(s){const m={'Added':'rb-added','Missing':'rb-missing','Needs Review':'rb-review','Draft':'rb-draft','Final':'rb-final'};return'<span class="resource-badge '+(m[s]||'rb-draft')+'">'+s+'</span>';}
 function countAll(p){return 2+p.funnel.resources.length+p.marketing.resources.length+p.workflow.resources.length+p.checkin.resources.length;}
 function countLinked(p){let c=0;if(p.deck.pptx.url)c++;if(p.deck.pdf.url)c++;[p.funnel,p.marketing,p.workflow,p.checkin].forEach(cat=>c+=cat.resources.filter(r=>r.url).length);return c;}
 function pctVal(p){const t=countAll(p),f=countLinked(p);return t?Math.round(f/t*100):0;}
-function showEditDeck(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input').value=p.deck[type].url;el.querySelector('input').focus();}}
-function saveDeckUrl(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);const url=el.querySelector('input').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p.deck[type].url=url;p.deck[type].status=status;p.deck[type].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);saveData();renderAll();showToast(type.toUpperCase()+' link saved');}
-function showEditRes(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input').value=p[cat].resources[idx].url;el.querySelector('input').focus();}}
-function saveResUrl(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);const url=el.querySelector('input').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p[cat].resources[idx].url=url;p[cat].resources[idx].status=status;p[cat].resources[idx].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);saveData();renderAll();showToast('Link saved for '+p[cat].resources[idx].label);}
+function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type==='error'?' error':'');setTimeout(()=>t.classList.remove('show'),3500);}
+function setLoading(on){const b=document.getElementById('loadingBar');b.className='loading-bar '+(on?'active':'done');if(!on)setTimeout(()=>b.className='loading-bar',500);}
+function setSaveStatus(msg,isErr){const s=document.getElementById('saveIndicator');s.textContent=msg;s.style.color=isErr?'var(--red)':'var(--green)';s.classList.add('show');setTimeout(()=>{s.classList.remove('show');s.style.color='var(--green)';},3000);}
+
+/* ═══════════════════════════════════
+   ADMIN / LOGIN
+═══════════════════════════════════ */
+function toggleAdmin(){if(isAdmin){isAdmin=false;document.body.classList.remove('is-admin');document.getElementById('adminBtn').innerHTML='&#128274; Admin';document.getElementById('adminBtn').className='btn-top';renderAll();showToast('Viewer mode');return;}document.getElementById('loginOv').classList.add('show');document.getElementById('adminPass').value='';document.getElementById('loginErr').style.display='none';setTimeout(()=>document.getElementById('adminPass').focus(),100);}
+function doLogin(){if(document.getElementById('adminPass').value===ADMIN_PASS){isAdmin=true;document.body.classList.add('is-admin');document.getElementById('loginOv').classList.remove('show');document.getElementById('adminBtn').innerHTML='&#128275; Logout';document.getElementById('adminBtn').className='btn-top logout';renderAll();showToast('Admin mode activated');}else{document.getElementById('loginErr').style.display='block';}}
+
+/* ═══════════════════════════════════
+   SETTINGS
+═══════════════════════════════════ */
+function openSettings(){const c=getCfg();document.getElementById('cfgToken').value=c.token;document.getElementById('cfgOwner').value=c.owner;document.getElementById('cfgRepo').value=c.repo;document.getElementById('cfgBranch').value=c.branch;document.getElementById('cfgDataPath').value=c.dataPath;document.getElementById('settingsOv').classList.add('show');}
+function closeSettings(){document.getElementById('settingsOv').classList.remove('show');}
+function saveSettings(){saveCfg({token:document.getElementById('cfgToken').value.trim(),owner:document.getElementById('cfgOwner').value.trim()||DEF.owner,repo:document.getElementById('cfgRepo').value.trim()||DEF.repo,branch:document.getElementById('cfgBranch').value.trim()||DEF.branch,dataPath:document.getElementById('cfgDataPath').value.trim()||DEF.dataPath});closeSettings();showToast('Settings saved');}
+async function testConnection(){const c=getCfg();if(!c.token){showToast('Enter a token first','error');return;}try{const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}`,{headers:apiH()});if(res.ok)showToast('Connected to '+c.owner+'/'+c.repo);else showToast('Connection failed: '+res.status,'error');}catch(e){showToast('Connection error','error');}}
+async function importLegacy(){const raw=localStorage.getItem('mm_presentation_tracker');if(!raw){showToast('No legacy data found in localStorage');return;}let d;try{d=JSON.parse(raw);}catch(e){showToast('Legacy data is corrupted','error');return;}if(!Array.isArray(d)||!d.length){showToast('No presentations found');return;}if(!confirm('Found '+d.length+' presentations in browser storage.\n\nThis will REPLACE current shared data.\n\nContinue?'))return;presentations=d;runMigration();const ok=await saveDataToGitHub();if(ok){showToast('Imported '+presentations.length+' presentations');renderAll();}}
+async function syncFromGitHub(){const ok=await fetchDataFromGitHub();renderAll();showToast(ok?'Synced from GitHub':'Sync failed — check settings',ok?undefined:'error');}
+
+/* ═══════════════════════════════════
+   EDITING — DECK FILES
+═══════════════════════════════════ */
+function showEditDeck(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input[type="url"]').value=p.deck[type].url;el.querySelector('input[type="url"]').focus();}}
+async function saveDeckUrl(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);const url=el.querySelector('input[type="url"]').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p.deck[type].url=url;p.deck[type].status=status;p.deck[type].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast(type.toUpperCase()+' saved');}
+
+/* Upload new deck file (when empty) */
+function uploadDeckFile(pid,type){
+  if(!isAdmin)return;
+  const input=document.createElement('input');input.type='file';input.accept='.'+type+',.pptx,.pdf';
+  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Uploading '+file.name+'...');
+    const reader=new FileReader();reader.onload=async function(){
+      const b64=reader.result.split(',')[1];const ext=file.name.split('.').pop().toLowerCase();
+      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const path='assets/'+(ext==='pdf'?'pdf':'pptx')+'/'+pid.substring(0,10)+'_'+safe;
+      const url=await uploadFileToGitHub(path,b64,'Upload '+safe);
+      if(url){const p=presentations.find(x=>x.id===pid);p.deck[type].url=url;p.deck[type].status='Added';p.deck[type].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Uploaded: '+file.name);}
+    };reader.readAsDataURL(file);};input.click();
+}
+
+/* Replace existing deck file */
+function replaceDeckFile(pid,type){
+  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
+  const input=document.createElement('input');input.type='file';input.accept='.'+type+',.pptx,.pdf';
+  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Replacing with '+file.name+'...');
+    const reader=new FileReader();reader.onload=async function(){
+      const b64=reader.result.split(',')[1];const ext=file.name.split('.').pop().toLowerCase();
+      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      // If old file is in repo, overwrite same path; otherwise create new
+      const oldPath=repoPathFromUrl(p.deck[type].url);
+      const path=oldPath||'assets/'+(ext==='pdf'?'pdf':'pptx')+'/'+pid.substring(0,10)+'_'+safe;
+      const url=await uploadFileToGitHub(path,b64,'Replace '+safe);
+      if(url){p.deck[type].url=url;p.deck[type].status='Added';p.deck[type].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Replaced: '+file.name);}
+    };reader.readAsDataURL(file);};input.click();
+}
+
+/* Delete deck file */
+async function deleteDeckFile(pid,type){
+  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
+  if(!confirm('Remove '+type.toUpperCase()+' file from "'+p.title+'"?'))return;
+  // If stored in repo, delete actual file
+  if(isRepoFile(p.deck[type].url)){const rp=repoPathFromUrl(p.deck[type].url);if(rp)await deleteFileFromGitHub(rp);}
+  p.deck[type].url='';p.deck[type].status='Added';p.deck[type].notes='Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);
+  await saveDataToGitHub();renderAll();showToast(type.toUpperCase()+' file removed');
+}
+
+/* ═══════════════════════════════════
+   EDITING — RESOURCES
+═══════════════════════════════════ */
+function showEditRes(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input[type="url"]').value=p[cat].resources[idx].url;el.querySelector('input[type="url"]').focus();}}
+async function saveResUrl(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);const url=el.querySelector('input[type="url"]').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p[cat].resources[idx].url=url;p[cat].resources[idx].status=status;p[cat].resources[idx].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Link saved');}
+
+/* Upload resource file (when empty) */
+function uploadResFile(pid,cat,idx){
+  if(!isAdmin)return;
+  const input=document.createElement('input');input.type='file';
+  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Uploading '+file.name+'...');
+    const reader=new FileReader();reader.onload=async function(){
+      const b64=reader.result.split(',')[1];const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const folder='assets/'+cat;const path=folder+'/'+pid.substring(0,10)+'_'+safe;
+      const url=await uploadFileToGitHub(path,b64,'Upload '+safe);
+      if(url){const p=presentations.find(x=>x.id===pid);p[cat].resources[idx].url=url;p[cat].resources[idx].status='Added';p[cat].resources[idx].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Uploaded: '+file.name);}
+    };reader.readAsDataURL(file);};input.click();
+}
+
+/* Replace existing resource file */
+function replaceResFile(pid,cat,idx){
+  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
+  const input=document.createElement('input');input.type='file';
+  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Replacing with '+file.name+'...');
+    const reader=new FileReader();reader.onload=async function(){
+      const b64=reader.result.split(',')[1];const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const oldPath=repoPathFromUrl(p[cat].resources[idx].url);
+      const path=oldPath||'assets/'+cat+'/'+pid.substring(0,10)+'_'+safe;
+      const url=await uploadFileToGitHub(path,b64,'Replace '+safe);
+      if(url){p[cat].resources[idx].url=url;p[cat].resources[idx].status='Added';p[cat].resources[idx].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Replaced: '+file.name);}
+    };reader.readAsDataURL(file);};input.click();
+}
+
+/* Rename resource — label + optional GitHub file rename */
+async function renameRes(pid,cat,idx){
+  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
+  const r=p[cat].resources[idx];const nm=prompt('Rename resource:',r.label);
+  if(!nm||!nm.trim()||nm.trim()===r.label)return;
+  const newLabel=nm.trim();
+  // If file is in repo, also rename the actual file
+  if(isRepoFile(r.url)){
+    const oldPath=repoPathFromUrl(r.url);
+    if(oldPath){
+      const ext=oldPath.split('.').pop();const dir=oldPath.substring(0,oldPath.lastIndexOf('/'));
+      const safeName=newLabel.replace(/[^a-zA-Z0-9._-]/g,'_');
+      const newPath=dir+'/'+pid.substring(0,10)+'_'+safeName+'.'+ext;
+      if(newPath!==oldPath){
+        showToast('Renaming file...');
+        const newUrl=await renameFileInGitHub(oldPath,newPath);
+        if(newUrl){r.url=newUrl;r.notes=safeName+'.'+ext;}
+      }
+    }
+  }
+  r.label=newLabel;p.lastUpdated=new Date().toISOString().slice(0,10);
+  await saveDataToGitHub();renderAll();showToast('Renamed to: '+newLabel);
+}
+
+/* Delete resource — with optional GitHub file deletion */
+async function deleteRes(pid,cat,idx){
+  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
+  const r=p[cat].resources[idx];
+  const hasRepoFile=isRepoFile(r.url);
+  const msg=hasRepoFile?'Delete "'+r.label+'" and its file from GitHub?':'Delete "'+r.label+'"?';
+  if(!confirm(msg))return;
+  if(hasRepoFile){const rp=repoPathFromUrl(r.url);if(rp){showToast('Deleting file...');await deleteFileFromGitHub(rp);}}
+  p[cat].resources.splice(idx,1);p.lastUpdated=new Date().toISOString().slice(0,10);
+  await saveDataToGitHub();renderAll();showToast('Deleted: '+r.label);
+}
+
+async function addResource(pid,cat,group){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;const nm=prompt('Enter resource name:');if(!nm||!nm.trim())return;const r={label:nm.trim(),url:'',status:'Added',notes:'Placeholder'};if(group)r.group=group;p[cat].resources.push(r);p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Added: '+nm.trim());}
+function updateField(id,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p){p[f]=v;p.lastUpdated=new Date().toISOString().slice(0,10);}}
+function updateCatField(id,cat,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p&&p[cat]){p[cat][f]=v;p.lastUpdated=new Date().toISOString().slice(0,10);}}
+let saveTimer;function debouncedSave(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDataToGitHub(),2000);}
+
+/* ═══════════════════════════════════
+   PREVIEW
+═══════════════════════════════════ */
+function openPrev(url,label){document.getElementById('prevTitle').textContent=label;document.getElementById('prevDl').href=url;document.getElementById('prevTab').href=url;const body=document.getElementById('prevBody');const ok=url.includes('canva.com')||url.includes('google.com')||url.includes('gamma.app')||url.includes('connectionincorporated.com')||url.includes('leadconnectorhq.com')||url.includes('githubusercontent.com')||url.endsWith('.pdf')||url.endsWith('.html');body.innerHTML=ok?'<iframe src="'+url+'" allow="fullscreen"></iframe>':'<div class="prev-fallback"><div style="font-size:48px;opacity:0.4;">&#128196;</div><div>Preview not available for this file type.<br>Use the buttons above to download or open in a new tab.</div></div>';document.getElementById('prevOv').classList.add('show');}
+function closePrev(){document.getElementById('prevOv').classList.remove('show');document.getElementById('prevBody').innerHTML='';}
+
+/* ═══════════════════════════════════
+   RENDER
+═══════════════════════════════════ */
 function renderAll(){renderSummary();renderGrid();}
 function renderSummary(){const t=presentations.length,c=presentations.filter(p=>p.status==='Complete').length,ip=presentations.filter(p=>p.status==='In Progress').length,nr=presentations.filter(p=>p.status==='Needs Review').length,ta=presentations.reduce((s,p)=>s+countAll(p),0),lk=presentations.reduce((s,p)=>s+countLinked(p),0);document.getElementById('summaryStrip').innerHTML='<div class="stat-card"><div class="stat-num">'+t+'</div><div class="stat-label">Total<br>Presentations</div></div><div class="stat-card"><div class="stat-num" style="color:var(--green);">'+c+'</div><div class="stat-label">Complete</div></div><div class="stat-card"><div class="stat-num" style="color:var(--blue);">'+ip+'</div><div class="stat-label">In Progress</div></div><div class="stat-card"><div class="stat-num" style="color:var(--orange);">'+nr+'</div><div class="stat-label">Needs Review</div></div><div class="stat-card"><div class="stat-num">'+lk+'</div><div class="stat-label">Assets<br>Linked</div></div><div class="stat-card"><div class="stat-num">'+(ta-lk)+'</div><div class="stat-label">Assets<br>Pending</div></div>';}
-function deckCard(p,type){const f=p.deck[type],ph=!f.url,ext=type.toUpperCase(),nm=p.title.replace(/[^a-zA-Z0-9 ]/g,'').replace(/ /g,'-'),su=esc(f.url);let vb='';if(ph){vb='<span class="btn-placeholder">Coming Soon</span>';}else{vb='<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(nm)+'.'+type+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';}return'<div class="deck-file-card"><div class="file-icon '+type+'">'+ext+'</div><div class="file-info"><div class="file-name">'+esc(nm)+'.'+type+'</div><div class="file-type">'+ext+' Presentation File</div></div><div class="file-actions">'+resBadge(f.status)+' '+vb+' <button class="btn-edit admin-only" onclick="event.stopPropagation();showEditDeck(\''+p.id+'\',\''+type+'\')">&#9998; Edit</button></div></div><div class="edit-row admin-only" id="edit-deck-'+p.id+'-'+type+'"><input type="url" placeholder="Paste '+ext+' URL..." value="'+su+'"><select><option '+(f.status==='Added'?'selected':'')+'>Added</option><option '+(f.status==='Missing'?'selected':'')+'>Missing</option><option '+(f.status==='Draft'?'selected':'')+'>Draft</option><option '+(f.status==='Final'?'selected':'')+'>Final</option><option '+(f.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveDeckUrl(\''+p.id+'\',\''+type+'\')">Save</button><button class="btn-cancel-url" onclick="showEditDeck(\''+p.id+'\',\''+type+'\')">Cancel</button></div>';}
-function resRow(p,cat,r,idx){const ph=!r.url,icons={funnel:'\u26A1',marketing:'\u{1F3A8}',workflow:'\u2699',checkin:'\u2611'},su=esc(r.url);const grp=r.group||'';const iconCls=grp==='emails'?'email':grp==='canva'?'canva':grp==='bonus'?'bonus':cat;const iconChar=grp==='emails'?'\u{1F4E7}':grp==='canva'?'\u{1F3A8}':grp==='bonus'?'\u{1F381}':icons[cat]||'\u2611';let vb='';if(ph){vb='<span class="btn-placeholder">Coming Soon</span>';}else{vb='<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(r.label)+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';}return'<div class="resource-row"><div class="resource-icon '+iconCls+'">'+iconChar+'</div><div class="resource-info"><div class="resource-label">'+esc(r.label)+'</div><div class="resource-note">'+(ph?'Pending':'Ready')+'</div></div>'+resBadge(r.status)+' '+vb+' <button class="btn-edit admin-only" onclick="event.stopPropagation();showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#9998; Edit</button><button class="btn-rename admin-only" onclick="event.stopPropagation();renameRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#9998; Rename</button><button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#10005;</button></div><div class="edit-row admin-only" id="edit-res-'+p.id+'-'+cat+'-'+idx+'"><input type="url" placeholder="Paste URL..." value="'+su+'"><select><option '+(r.status==='Added'?'selected':'')+'>Added</option><option '+(r.status==='Missing'?'selected':'')+'>Missing</option><option '+(r.status==='Draft'?'selected':'')+'>Draft</option><option '+(r.status==='Final'?'selected':'')+'>Final</option><option '+(r.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveResUrl(\''+p.id+'\',\''+cat+'\','+idx+')">Save</button><button class="btn-cancel-url" onclick="showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">Cancel</button></div>';}
-function renderCard(p){const pc=pctVal(p),col=pc===100?'var(--green)':'var(--blue)',ro=isAdmin?'':'readonly',ns=isAdmin?'':'style="background:var(--gray-100);border-color:var(--gray-200);cursor:default;"';return'<div class="project-card collapsed" id="card-'+p.id+'" data-status="'+p.status+'" data-title="'+p.title.toLowerCase()+'">'+'<div class="card-header" onclick="toggleCard(\''+p.id+'\')">'+'<div class="card-chevron">\u25BC</div>'+'<div class="card-icon">'+p.icon+'</div>'+'<div class="card-title-area"><div class="card-title">'+esc(p.title)+'</div><div class="card-subtitle">'+esc(p.owner)+' \u00B7 Updated '+p.lastUpdated+'</div></div>'+statusBadge(p.status)+'<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+pc+'%;background:'+col+'"></div></div>'+'<span style="font-size:11px;color:var(--gray-500);min-width:36px;text-align:right;">'+pc+'%</span>'+'</div>'+'<div class="card-body">'+'<div class="tab-strip">'+'<button class="tab-btn active" onclick="switchTab(this,\''+p.id+'\',\'overview\')">Overview</button>'+'<button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'funnel\')">\u26A1 Funnel</button>'+'<button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'marketing\')">\u{1F3A8} Marketing</button>'+'<button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'workflow\')">\u2699 Workflow</button>'+'<button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'checkin\')">\u2611 Check-in Forms</button>'+'</div>'+'<div class="tab-panel active" id="tab-'+p.id+'-overview" data-tab-label="Overview">'+'<div class="overview-grid">'+'<div class="ov-field"><label>Title</label><div class="val">'+esc(p.title)+'</div></div>'+'<div class="ov-field"><label>Owner</label><div class="val">'+esc(p.owner)+'</div></div>'+'<div class="ov-field ov-full"><label>Description</label><div class="val">'+esc(p.description)+'</div></div>'+'<div class="ov-field"><label>Status</label><div class="val">'+statusBadge(p.status)+'</div></div>'+'<div class="ov-field"><label>Last Updated</label><div class="val">'+p.lastUpdated+'</div></div>'+'<div class="deck-files-strip"><div class="strip-label">Presentation Files</div>'+deckCard(p,'pptx')+deckCard(p,'pdf')+'</div>'+'<div class="ov-field ov-full admin-only"><label>Notes</label><textarea class="ov-notes" placeholder="Add notes..." oninput="updateField(\''+p.id+'\',\'notes\',this.value)">'+esc(p.notes)+'</textarea></div>'+'<div class="ov-field admin-only"><label>Missing Items</label><textarea class="ov-notes" style="min-height:40px" placeholder="List missing items..." oninput="updateField(\''+p.id+'\',\'missingItems\',this.value)">'+esc(p.missingItems)+'</textarea></div>'+'<div class="ov-field admin-only"><label>Next Action</label><textarea class="ov-notes" style="min-height:40px" placeholder="Next action..." oninput="updateField(\''+p.id+'\',\'nextAction\',this.value)">'+esc(p.nextAction)+'</textarea></div>'+'</div>'+'</div>'+'<div class="tab-panel" id="tab-'+p.id+'-funnel" data-tab-label="Funnel">'+'<div class="resource-header"><h4>\u26A1 Funnel Resources</h4>'+resBadge(p.funnel.status)+'</div>'+'<div class="resource-list">'+p.funnel.resources.map((r,i)=>resRow(p,'funnel',r,i)).join('')+'</div>'+'<button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'funnel\')">+ Add Funnel Resource</button>'+'<div class="tab-notes-area admin-only"><label>Funnel Notes</label><textarea class="ov-notes" placeholder="Add funnel notes..." oninput="updateCatField(\''+p.id+'\',\'funnel\',\'notes\',this.value)">'+esc(p.funnel.notes)+'</textarea></div>'+'</div>'+'<div class="tab-panel" id="tab-'+p.id+'-marketing" data-tab-label="Marketing Materials">'+'<div class="resource-header"><h4>\u{1F3A8} Canva Resources</h4>'+resBadge(p.marketing.status)+'</div>'+'<div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='canva').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div>'+'<button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'canva\')">+ Add Canva Resource</button>'+'<div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F381} Class Bonus + Lead Magnet</h4></div></div>'+'<div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='bonus').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div>'+'<button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'bonus\')">+ Add Bonus / Lead Magnet</button>'+'<div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F4E7} Email Templates</h4></div></div>'+'<div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='emails').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div>'+'<button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'emails\')">+ Add Email Template</button>'+'<div class="tab-notes-area admin-only"><label>Marketing Notes</label><textarea class="ov-notes" placeholder="Add marketing notes..." oninput="updateCatField(\''+p.id+'\',\'marketing\',\'notes\',this.value)">'+esc(p.marketing.notes)+'</textarea></div>'+'</div>'+'<div class="tab-panel" id="tab-'+p.id+'-workflow" data-tab-label="Workflow inside the CRM">'+'<div class="resource-header"><h4>\u2699 Workflow inside the CRM</h4>'+resBadge(p.workflow.status)+'</div>'+'<div class="resource-list">'+p.workflow.resources.map((r,i)=>resRow(p,'workflow',r,i)).join('')+'</div>'+'<button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'workflow\')">+ Add Workflow Resource</button>'+'<div class="tab-notes-area admin-only"><label>Workflow Notes</label><textarea class="ov-notes" placeholder="Add workflow notes..." oninput="updateCatField(\''+p.id+'\',\'workflow\',\'notes\',this.value)">'+esc(p.workflow.notes)+'</textarea></div>'+'</div>'+'<div class="tab-panel" id="tab-'+p.id+'-checkin" data-tab-label="Check-in Forms">'+'<div class="resource-header"><h4>\u2611 Check-in Forms</h4>'+resBadge(p.checkin.status)+'</div>'+'<div class="resource-list">'+p.checkin.resources.map((r,i)=>resRow(p,'checkin',r,i)).join('')+'</div>'+'<button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'checkin\')">+ Add Check-in Resource</button>'+'<div class="tab-notes-area admin-only"><label>Check-in Notes</label><textarea class="ov-notes" placeholder="Add check-in notes..." oninput="updateCatField(\''+p.id+'\',\'checkin\',\'notes\',this.value)">'+esc(p.checkin.notes)+'</textarea></div>'+'</div>'+'</div></div>';}
-function renderGrid(){const g=document.getElementById('projectGrid');if(!presentations.length){g.innerHTML='<div style="text-align:center;padding:48px;color:var(--gray-500);"><div style="font-size:40px;margin-bottom:12px;">\u{1F4DA}</div><p>No presentations yet.</p></div>';return;}g.innerHTML=presentations.map(p=>renderCard(p)).join('');applyFilters();}
+
+function deckCard(p,type){
+  const f=p.deck[type],ph=!f.url,ext=type.toUpperCase(),nm=p.title.replace(/[^a-zA-Z0-9 ]/g,'').replace(/ /g,'-'),su=esc(f.url);
+  // Viewer buttons: Preview + Download when URL exists, Coming Soon when empty
+  let vb=ph?'<span class="btn-placeholder">Coming Soon</span>':'<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(nm)+'.'+type+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';
+  // Admin buttons: Upload (empty) OR Replace (has file) + Edit + Delete
+  let ab='';
+  if(ph){ab='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadDeckFile(\''+p.id+'\',\''+type+'\')">&#8679; Upload</button>';}
+  else{ab='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceDeckFile(\''+p.id+'\',\''+type+'\')">&#8635; Replace</button><button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteDeckFile(\''+p.id+'\',\''+type+'\')">&#10005;</button>';}
+  ab+='<button class="btn-edit admin-only" onclick="event.stopPropagation();showEditDeck(\''+p.id+'\',\''+type+'\')">&#9998; Edit URL</button>';
+  return'<div class="deck-file-card"><div class="file-icon '+type+'">'+ext+'</div><div class="file-info"><div class="file-name">'+esc(nm)+'.'+type+'</div><div class="file-type">'+(f.notes&&f.notes!=='Placeholder'?esc(f.notes):ext+' File')+'</div></div><div class="file-actions">'+resBadge(f.status)+' '+vb+' '+ab+'</div></div><div class="edit-row admin-only" id="edit-deck-'+p.id+'-'+type+'"><input type="url" placeholder="Paste '+ext+' URL..." value="'+su+'"><select><option '+(f.status==='Added'?'selected':'')+'>Added</option><option '+(f.status==='Missing'?'selected':'')+'>Missing</option><option '+(f.status==='Draft'?'selected':'')+'>Draft</option><option '+(f.status==='Final'?'selected':'')+'>Final</option><option '+(f.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveDeckUrl(\''+p.id+'\',\''+type+'\')">Save</button><button class="btn-cancel-url" onclick="showEditDeck(\''+p.id+'\',\''+type+'\')">Cancel</button></div>';
+}
+
+function resRow(p,cat,r,idx){
+  const ph=!r.url,icons={funnel:'\u26A1',marketing:'\u{1F3A8}',workflow:'\u2699',checkin:'\u2611'},su=esc(r.url);
+  const grp=r.group||'';const iconCls=grp==='emails'?'email':grp==='canva'?'canva':grp==='bonus'?'bonus':cat;
+  const iconChar=grp==='emails'?'\u{1F4E7}':grp==='canva'?'\u{1F3A8}':grp==='bonus'?'\u{1F381}':icons[cat]||'\u2611';
+  // Viewer buttons
+  let vb=ph?'<span class="btn-placeholder">Coming Soon</span>':'<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(r.label)+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';
+  // Admin buttons: Upload/Replace + Edit + Rename + Delete
+  let ab='';
+  if(ph){ab='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadResFile(\''+p.id+'\',\''+cat+'\','+idx+')">&#8679; Upload</button>';}
+  else{ab='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceResFile(\''+p.id+'\',\''+cat+'\','+idx+')">&#8635; Replace</button>';}
+  ab+='<button class="btn-edit admin-only" onclick="event.stopPropagation();showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#9998; Edit</button>';
+  ab+='<button class="btn-rename admin-only" onclick="event.stopPropagation();renameRes(\''+p.id+'\',\''+cat+'\','+idx+')">Rename</button>';
+  ab+='<button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#10005;</button>';
+  return'<div class="resource-row"><div class="resource-icon '+iconCls+'">'+iconChar+'</div><div class="resource-info"><div class="resource-label">'+esc(r.label)+'</div><div class="resource-note">'+(r.notes&&r.notes!=='Placeholder'?esc(r.notes):(ph?'Pending':'Ready'))+'</div></div>'+resBadge(r.status)+' '+vb+' '+ab+'</div><div class="edit-row admin-only" id="edit-res-'+p.id+'-'+cat+'-'+idx+'"><input type="url" placeholder="Paste URL..." value="'+su+'"><select><option '+(r.status==='Added'?'selected':'')+'>Added</option><option '+(r.status==='Missing'?'selected':'')+'>Missing</option><option '+(r.status==='Draft'?'selected':'')+'>Draft</option><option '+(r.status==='Final'?'selected':'')+'>Final</option><option '+(r.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveResUrl(\''+p.id+'\',\''+cat+'\','+idx+')">Save</button><button class="btn-cancel-url" onclick="showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">Cancel</button></div>';
+}
+
+function renderCard(p){
+  const pc=pctVal(p),col=pc===100?'var(--green)':'var(--blue)';
+  return'<div class="project-card collapsed" id="card-'+p.id+'" data-status="'+p.status+'" data-title="'+p.title.toLowerCase()+'"><div class="card-header" onclick="toggleCard(\''+p.id+'\')"><div class="card-chevron">\u25BC</div><div class="card-icon">'+p.icon+'</div><div class="card-title-area"><div class="card-title">'+esc(p.title)+'</div><div class="card-subtitle">'+esc(p.owner)+' \u00B7 Updated '+p.lastUpdated+'</div></div>'+statusBadge(p.status)+'<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+pc+'%;background:'+col+'"></div></div><span style="font-size:11px;color:var(--gray-500);min-width:36px;text-align:right;">'+pc+'%</span></div><div class="card-body"><div class="tab-strip"><button class="tab-btn active" onclick="switchTab(this,\''+p.id+'\',\'overview\')">Overview</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'funnel\')">\u26A1 Funnel</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'marketing\')">\u{1F3A8} Marketing</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'workflow\')">\u2699 Workflow</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'checkin\')">\u2611 Check-in Forms</button></div>'+
+  '<div class="tab-panel active" id="tab-'+p.id+'-overview"><div class="overview-grid"><div class="ov-field"><label>Title</label><div class="val">'+esc(p.title)+'</div></div><div class="ov-field"><label>Owner</label><div class="val">'+esc(p.owner)+'</div></div><div class="ov-field ov-full"><label>Description</label><div class="val">'+esc(p.description)+'</div></div><div class="ov-field"><label>Status</label><div class="val">'+statusBadge(p.status)+'</div></div><div class="ov-field"><label>Last Updated</label><div class="val">'+p.lastUpdated+'</div></div><div class="deck-files-strip"><div class="strip-label">Presentation Files</div>'+deckCard(p,'pptx')+deckCard(p,'pdf')+'</div><div class="ov-field ov-full admin-only"><label>Notes</label><textarea class="ov-notes" placeholder="Add notes..." oninput="updateField(\''+p.id+'\',\'notes\',this.value);debouncedSave()">'+esc(p.notes)+'</textarea></div><div class="ov-field admin-only"><label>Missing Items</label><textarea class="ov-notes" style="min-height:40px" placeholder="Missing items..." oninput="updateField(\''+p.id+'\',\'missingItems\',this.value);debouncedSave()">'+esc(p.missingItems)+'</textarea></div><div class="ov-field admin-only"><label>Next Action</label><textarea class="ov-notes" style="min-height:40px" placeholder="Next action..." oninput="updateField(\''+p.id+'\',\'nextAction\',this.value);debouncedSave()">'+esc(p.nextAction)+'</textarea></div></div></div>'+
+  '<div class="tab-panel" id="tab-'+p.id+'-funnel"><div class="resource-header"><h4>\u26A1 Funnel Resources</h4>'+resBadge(p.funnel.status)+'</div><div class="resource-list">'+p.funnel.resources.map((r,i)=>resRow(p,'funnel',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'funnel\')">+ Add Funnel Resource</button><div class="tab-notes-area admin-only"><label>Funnel Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'funnel\',\'notes\',this.value);debouncedSave()">'+esc(p.funnel.notes)+'</textarea></div></div>'+
+  '<div class="tab-panel" id="tab-'+p.id+'-marketing"><div class="resource-header"><h4>\u{1F3A8} Canva Resources</h4>'+resBadge(p.marketing.status)+'</div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='canva').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'canva\')">+ Add Canva Resource</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F381} Class Bonus + Lead Magnet</h4></div></div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='bonus').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'bonus\')">+ Add Bonus / Lead Magnet</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F4E7} Email Templates</h4></div></div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='emails').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'emails\')">+ Add Email Template</button><div class="tab-notes-area admin-only"><label>Marketing Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'marketing\',\'notes\',this.value);debouncedSave()">'+esc(p.marketing.notes)+'</textarea></div></div>'+
+  '<div class="tab-panel" id="tab-'+p.id+'-workflow"><div class="resource-header"><h4>\u2699 Workflow inside the CRM</h4>'+resBadge(p.workflow.status)+'</div><div class="resource-list">'+p.workflow.resources.map((r,i)=>resRow(p,'workflow',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'workflow\')">+ Add Workflow Resource</button><div class="tab-notes-area admin-only"><label>Workflow Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'workflow\',\'notes\',this.value);debouncedSave()">'+esc(p.workflow.notes)+'</textarea></div></div>'+
+  '<div class="tab-panel" id="tab-'+p.id+'-checkin"><div class="resource-header"><h4>\u2611 Check-in Forms</h4>'+resBadge(p.checkin.status)+'</div><div class="resource-list">'+p.checkin.resources.map((r,i)=>resRow(p,'checkin',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'checkin\')">+ Add Check-in Resource</button><div class="tab-notes-area admin-only"><label>Check-in Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'checkin\',\'notes\',this.value);debouncedSave()">'+esc(p.checkin.notes)+'</textarea></div></div></div></div>';
+}
+
+function renderGrid(){
+  const g=document.getElementById('projectGrid');
+  if(!presentations.length){
+    g.innerHTML=isAdmin?'<div style="text-align:center;padding:48px;color:var(--gray-500);"><div style="font-size:40px;margin-bottom:12px;">\u{1F4DA}</div><p>No presentations yet. Click "+ Add Presentation" to get started.</p></div>':'<div class="error-state"><div class="err-icon">&#9888;</div><h3>No Data Available</h3><p>Shared presentation data could not be loaded from GitHub. This may be a temporary issue — try refreshing the page. If the problem persists, contact the administrator.</p></div>';
+    return;
+  }
+  g.innerHTML=presentations.map(p=>renderCard(p)).join('');applyFilters();
+}
+
 function toggleCard(id){document.getElementById('card-'+id).classList.toggle('collapsed');}
 function toggleAll(c){document.querySelectorAll('.project-card').forEach(el=>{c?el.classList.add('collapsed'):el.classList.remove('collapsed');});}
 function switchTab(btn,pid,tab){const card=document.getElementById('card-'+pid);card.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));card.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+pid+'-'+tab).classList.add('active');}
-function applyFilters(){const q=document.getElementById('searchInput').value.toLowerCase(),sf=document.getElementById('statusFilter').value,cf=document.getElementById('categoryFilter').value;document.querySelectorAll('.project-card').forEach(c=>{const title=c.dataset.title,status=c.dataset.status,pid=c.id.replace('card-',''),p=presentations.find(x=>x.id===pid);let show=true;if(q&&!title.includes(q))show=false;if(sf&&status!==sf)show=false;if(cf&&p){if(cf==='deck-missing'){if(p.deck.pptx.url||p.deck.pdf.url)show=false;}else{const cat=cf.split('-')[0];const d=p[cat];if(d&&!d.resources.every(r=>!r.url))show=false;}}c.style.display=show?'':'none';});}
-function updateField(id,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p){p[f]=v;clearTimeout(saveTimeout);saveTimeout=setTimeout(()=>saveData(),800);}}
-function updateCatField(id,cat,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p&&p[cat]){p[cat][f]=v;clearTimeout(saveTimeout);saveTimeout=setTimeout(()=>saveData(),800);}}
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+function applyFilters(){const q=document.getElementById('searchInput').value.toLowerCase(),sf=document.getElementById('statusFilter').value;document.querySelectorAll('.project-card').forEach(c=>{let show=true;if(q&&!c.dataset.title.includes(q))show=false;if(sf&&c.dataset.status!==sf)show=false;c.style.display=show?'':'none';});}
+
 function openAddModal(){document.getElementById('fTitle').value='';document.getElementById('fDesc').value='';document.getElementById('fOwner').value='Mike Gillett';document.getElementById('fStatus').value='Complete';document.getElementById('fIcon').value='\u{1F4DA}';document.getElementById('modalOverlay').classList.add('show');}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
-function savePresentation(){const title=document.getElementById('fTitle').value.trim();if(!title){showToast('Title is required');return;}const p=makePresentation(title,document.getElementById('fDesc').value.trim(),document.getElementById('fIcon').value||'\u{1F4DA}');p.owner=document.getElementById('fOwner').value.trim()||'Mike Gillett';p.status=document.getElementById('fStatus').value;presentations.push(p);saveData();closeModal();renderAll();showToast('Added: '+title);}
-function renameRes(pid,cat,idx){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p||!p[cat])return;const r=p[cat].resources[idx];const newName=prompt('Rename resource:',r.label);if(newName&&newName.trim()){r.label=newName.trim();p.lastUpdated=new Date().toISOString().slice(0,10);saveData();renderAll();showToast('Renamed to: '+newName.trim());}}
-function deleteRes(pid,cat,idx){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p||!p[cat])return;const r=p[cat].resources[idx];if(!confirm('Delete "'+r.label+'"? This cannot be undone.'))return;p[cat].resources.splice(idx,1);p.lastUpdated=new Date().toISOString().slice(0,10);saveData();renderAll();showToast('Deleted: '+r.label);}
-function addResource(pid,cat,group){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p||!p[cat])return;const name=prompt('Enter resource name:');if(!name||!name.trim())return;const r={label:name.trim(),url:'',status:'Added',notes:'Placeholder'};if(group)r.group=group;p[cat].resources.push(r);p.lastUpdated=new Date().toISOString().slice(0,10);saveData();renderAll();showToast('Added: '+name.trim());}
-function editHeader(){if(!isAdmin)return;const hd=loadHeader();const title=prompt('Company / Site Title:',hd.title);if(title===null)return;const sub=prompt('Subtitle:',hd.subtitle);if(sub===null)return;const logo=prompt('Logo Letter (1-2 characters):',hd.logo);if(logo===null)return;hd.title=title.trim()||'Mortgage Marketplace LLC';hd.subtitle=sub.trim()||'Presentation Tracker & Resource Hub';hd.logo=logo.trim().substring(0,2)||'M';saveHeader(hd);applyHeader();showToast('Header updated');}
-function loadHeader(){try{const r=localStorage.getItem('mm_tracker_header');if(r)return JSON.parse(r);}catch(e){}return{title:'Mortgage Marketplace LLC',subtitle:'Presentation Tracker & Resource Hub',logo:'M'};}
-function saveHeader(hd){try{localStorage.setItem('mm_tracker_header',JSON.stringify(hd));}catch(e){}}
-function applyHeader(){const hd=loadHeader();document.getElementById('headerTitle').textContent=hd.title;document.getElementById('headerSub').textContent=hd.subtitle;document.getElementById('logoMark').textContent=hd.logo;document.title=hd.title+' | '+hd.subtitle;}
-const GH_SETTINGS_KEY='mm_github_settings';
-function defaultGitHubSettings(){return{token:'',owner:'jeromemmplace',repo:'mortgagemarketplace',branch:'main',path:'data.json'};}
-function loadGitHubSettings(){try{const r=localStorage.getItem(GH_SETTINGS_KEY);return r?{...defaultGitHubSettings(),...JSON.parse(r)}:defaultGitHubSettings();}catch(e){return defaultGitHubSettings();}}
-function openSettingsModal(){if(!isAdmin)return;const s=loadGitHubSettings();document.getElementById('ghToken').value=s.token||'';document.getElementById('ghOwner').value=s.owner||'';document.getElementById('ghRepo').value=s.repo||'';document.getElementById('ghBranch').value=s.branch||'main';document.getElementById('ghPath').value=s.path||'data.json';document.getElementById('settingsOverlay').classList.add('show');}
-function closeSettingsModal(){document.getElementById('settingsOverlay').classList.remove('show');}
-function saveGitHubSettings(){const settings={token:document.getElementById('ghToken').value.trim(),owner:document.getElementById('ghOwner').value.trim(),repo:document.getElementById('ghRepo').value.trim(),branch:document.getElementById('ghBranch').value.trim()||'main',path:document.getElementById('ghPath').value.trim()||'data.json'};try{localStorage.setItem(GH_SETTINGS_KEY,JSON.stringify(settings));closeSettingsModal();showToast('GitHub settings saved');}catch(e){showToast('Could not save settings');}}
-async function importLegacyLocalData(){
-  if(!isAdmin) return;
-  try{
-    const raw = localStorage.getItem(LEGACY_SK);
-    if(!raw){showToast('No legacy browser data found');return;}
-    const parsed = JSON.parse(raw);
-    if(!Array.isArray(parsed)){showToast('Legacy data is invalid');return;}
-    if(!confirm('Import current browser data and publish it to GitHub?')) return;
-    presentations = parsed;
-    renderAll();
-    await saveData();
-    closeSettingsModal();
-    showToast('Legacy browser data published');
-  }catch(e){
-    console.error(e);
-    showToast('Legacy import failed');
+function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Feed Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Email Banner',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Bonus / Lead Magnet',url:'',status:'Added',notes:'Placeholder',group:'bonus'},{label:'Promotional Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Thank You Email - After Attending Class',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Missed Class Email',url:'',status:'Added',notes:'Placeholder',group:'emails'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'},{label:'Automation Doc',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
+async function addPresentation(){const title=document.getElementById('fTitle').value.trim();if(!title){showToast('Title is required','error');return;}const p=makePresentation(title,document.getElementById('fDesc').value.trim(),document.getElementById('fIcon').value||'\u{1F4DA}');p.owner=document.getElementById('fOwner').value.trim()||'Mike Gillett';p.status=document.getElementById('fStatus').value;presentations.push(p);await saveDataToGitHub();closeModal();renderAll();showToast('Added: '+title);}
+
+/* ═══════════════════════════════════
+   INIT
+═══════════════════════════════════ */
+(async function(){
+  applyHeader();
+  const ok=await fetchDataFromGitHub();
+  if(!ok){
+    const g=document.getElementById('projectGrid');
+    if(isAdmin){g.innerHTML='<div class="error-state"><div class="err-icon">&#9888;</div><h3>GitHub Fetch Failed</h3><p>Could not load shared data from GitHub. Check your Settings (token, repo owner, repo name, branch, and data.json path). Make sure the data.json file exists in your repository.</p></div>';}
+    else{g.innerHTML='<div class="error-state"><div class="err-icon">&#9888;</div><h3>Data Unavailable</h3><p>The shared presentation data could not be loaded right now. This may be a temporary issue. Try refreshing the page. If the problem continues, please contact the site administrator.</p></div>';}
   }
-}
-applyHeader();
-loadData();
+  renderAll();
+})();
 </script>
 </body>
 </html>
