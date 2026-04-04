@@ -637,15 +637,15 @@
       "icon": "🎓",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-02",
+      "lastUpdated": "2026-04-04",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
       "deck": {
         "pptx": {
-          "url": "",
+          "url": "https://raw.githubusercontent.com/jeromemmplace/mortgagemarketplace/main/assets/pptx/p177516622_Mastering-VA-Loans-The-Realtors-Competitive-Edge.pptx",
           "status": "Added",
-          "notes": "Placeholder"
+          "notes": "Mastering-VA-Loans-The-Realtors-Competitive-Edge.pptx"
         },
         "pdf": {
           "url": "",
