@@ -1687,20 +1687,20 @@
       "icon": "💼",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-04",
+      "lastUpdated": "2026-04-02",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
       "deck": {
         "pptx": {
-          "url": "https://docs.google.com/presentation/d/1nBC0iwfnANXMe3JAdC56gHYXqjABfYXI/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
+          "url": "",
           "status": "Added",
-          "notes": ""
+          "notes": "Placeholder"
         },
         "pdf": {
-          "url": "https://drive.google.com/file/d/1RezNRS9hN-9oqOtiD2gXbP_gl6r7BSO9/view?usp=sharing",
+          "url": "",
           "status": "Added",
-          "notes": ""
+          "notes": "Placeholder"
         }
       },
       "funnel": {
@@ -1897,15 +1897,15 @@
       "icon": "🏠",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-02",
+      "lastUpdated": "2026-04-04",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
       "deck": {
         "pptx": {
-          "url": "",
+          "url": "https://docs.google.com/presentation/d/1qQuBspMXdQessBeNZQQX8jL8L2A6ZMvP/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
           "status": "Added",
-          "notes": "Placeholder"
+          "notes": ""
         },
         "pdf": {
           "url": "",
