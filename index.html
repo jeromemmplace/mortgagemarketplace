@@ -118,7 +118,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 <!-- ADD MODAL -->
 <div class="modal-overlay" id="modalOverlay"><div class="modal"><div class="modal-head"><h3 id="modalTitle">Add New Presentation</h3><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>Presentation Title</label><input type="text" id="fTitle" placeholder="e.g. YouTube Secrets for Real Estate"></div><div class="form-group"><label>Short Description</label><input type="text" id="fDesc" placeholder="Brief description of this class"></div><div class="form-row"><div class="form-group"><label>Owner</label><input type="text" id="fOwner" value="Mike Gillett"></div><div class="form-group"><label>Status</label><select id="fStatus"><option>Complete</option><option>In Progress</option><option>Needs Review</option><option>Not Started</option><option>Missing Assets</option><option>Waiting on Link</option><option>Waiting on Approval</option></select></div></div><div class="form-group"><label>Emoji Icon</label><input type="text" id="fIcon" value="&#128218;" maxlength="4" style="width:60px;"></div></div><div class="modal-foot"><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="savePresentation()">Save Presentation</button></div></div></div>
 <!-- SETTINGS MODAL -->
-<div class="modal-overlay" id="settingsOverlay"><div class="modal"><div class="modal-head"><h3>GitHub Sync Settings</h3><button class="modal-close" onclick="closeSettingsModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>GitHub Token</label><input type="password" id="ghToken" placeholder="Paste GitHub token"></div><div class="form-row"><div class="form-group"><label>Repo Owner</label><input type="text" id="ghOwner" value="jeromemmplace"></div><div class="form-group"><label>Repo Name</label><input type="text" id="ghRepo" value="mortgagemarketplace"></div></div><div class="form-row"><div class="form-group"><label>Branch</label><input type="text" id="ghBranch" value="main"></div><div class="form-group"><label>Data File Path</label><input type="text" id="ghPath" value="data.json"></div></div></div><div class="modal-foot"><button class="btn-cancel" onclick="closeSettingsModal()">Cancel</button><button class="btn-save" onclick="saveGitHubSettings()">Save Settings</button></div></div></div>
+<div class="modal-overlay" id="settingsOverlay"><div class="modal"><div class="modal-head"><h3>GitHub Sync Settings</h3><button class="modal-close" onclick="closeSettingsModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>GitHub Token</label><input type="password" id="ghToken" placeholder="Paste GitHub token"></div><div class="form-row"><div class="form-group"><label>Repo Owner</label><input type="text" id="ghOwner" value="jeromemmplace"></div><div class="form-group"><label>Repo Name</label><input type="text" id="ghRepo" value="mortgagemarketplace"></div></div><div class="form-row"><div class="form-group"><label>Branch</label><input type="text" id="ghBranch" value="main"></div><div class="form-group"><label>Data File Path</label><input type="text" id="ghPath" value="data.json"></div></div><div style="font-size:12px;color:var(--gray-600);line-height:1.45;">Public visitors read from data.json in the repo. Admin saves write back to the same file through the GitHub API. Use Import Legacy Browser Data one time only if your old progress still lives in this browser.</div></div><div class="modal-foot"><button class="btn-cancel" onclick="importLegacyLocalData()">Import Legacy Browser Data</button><button class="btn-cancel" onclick="closeSettingsModal()">Cancel</button><button class="btn-save" onclick="saveGitHubSettings()">Save Settings</button></div></div></div>
 <!-- PREVIEW -->
 <div class="prev-overlay" id="prevOv"><div class="prev-modal"><div class="prev-head"><h3 id="prevTitle">Preview</h3><div class="prev-btns"><a class="prev-btn-dl" id="prevDl" href="#" target="_blank">&#11015; Download</a><a class="prev-btn-tab" id="prevTab" href="#" target="_blank">&#8599; Open in New Tab</a><button class="prev-close" onclick="closePrev()">&times;</button></div></div><div class="prev-body" id="prevBody"></div></div></div>
 <div class="toast" id="toast"></div>
@@ -130,9 +130,96 @@ function openPrev(url,label){document.getElementById('prevTitle').textContent=la
 function closePrev(){document.getElementById('prevOv').classList.remove('show');document.getElementById('prevBody').innerHTML='';}
 const DEFAULTS=[{t:'YouTube Secrets for Real Estate',d:'Build and grow a YouTube channel that generates real estate leads.',i:'\u{1F3AC}'},{t:'LinkedIn for Real Estate Agents',d:'Leverage LinkedIn to connect with referral partners and clients.',i:'\u{1F517}'},{t:'Instagram for Real Estate Agents',d:'Use Instagram to build your brand and attract local buyers and sellers.',i:'\u{1F4F7}'},{t:'VA Home Loans',d:'VA loan program education for realtors working with veterans.',i:'\u{1F393}'},{t:'Database Marketing',d:'Turn your existing database into a consistent lead generation engine.',i:'\u{1F4C8}'},{t:'Business Planning',d:'Annual and quarterly planning framework for real estate professionals.',i:'\u{1F4CB}'},{t:'12 Week Year',d:'Implement the 12 Week Year productivity system for agents.',i:'\u{1F4C5}'},{t:'Down Payment Assistance',d:'Down payment assistance programs realtors should know.',i:'\u{1F4B0}'},{t:'Investor Financing',d:'Financing strategies for real estate investors.',i:'\u{1F4BC}'},{t:'Renovation Loans',d:'Renovation and rehab loan options for buyers and investors.',i:'\u{1F3E0}'},{t:'AI for Realtors',d:'AI tools and workflows to save time and win more deals.',i:'\u{1F916}'},{t:'Facebook Marketing/Lead Gen',d:'Facebook ad strategies and lead generation for real estate.',i:'\u{1F4F0}'},{t:'Getting Found in AI Search',d:'How to optimize for AI search engines as a real estate professional.',i:'\u{1F50D}'}];
 function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Feed Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Email Banner',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Bonus / Lead Magnet',url:'',status:'Added',notes:'Placeholder',group:'bonus'},{label:'Promotional Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Thank You Email - After Attending Class',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Missed Class Email',url:'',status:'Added',notes:'Placeholder',group:'emails'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'},{label:'Automation Doc',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
-const SK='mm_presentation_tracker';function loadData(){try{const r=localStorage.getItem(SK);if(r)return JSON.parse(r);}catch(e){}return DEFAULTS.map(d=>makePresentation(d.t,d.d,d.i));}
-function saveData(){try{localStorage.setItem(SK,JSON.stringify(presentations));const s=document.getElementById('saveIndicator');s.classList.add('show');setTimeout(()=>s.classList.remove('show'),2000);}catch(e){}}
-let presentations=loadData();
+const LEGACY_SK='mm_presentation_tracker';
+let presentations=[];
+let saveTimeout;
+let lastLoadedSha='';
+
+function showSavedIndicator(msg='All changes saved'){
+  const s=document.getElementById('saveIndicator');
+  if(s){
+    s.textContent=msg;
+    s.classList.add('show');
+    setTimeout(()=>{s.textContent='All changes saved';s.classList.remove('show');},2000);
+  }
+}
+
+async function loadData(){
+  const settings = loadGitHubSettings();
+  const publicPath = (settings.path || 'data.json').replace(/^\/+/, '');
+  const publicUrl = './' + publicPath + '?ts=' + Date.now();
+  try{
+    const res = await fetch(publicUrl, {cache:'no-store'});
+    if(res.ok){
+      const data = await res.json();
+      if(Array.isArray(data.presentations)){
+        presentations = data.presentations;
+      }else if(Array.isArray(data)){
+        presentations = data;
+      }else{
+        presentations = DEFAULTS.map(d=>makePresentation(d.t,d.d,d.i));
+      }
+      renderAll();
+      return;
+    }
+  }catch(e){}
+  presentations = DEFAULTS.map(d=>makePresentation(d.t,d.d,d.i));
+  renderAll();
+}
+
+async function getFileMeta(settings){
+  const apiUrl = `https://api.github.com/repos/${encodeURIComponent(settings.owner)}/${encodeURIComponent(settings.repo)}/contents/${settings.path}?ref=${encodeURIComponent(settings.branch)}`;
+  const res = await fetch(apiUrl,{
+    headers:{
+      'Accept':'application/vnd.github+json',
+      'Authorization':'Bearer ' + settings.token
+    }
+  });
+  if(res.status===404) return {sha:'', exists:false, apiUrl};
+  if(!res.ok){
+    const txt = await res.text();
+    throw new Error('GitHub read failed: ' + txt);
+  }
+  const data = await res.json();
+  return {sha:data.sha || '', exists:true, apiUrl};
+}
+
+async function saveData(){
+  if(!isAdmin) return;
+  const settings = loadGitHubSettings();
+  if(!settings.token || !settings.owner || !settings.repo || !settings.branch || !settings.path){
+    showToast('Complete GitHub settings first');
+    return;
+  }
+  try{
+    const meta = await getFileMeta(settings);
+    const payload = {
+      message: 'Update tracker data',
+      content: btoa(unescape(encodeURIComponent(JSON.stringify({presentations}, null, 2)))),
+      branch: settings.branch
+    };
+    if(meta.exists && meta.sha) payload.sha = meta.sha;
+    const res = await fetch(meta.apiUrl,{
+      method:'PUT',
+      headers:{
+        'Accept':'application/vnd.github+json',
+        'Authorization':'Bearer ' + settings.token,
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    if(!res.ok){
+      const txt = await res.text();
+      throw new Error(txt);
+    }
+    const out = await res.json();
+    lastLoadedSha = out.content && out.content.sha ? out.content.sha : '';
+    showSavedIndicator();
+  }catch(e){
+    console.error(e);
+    showToast('GitHub save failed');
+  }
+}
 // Migrate: update existing presentations to new marketing structure
 presentations.forEach(p=>{if(!p.marketing)return;const labels=p.marketing.resources.map(r=>r.label);const needed=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Story Post',group:'canva'},{label:'Instagram Feed Post',group:'canva'},{label:'Email Banner',group:'canva'},{label:'Class Bonus / Lead Magnet',group:'bonus'},{label:'Promotional Email 1',group:'emails'},{label:'Promotional Email 2',group:'emails'},{label:'Promotional Email 3',group:'emails'},{label:'Confirmation & Reminders Email 1',group:'emails'},{label:'Confirmation & Reminders Email 2',group:'emails'},{label:'Confirmation & Reminders Email 3',group:'emails'},{label:'Thank You Email - After Attending Class',group:'emails'},{label:'Missed Class Email',group:'emails'}];needed.forEach(n=>{if(!labels.includes(n.label)){p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});}});p.marketing.resources.forEach(r=>{if(!r.group){const emailLabels=['Promotional Email 1','Promotional Email 2','Promotional Email 3','Confirmation & Reminders Email 1','Confirmation & Reminders Email 2','Confirmation & Reminders Email 3','Thank You Email - After Attending Class','Missed Class Email'];const canvaLabels=['Class Flyer','Facebook Post','Instagram Story Post','Instagram Feed Post','Email Banner','Email Banners','Social Graphics'];const bonusLabels=['Class Bonus / Lead Magnet','AI Content System & Playbook'];if(emailLabels.includes(r.label))r.group='emails';else if(canvaLabels.includes(r.label))r.group='canva';else if(bonusLabels.includes(r.label))r.group='bonus';else r.group='canva';}});});
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
@@ -155,8 +242,8 @@ function toggleCard(id){document.getElementById('card-'+id).classList.toggle('co
 function toggleAll(c){document.querySelectorAll('.project-card').forEach(el=>{c?el.classList.add('collapsed'):el.classList.remove('collapsed');});}
 function switchTab(btn,pid,tab){const card=document.getElementById('card-'+pid);card.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));card.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+pid+'-'+tab).classList.add('active');}
 function applyFilters(){const q=document.getElementById('searchInput').value.toLowerCase(),sf=document.getElementById('statusFilter').value,cf=document.getElementById('categoryFilter').value;document.querySelectorAll('.project-card').forEach(c=>{const title=c.dataset.title,status=c.dataset.status,pid=c.id.replace('card-',''),p=presentations.find(x=>x.id===pid);let show=true;if(q&&!title.includes(q))show=false;if(sf&&status!==sf)show=false;if(cf&&p){if(cf==='deck-missing'){if(p.deck.pptx.url||p.deck.pdf.url)show=false;}else{const cat=cf.split('-')[0];const d=p[cat];if(d&&!d.resources.every(r=>!r.url))show=false;}}c.style.display=show?'':'none';});}
-let saveTimeout;function updateField(id,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p){p[f]=v;clearTimeout(saveTimeout);saveTimeout=setTimeout(saveData,800);}}
-function updateCatField(id,cat,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p&&p[cat]){p[cat][f]=v;clearTimeout(saveTimeout);saveTimeout=setTimeout(saveData,800);}}
+function updateField(id,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p){p[f]=v;clearTimeout(saveTimeout);saveTimeout=setTimeout(()=>saveData(),800);}}
+function updateCatField(id,cat,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p&&p[cat]){p[cat][f]=v;clearTimeout(saveTimeout);saveTimeout=setTimeout(()=>saveData(),800);}}
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 function openAddModal(){document.getElementById('fTitle').value='';document.getElementById('fDesc').value='';document.getElementById('fOwner').value='Mike Gillett';document.getElementById('fStatus').value='Complete';document.getElementById('fIcon').value='\u{1F4DA}';document.getElementById('modalOverlay').classList.add('show');}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
@@ -174,8 +261,26 @@ function loadGitHubSettings(){try{const r=localStorage.getItem(GH_SETTINGS_KEY);
 function openSettingsModal(){if(!isAdmin)return;const s=loadGitHubSettings();document.getElementById('ghToken').value=s.token||'';document.getElementById('ghOwner').value=s.owner||'';document.getElementById('ghRepo').value=s.repo||'';document.getElementById('ghBranch').value=s.branch||'main';document.getElementById('ghPath').value=s.path||'data.json';document.getElementById('settingsOverlay').classList.add('show');}
 function closeSettingsModal(){document.getElementById('settingsOverlay').classList.remove('show');}
 function saveGitHubSettings(){const settings={token:document.getElementById('ghToken').value.trim(),owner:document.getElementById('ghOwner').value.trim(),repo:document.getElementById('ghRepo').value.trim(),branch:document.getElementById('ghBranch').value.trim()||'main',path:document.getElementById('ghPath').value.trim()||'data.json'};try{localStorage.setItem(GH_SETTINGS_KEY,JSON.stringify(settings));closeSettingsModal();showToast('GitHub settings saved');}catch(e){showToast('Could not save settings');}}
+async function importLegacyLocalData(){
+  if(!isAdmin) return;
+  try{
+    const raw = localStorage.getItem(LEGACY_SK);
+    if(!raw){showToast('No legacy browser data found');return;}
+    const parsed = JSON.parse(raw);
+    if(!Array.isArray(parsed)){showToast('Legacy data is invalid');return;}
+    if(!confirm('Import current browser data and publish it to GitHub?')) return;
+    presentations = parsed;
+    renderAll();
+    await saveData();
+    closeSettingsModal();
+    showToast('Legacy browser data published');
+  }catch(e){
+    console.error(e);
+    showToast('Legacy import failed');
+  }
+}
 applyHeader();
-renderAll();
+loadData();
 </script>
 </body>
 </html>
