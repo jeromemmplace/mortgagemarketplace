@@ -28,12 +28,6 @@
         "notes": "",
         "resources": [
           {
-            "label": "Landing Page",
-            "url": "https://app.connectionincorporated.com/v2/preview/33NWjYx5Cig2CdHk664X",
-            "status": "Added",
-            "notes": ""
-          },
-          {
             "label": "Thank You Page",
             "url": "",
             "status": "Added",
@@ -1057,15 +1051,15 @@
       "icon": "📋",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-04",
+      "lastUpdated": "2026-04-02",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
       "deck": {
         "pptx": {
-          "url": "https://docs.google.com/presentation/d/1j6SUcQMatY5Ce_vdjvpN_La5fwOBptwS/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
+          "url": "",
           "status": "Added",
-          "notes": ""
+          "notes": "Placeholder"
         },
         "pdf": {
           "url": "",
