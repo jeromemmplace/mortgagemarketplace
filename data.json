@@ -1,0 +1,2732 @@
+{
+  "presentations": [
+    {
+      "id": "p1775166227208_csrx0",
+      "title": "YouTube Secrets for Real Estate",
+      "description": "Build and grow a YouTube channel that generates real estate leads.",
+      "icon": "🎬",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-04",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/33NWjYx5Cig2CdHk664X",
+            "status": "Added",
+            "notes": ""
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_bmxnr",
+      "title": "LinkedIn for Real Estate Agents",
+      "description": "Leverage LinkedIn to connect with referral partners and clients.",
+      "icon": "🔗",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-04",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "https://docs.google.com/presentation/d/1so0WIutSCU3ZNEzJ-EjOTwpOKWblojKx/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
+          "status": "Added",
+          "notes": ""
+        },
+        "pdf": {
+          "url": "https://drive.google.com/file/d/1fFGR6Nrao0_qASFhuYQMvmw0QZCJsfji/view?usp=sharing",
+          "status": "Added",
+          "notes": ""
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/33NWjYx5Cig2CdHk664X",
+            "status": "Added",
+            "notes": ""
+          },
+          {
+            "label": "Thank You Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/eoWsfZGhtOvsq0UPqSnY",
+            "status": "Added",
+            "notes": ""
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c07cac8165f5247006f6e2",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c07e39cae75b7e46b69566",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c07f5f80b0957777edf2f5",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c090873eea5afb8e53982e",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c09127862c81a0d1136901",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c091d28165f553cc07faaa",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c2003d6dbf6f5baa6ed869",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c305c7140655fad5b4b166",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/pjm981jIuF31oSdm3kkn",
+            "status": "Added",
+            "notes": ""
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_6aw8z",
+      "title": "Instagram for Real Estate Agents",
+      "description": "Use Instagram to build your brand and attract local buyers and sellers.",
+      "icon": "📷",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-04",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "https://docs.google.com/presentation/d/1bp3Bc_UvTyhULZh-l1Qj6lX7kacyl3zC/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
+          "status": "Added",
+          "notes": ""
+        },
+        "pdf": {
+          "url": "https://drive.google.com/file/d/16PpZqPUl76zvbXKiXjp0Ba4I4OZcMw2d/view?usp=sharing",
+          "status": "Added",
+          "notes": ""
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/bdswbSyUW4TMxFhW0C1x",
+            "status": "Added",
+            "notes": ""
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c57f1d9ae8b76705342455",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5af3f3df14e3be4c776a1",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5b63315bad649249bad59",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5ba281654d10c8733acf7",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5bdd29ae8b78aaa36a514",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5bede3df14ef43ac7e8ef",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5d0ea701486f3e975e423",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69c5d205f3439d24073a4712",
+            "status": "Added",
+            "notes": "",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/sS0ThWDx2zvMkHIZ4VVl",
+            "status": "Added",
+            "notes": ""
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_55kcw",
+      "title": "VA Home Loans",
+      "description": "VA loan program education for realtors working with veterans.",
+      "icon": "🎓",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_e2r5u",
+      "title": "Database Marketing",
+      "description": "Turn your existing database into a consistent lead generation engine.",
+      "icon": "📈",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_54505",
+      "title": "Business Planning",
+      "description": "Annual and quarterly planning framework for real estate professionals.",
+      "icon": "📋",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_icbj2",
+      "title": "12 Week Year",
+      "description": "Implement the 12 Week Year productivity system for agents.",
+      "icon": "📅",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_uhckx",
+      "title": "Down Payment Assistance",
+      "description": "Down payment assistance programs realtors should know.",
+      "icon": "💰",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_yuxhw",
+      "title": "Investor Financing",
+      "description": "Financing strategies for real estate investors.",
+      "icon": "💼",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_spz0n",
+      "title": "Renovation Loans",
+      "description": "Renovation and rehab loan options for buyers and investors.",
+      "icon": "🏠",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_377xo",
+      "title": "AI for Realtors",
+      "description": "AI tools and workflows to save time and win more deals.",
+      "icon": "🤖",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_47msx",
+      "title": "Facebook Marketing/Lead Gen",
+      "description": "Facebook ad strategies and lead generation for real estate.",
+      "icon": "📰",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "id": "p1775166227208_l7y2f",
+      "title": "Getting Found in AI Search",
+      "description": "How to optimize for AI search engines as a real estate professional.",
+      "icon": "🔍",
+      "owner": "Mike Gillett",
+      "status": "Complete",
+      "lastUpdated": "2026-04-02",
+      "notes": "",
+      "nextAction": "",
+      "missingItems": "",
+      "deck": {
+        "pptx": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        },
+        "pdf": {
+          "url": "",
+          "status": "Added",
+          "notes": "Placeholder"
+        }
+      },
+      "funnel": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Landing Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "marketing": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Email Banners",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Social Graphics",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email/SMS Copy",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Slide Deck",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Flyer",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Facebook Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Story Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Instagram Feed Post",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Email Banner",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "canva"
+          },
+          {
+            "label": "Class Bonus / Lead Magnet",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "bonus"
+          },
+          {
+            "label": "Promotional Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Promotional Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 1",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 2",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Confirmation & Reminders Email 3",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Thank You Email - After Attending Class",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          },
+          {
+            "label": "Missed Class Email",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder",
+            "group": "emails"
+          }
+        ]
+      },
+      "workflow": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Workflow Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Automation Doc",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      },
+      "checkin": {
+        "status": "Final",
+        "notes": "",
+        "resources": [
+          {
+            "label": "Check-in Page",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          },
+          {
+            "label": "Form Link",
+            "url": "",
+            "status": "Added",
+            "notes": "Placeholder"
+          }
+        ]
+      }
+    }
+  ],
+  "header": {
+    "title": "Mortgage Marketplace LLC",
+    "subtitle": "Presentation Tracker & Resource Hub",
+    "logo": "M"
+  }
+}
