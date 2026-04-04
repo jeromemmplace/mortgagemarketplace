@@ -28,6 +28,12 @@
         "notes": "",
         "resources": [
           {
+            "label": "Landing Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/33NWjYx5Cig2CdHk664X",
+            "status": "Added",
+            "notes": ""
+          },
+          {
             "label": "Thank You Page",
             "url": "",
             "status": "Added",
@@ -847,9 +853,9 @@
       "missingItems": "",
       "deck": {
         "pptx": {
-          "url": "",
+          "url": "https://docs.google.com/presentation/d/1U4bGq27bB-Y1sKMH7ssWyUNcXTg5LSQs/edit?usp=sharing&ouid=112032009078194037371&rtpof=true&sd=true",
           "status": "Added",
-          "notes": "Placeholder"
+          "notes": ""
         },
         "pdf": {
           "url": "https://drive.google.com/file/d/1X7cMGtRRBE4QK7H3-iPBu0tezUN2GDEl/view?usp=drive_link",
