@@ -2252,16 +2252,16 @@
           },
           {
             "label": "Confirmation & Reminders Email 3",
-            "url": "",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69d32eaf29cb023141c62abb",
             "status": "Added",
-            "notes": "Placeholder",
+            "notes": "",
             "group": "emails"
           },
           {
             "label": "Thank You Email - After Attending Class",
-            "url": "",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69d1b6f5c73b634a4dd614b5",
             "status": "Added",
-            "notes": "Placeholder",
+            "notes": "",
             "group": "emails"
           },
           {
