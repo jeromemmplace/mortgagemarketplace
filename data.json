@@ -2317,7 +2317,7 @@
       "icon": "📰",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-02",
+      "lastUpdated": "2026-04-06",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -2328,9 +2328,9 @@
           "notes": "Placeholder"
         },
         "pdf": {
-          "url": "",
+          "url": "https://drive.google.com/file/d/1xgU5Y9ltlfGNDds0VFXVmjLnhpOEJV1U/view?usp=sharing",
           "status": "Added",
-          "notes": "Placeholder"
+          "notes": ""
         }
       },
       "funnel": {
