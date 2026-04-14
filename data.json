@@ -1267,7 +1267,7 @@
       "icon": "📅",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-09",
+      "lastUpdated": "2026-04-14",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -1289,7 +1289,7 @@
         "resources": [
           {
             "label": "Landing Page",
-            "url": "https://app.connectionincorporated.com/v2/preview/Tn7X2YWmBnBDqwRpz6fb",
+            "url": "https://app.connectionincorporated.com/v2/preview/Tn7X2YWmBnBDqwRpz6fb?notrack=true",
             "status": "Added",
             "notes": ""
           },
