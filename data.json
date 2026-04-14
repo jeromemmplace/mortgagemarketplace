@@ -2317,7 +2317,7 @@
       "icon": "📰",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-09",
+      "lastUpdated": "2026-04-14",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -2427,9 +2427,9 @@
           },
           {
             "label": "Promotional Email 1",
-            "url": "",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69deb75fa99bbc5ec081aabe",
             "status": "Added",
-            "notes": "Placeholder",
+            "notes": "",
             "group": "emails"
           },
           {
