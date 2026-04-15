@@ -1398,9 +1398,9 @@
           },
           {
             "label": "Confirmation & Reminders Email 1",
-            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69dee36a771ebd1ddf59fd51",
+            "url": "",
             "status": "Added",
-            "notes": "",
+            "notes": "Placeholder",
             "group": "emails"
           },
           {
@@ -1426,9 +1426,9 @@
           },
           {
             "label": "Missed Class Email",
-            "url": "",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69dee613271dd1179f392fa6",
             "status": "Added",
-            "notes": "Placeholder",
+            "notes": "",
             "group": "emails"
           }
         ]
