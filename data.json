@@ -1398,23 +1398,23 @@
           },
           {
             "label": "Confirmation & Reminders Email 1",
-            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69dee36a771ebd1ddf59fd51",
+            "url": "",
             "status": "Added",
-            "notes": "",
+            "notes": "Placeholder",
             "group": "emails"
           },
           {
             "label": "Confirmation & Reminders Email 2",
-            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69dee3cb6d6847f857fda440",
+            "url": "",
             "status": "Added",
-            "notes": "",
+            "notes": "Placeholder",
             "group": "emails"
           },
           {
             "label": "Confirmation & Reminders Email 3",
-            "url": "",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69dee43079cd9712bd3ed15c",
             "status": "Added",
-            "notes": "Placeholder",
+            "notes": "",
             "group": "emails"
           },
           {
