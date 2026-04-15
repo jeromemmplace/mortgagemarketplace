@@ -138,16 +138,16 @@
           },
           {
             "label": "Confirmation & Reminders Email 1",
-            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69d1b8cec73b6362cfd623ee",
+            "url": "",
             "status": "Added",
-            "notes": "",
+            "notes": "Placeholder",
             "group": "emails"
           },
           {
             "label": "Confirmation & Reminders Email 2",
-            "url": "",
+            "url": "https://backend.leadconnectorhq.com/emails/builder/preview/yKkgYYAJjCRCDtK1nzsr/69d1b8dc6ac7e01d855698bc",
             "status": "Added",
-            "notes": "Placeholder",
+            "notes": "",
             "group": "emails"
           },
           {
