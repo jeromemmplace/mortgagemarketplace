@@ -135,6 +135,51 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .dash-empty{text-align:center;padding:80px 24px;color:var(--gray-500);}
 .dash-empty-icon{font-size:48px;margin-bottom:12px;opacity:0.4;}
 
+/* Asset Viewer Modal */
+.av-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.85);z-index:300;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;backdrop-filter:blur(4px);}.av-overlay.show{display:flex;}
+.av-modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:900px;margin:20px auto;box-shadow:0 24px 80px rgba(0,0,0,0.4);overflow:hidden;animation:avSlideIn 0.3s ease;}
+@keyframes avSlideIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.av-header{background:var(--navy);padding:20px 28px;display:flex;align-items:center;gap:16px;position:relative;}
+.av-header-icon{width:48px;height:48px;border-radius:var(--radius-md);background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.av-header-info{flex:1;min-width:0;}
+.av-header-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:2px;}
+.av-header-sub{font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.av-header-sub .badge{font-size:10px;}
+.av-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:24px;cursor:pointer;padding:4px 8px;transition:var(--transition);position:absolute;top:16px;right:16px;font-family:inherit;}.av-close:hover{color:var(--white);}
+
+.av-body{padding:24px 28px 28px;}
+.av-section{margin-bottom:24px;}
+.av-section:last-child{margin-bottom:0;}
+.av-section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-200);}
+.av-section-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.av-section-icon.si-deck{background:var(--pptx-bg);color:var(--pptx-color);}
+.av-section-icon.si-funnel{background:#dbeafe;color:#2563eb;}
+.av-section-icon.si-canva{background:#e0f2fe;color:#0284c7;}
+.av-section-icon.si-bonus{background:#fef3c7;color:#b45309;}
+.av-section-icon.si-emails{background:#ede9fe;color:#7c3aed;}
+.av-section-icon.si-workflow{background:#d1fae5;color:#059669;}
+.av-section-icon.si-checkin{background:#fef3c7;color:#d97706;}
+.av-section-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;}
+.av-section-count{font-size:11px;color:var(--gray-500);margin-left:auto;}
+
+.av-assets{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.av-asset{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);transition:var(--transition);min-width:0;}
+.av-asset:hover{border-color:var(--gray-300);box-shadow:var(--shadow-sm);}
+.av-asset-info{flex:1;min-width:0;}
+.av-asset-name{font-size:13px;font-weight:600;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.av-asset-note{font-size:10px;color:var(--gray-500);margin-top:1px;}
+.av-asset-actions{display:flex;gap:4px;align-items:center;flex-shrink:0;}
+.av-asset .resource-badge{font-size:9px;padding:2px 6px;}
+.av-btn-open{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;background:var(--blue);color:var(--white);border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:var(--transition);white-space:nowrap;font-family:inherit;}.av-btn-open:hover{background:#3a8ec8;}
+.av-btn-empty{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:500;background:var(--gray-100);color:var(--gray-400);border:1px solid var(--gray-200);cursor:default;white-space:nowrap;}
+
+.av-footer{padding:16px 28px;border-top:1px solid var(--gray-200);display:flex;gap:10px;justify-content:flex-end;}
+.av-footer-btn{padding:9px 18px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}
+.av-footer-primary{background:var(--navy);color:var(--white);}.av-footer-primary:hover{background:var(--navy-light);}
+.av-footer-secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200);}.av-footer-secondary:hover{background:var(--gray-200);}
+
+@media(max-width:768px){.av-assets{grid-template-columns:1fr;}.av-modal{margin:8px;}.av-header{padding:16px 20px;}.av-body{padding:16px 20px 20px;}.av-footer{padding:12px 20px;}}
+
 /* ═══════════════════════════════════
    PAGE 3: TRACKER (existing styles)
 ═══════════════════════════════════ */
@@ -316,6 +361,18 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
     </div>
     <div class="dash-grid" id="dashGrid">
       <div class="dash-empty"><div class="dash-empty-icon">&#9203;</div><p>Loading classes...</p></div>
+    </div>
+  </div>
+
+  <!-- Asset Viewer Modal -->
+  <div class="av-overlay" id="avOverlay" onclick="if(event.target===this)closeAssetViewer()">
+    <div class="av-modal">
+      <div class="av-header" id="avHeader"></div>
+      <div class="av-body" id="avBody"></div>
+      <div class="av-footer">
+        <button class="av-footer-btn av-footer-secondary" onclick="closeAssetViewer()">Close</button>
+        <button class="av-footer-btn av-footer-primary" id="avTrackerBtn">Open in Tracker</button>
+      </div>
     </div>
   </div>
 </div>
@@ -585,8 +642,8 @@ function renderDashGrid(list) {
         </div>
       </div>
       <div class="class-card-actions">
-        <button class="class-card-action cca-primary" onclick="event.stopPropagation();openClassInTracker('${p.id}')">View Assets</button>
-        <button class="class-card-action cca-secondary" onclick="event.stopPropagation();navigateTo('tracker')">Full Tracker</button>
+        <button class="class-card-action cca-primary" onclick="event.stopPropagation();openAssetViewer('${p.id}')">View Assets</button>
+        <button class="class-card-action cca-secondary" onclick="event.stopPropagation();openClassInTracker('${p.id}')">Open in Tracker</button>
       </div>
     </div>`;
   }).join('');
@@ -628,6 +685,117 @@ function applyDashFilters() {
     c.style.display = show ? '' : 'none';
   });
 }
+
+/* ═══════════════════════════════════
+   ASSET VIEWER MODAL
+═══════════════════════════════════ */
+function openAssetViewer(id) {
+  const p = dashPresentations.find(x => x.id === id);
+  if (!p) return;
+
+  const cat = detectCategory(p.title);
+  const color = catColor(cat);
+  const pct = pctDash(p);
+  const linked = countLinkedDash(p);
+  const total = countAllDash(p);
+  const statusMap = { 'Complete': 'badge-complete', 'In Progress': 'badge-progress', 'Needs Review': 'badge-review', 'Not Started': 'badge-not-started', 'Missing Assets': 'badge-missing', 'Waiting on Link': 'badge-waiting-link', 'Waiting on Approval': 'badge-waiting-approval' };
+
+  /* Header */
+  document.getElementById('avHeader').innerHTML = `
+    <div class="av-header-icon">${p.icon || '&#128218;'}</div>
+    <div class="av-header-info">
+      <div class="av-header-title">${escDash(p.title)}</div>
+      <div class="av-header-sub">
+        <span class="badge ${statusMap[p.status] || 'badge-not-started'}">${p.status}</span>
+        <span>${linked}/${total} assets linked</span>
+        <span>${pct}% complete</span>
+      </div>
+    </div>
+    <button class="av-close" onclick="closeAssetViewer()">&times;</button>`;
+
+  /* Body - build sections */
+  let html = '';
+
+  /* Deck Files */
+  const deckItems = [
+    { label: 'Presentation (PPTX)', url: p.deck.pptx.url, status: p.deck.pptx.status, notes: p.deck.pptx.notes },
+    { label: 'Presentation (PDF)', url: p.deck.pdf.url, status: p.deck.pdf.status, notes: p.deck.pdf.notes }
+  ];
+  html += avSection('Deck Files', 'si-deck', '&#128196;', deckItems);
+
+  /* Funnel */
+  html += avSection('Funnel Resources', 'si-funnel', '&#9889;', p.funnel.resources);
+
+  /* Marketing - Canva */
+  const canvaRes = (p.marketing.resources || []).filter(r => r.group === 'canva');
+  if (canvaRes.length) html += avSection('Canva Resources', 'si-canva', '&#127912;', canvaRes);
+
+  /* Marketing - Bonus */
+  const bonusRes = (p.marketing.resources || []).filter(r => r.group === 'bonus');
+  if (bonusRes.length) html += avSection('Class Bonus / Lead Magnet', 'si-bonus', '&#127873;', bonusRes);
+
+  /* Marketing - Emails */
+  const emailRes = (p.marketing.resources || []).filter(r => r.group === 'emails');
+  if (emailRes.length) html += avSection('Email Templates', 'si-emails', '&#128231;', emailRes);
+
+  /* Workflow */
+  html += avSection('Workflow', 'si-workflow', '&#9881;', p.workflow.resources);
+
+  /* Check-in */
+  html += avSection('Check-in Forms', 'si-checkin', '&#9745;', p.checkin.resources);
+
+  document.getElementById('avBody').innerHTML = html;
+
+  /* Footer button */
+  document.getElementById('avTrackerBtn').onclick = function() {
+    closeAssetViewer();
+    openClassInTracker(id);
+  };
+
+  document.getElementById('avOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAssetViewer() {
+  document.getElementById('avOverlay').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function avSection(title, iconClass, iconChar, items) {
+  if (!items || !items.length) return '';
+  const linked = items.filter(r => r.url).length;
+  const rbMap = { 'Added': 'rb-added', 'Missing': 'rb-missing', 'Needs Review': 'rb-review', 'Draft': 'rb-draft', 'Final': 'rb-final' };
+
+  let rows = items.map(r => {
+    const hasUrl = !!r.url;
+    const badge = `<span class="resource-badge ${rbMap[r.status] || 'rb-draft'}">${r.status || 'Added'}</span>`;
+    const noteText = r.notes && r.notes !== 'Placeholder' ? r.notes : (hasUrl ? 'Ready' : 'Pending');
+    const actionBtn = hasUrl
+      ? `<a class="av-btn-open" href="${escDash(r.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#8599; Open</a>`
+      : `<span class="av-btn-empty">Pending</span>`;
+    return `<div class="av-asset">
+      <div class="av-asset-info">
+        <div class="av-asset-name">${escDash(r.label)}</div>
+        <div class="av-asset-note">${escDash(noteText)}</div>
+      </div>
+      <div class="av-asset-actions">${badge} ${actionBtn}</div>
+    </div>`;
+  }).join('');
+
+  return `<div class="av-section">
+    <div class="av-section-head">
+      <div class="av-section-icon ${iconClass}">${iconChar}</div>
+      <div class="av-section-title">${title}</div>
+      <div class="av-section-count">${linked}/${items.length} linked</div>
+    </div>
+    <div class="av-assets">${rows}</div>
+  </div>`;
+}
+
+/* Close on Escape key */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('avOverlay').classList.contains('show')) closeAssetViewer();
+});
 </script>
 
 <!-- ═══════════════════════════════════
