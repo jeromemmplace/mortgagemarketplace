@@ -1499,15 +1499,15 @@
         "resources": [
           {
             "label": "Landing Page",
-            "url": "https://app.connectionincorporated.com/v2/preview/h7lklGjit5hgeBZ2ATn3",
-            "status": "Added",
-            "notes": ""
-          },
-          {
-            "label": "Thank You Page",
             "url": "",
             "status": "Added",
             "notes": "Placeholder"
+          },
+          {
+            "label": "Thank You Page",
+            "url": "https://app.connectionincorporated.com/v2/preview/4PbxQHsGAgNn7JbdUptX",
+            "status": "Added",
+            "notes": ""
           }
         ]
       },
