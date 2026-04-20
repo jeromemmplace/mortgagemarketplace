@@ -1477,7 +1477,7 @@
       "icon": "💰",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-04",
+      "lastUpdated": "2026-04-20",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -1499,9 +1499,9 @@
         "resources": [
           {
             "label": "Landing Page",
-            "url": "",
+            "url": "https://app.connectionincorporated.com/v2/preview/h7lklGjit5hgeBZ2ATn3",
             "status": "Added",
-            "notes": "Placeholder"
+            "notes": ""
           },
           {
             "label": "Thank You Page",
@@ -2317,7 +2317,7 @@
       "icon": "📰",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-20",
+      "lastUpdated": "2026-04-15",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -2345,7 +2345,7 @@
           },
           {
             "label": "Thank You Page",
-            "url": "https://app.connectionincorporated.com/v2/preview/h8bbvj7b3eJNebQ2Sj51?notrack=true",
+            "url": "https://app.connectionincorporated.com/v2/preview/lnO8YENMfnFvN9BUk18K?notrack=true",
             "status": "Added",
             "notes": ""
           }
