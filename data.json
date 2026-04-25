@@ -1687,7 +1687,7 @@
       "icon": "💼",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-04",
+      "lastUpdated": "2026-04-25",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -1709,9 +1709,9 @@
         "resources": [
           {
             "label": "Landing Page",
-            "url": "",
+            "url": "https://app.connectionincorporated.com/v2/preview/LpV63OJNonvEQZqdc9ME?notrack=true",
             "status": "Added",
-            "notes": "Placeholder"
+            "notes": ""
           },
           {
             "label": "Thank You Page",
