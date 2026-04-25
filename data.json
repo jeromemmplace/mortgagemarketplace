@@ -1897,7 +1897,7 @@
       "icon": "🏠",
       "owner": "Mike Gillett",
       "status": "Complete",
-      "lastUpdated": "2026-04-20",
+      "lastUpdated": "2026-04-25",
       "notes": "",
       "nextAction": "",
       "missingItems": "",
@@ -1925,9 +1925,9 @@
           },
           {
             "label": "Thank You Page",
-            "url": "",
+            "url": "https://app.connectionincorporated.com/v2/preview/8p7DqbxiZpva7y159tC1?notrack=true",
             "status": "Added",
-            "notes": "Placeholder"
+            "notes": ""
           }
         ]
       },
