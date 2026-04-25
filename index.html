@@ -913,23 +913,15 @@ function applyHeader(){const hd=loadHeaderLocal();document.getElementById('heade
 function editHeader(){if(!isAdmin)return;const hd=loadHeaderLocal();const t=prompt('Company / Site Title:',hd.title);if(t===null)return;const s=prompt('Subtitle:',hd.subtitle);if(s===null)return;const l=prompt('Logo Letter (1-2 chars):',hd.logo);if(l===null)return;hd.title=t.trim()||'Mortgage Marketplace LLC';hd.subtitle=s.trim()||'Presentation Tracker & Resource Hub';hd.logo=l.trim().substring(0,2)||'M';saveHeaderLocal(hd);applyHeader();saveDataToGitHub();showToast('Header updated');}
 
 function runMigration(){
-  const removeLabels=['Email Banners','Social Graphics','Email/SMS Copy','Slide Deck','Email Banner','Instagram Post','Instagram Feed Post'];
-  const removeWf=['Automation Doc'];
-  const removeCi=['Form Link'];
-  presentations.forEach(p=>{
-    if(p.marketing){
-      p.marketing.resources=p.marketing.resources.filter(r=>!removeLabels.includes(r.label));
-      p.marketing.resources.forEach(r=>{if(r.label==='Instagram Story Post')r.label='Instagram Story';});
-      const labels=p.marketing.resources.map(r=>r.label);
-      const canvaNeeded=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Story',group:'canva'}];
-      canvaNeeded.forEach(n=>{if(!labels.includes(n.label))p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});});
-      const crCount=p.marketing.resources.filter(r=>r.group==='class-resources').length;
-      if(crCount<3){for(let i=crCount;i<3;i++)p.marketing.resources.push({label:'Class Resource '+(i+1),description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'});}
-      p.marketing.resources.forEach(r=>{if(!r.group)r.group='canva';});
-    }
-    if(p.workflow){p.workflow.resources=p.workflow.resources.filter(r=>!removeWf.includes(r.label));const wL=p.workflow.resources.map(r=>r.label);if(!wL.includes('Workflow Link'))p.workflow.resources.unshift({label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'});}
-    if(p.checkin){p.checkin.resources=p.checkin.resources.filter(r=>!removeCi.includes(r.label));const cL=p.checkin.resources.map(r=>r.label);if(!cL.includes('Check-in Page'))p.checkin.resources.unshift({label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'});}
+  presentations.forEach(p=>{if(!p.marketing)return;const labels=p.marketing.resources.map(r=>r.label);
+    const canvaNeeded=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Post',group:'canva'},{label:'Instagram Story',group:'canva'}];
+    canvaNeeded.forEach(n=>{if(!labels.includes(n.label))p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});});
+    p.marketing.resources.forEach(r=>{if(r.label==='Instagram Story Post')r.label='Instagram Story';if(r.label==='Instagram Feed Post')r.label='Instagram Post';});
+    const crCount=p.marketing.resources.filter(r=>r.group==='class-resources').length;
+    if(crCount<3){for(let i=crCount;i<3;i++)p.marketing.resources.push({label:'Class Resource '+(i+1),description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'});}
+    p.marketing.resources.forEach(r=>{if(!r.group)r.group='canva';});
   });
+  presentations.forEach(p=>{if(!p.workflow)return;const wL=p.workflow.resources.map(r=>r.label);if(!wL.includes('Workflow Link'))p.workflow.resources.unshift({label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'});});
 }
 
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
@@ -1128,7 +1120,7 @@ function applyFilters(){const q=document.getElementById('searchInput').value.toL
 
 function openAddModal(){document.getElementById('fTitle').value='';document.getElementById('fDesc').value='';document.getElementById('fOwner').value='Mike Gillett';document.getElementById('fStatus').value='Complete';document.getElementById('fIcon').value='\u{1F4DA}';document.getElementById('modalOverlay').classList.add('show');}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
-function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Resource 1',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'},{label:'Class Resource 2',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'},{label:'Class Resource 3',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'}]}};}
+function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Resource 1',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'},{label:'Class Resource 2',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'},{label:'Class Resource 3',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
 async function addPresentation(){const title=document.getElementById('fTitle').value.trim();if(!title){showToast('Title is required','error');return;}const p=makePresentation(title,document.getElementById('fDesc').value.trim(),document.getElementById('fIcon').value||'\u{1F4DA}');p.owner=document.getElementById('fOwner').value.trim()||'Mike Gillett';p.status=document.getElementById('fStatus').value;presentations.push(p);await saveDataToGitHub();closeModal();renderAll();showToast('Added: '+title);}
 
 /* TRACKER INIT — called when navigating to tracker page */
