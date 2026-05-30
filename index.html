@@ -94,6 +94,23 @@
     .btn.full { width:100%; }
     .button-row { display:flex; gap:10px; flex-wrap:wrap; }
     .dashboard-layout { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(330px,.78fr); gap:22px; }
+    .dashboard-simple { display:grid; gap:24px; }
+    .dashboard-simple .hero-card { min-height:260px; max-width:none; }
+    .dashboard-section { display:grid; gap:14px; }
+    .dashboard-section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .dashboard-section-head h2 { font-size:1.12rem; }
+    .workspace-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; }
+    .workspace-card { min-height:172px; display:grid; align-content:space-between; gap:18px; padding:20px; text-align:left; color:var(--ink); background:#fff; border:1px solid var(--line); border-top:4px solid var(--blue); border-radius:20px; box-shadow:0 8px 24px rgba(21,32,50,.07); cursor:pointer; }
+    .workspace-card:hover { transform:translateY(-2px); box-shadow:0 14px 28px rgba(21,32,50,.1); }
+    .workspace-card:nth-child(2) { border-top-color:#18a37a; }
+    .workspace-card:nth-child(3) { border-top-color:#d98b12; }
+    .workspace-card:nth-child(4) { border-top-color:#7468d7; }
+    .workspace-card:nth-child(5) { border-top-color:#c76894; }
+    .workspace-card-top { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .workspace-card h3 { color:var(--nav); font-size:1rem; }
+    .workspace-card p { color:var(--muted); font-size:.86rem; line-height:1.5; }
+    .workspace-card .quick-icon { width:42px; height:42px; border-radius:14px; }
+    .dashboard-project-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); gap:16px; }
     .hero { display:grid; grid-template-columns:minmax(0,1.25fr) 280px; gap:18px; margin-bottom:22px; }
     .card,.hero-card,.panel,.metric,.quick-card,.resource-card,.project-card { background:rgba(255,255,255,.94); border:1px solid rgba(255,255,255,.9); border-radius:28px; box-shadow:var(--shadow); }
     .hero-card { min-height:220px; padding:30px; position:relative; overflow:hidden; display:grid; align-content:space-between; }
@@ -243,7 +260,7 @@
       body { background:#f3f6f9; }
       .auth-screen { padding:14px; }
       .auth-card { margin:16px; padding:36px 24px; border-radius:20px; }
-      .login-logo img { https://drive.google.com/file/d/1h3AciZW4bmJCSeJKOUw8r1_CIyAD0rg_/view?usp=sharing; width:220px; }
+      .login-logo img { width:220px; }
       .sidebar { border-radius:22px; }
       .brand { padding:18px 18px 12px; }
       .brand-mark { height:84px; }
@@ -288,6 +305,7 @@
       .project-item { padding:14px; border-radius:16px; }
       .project-preview-card.list { display:grid; grid-template-columns:1fr; }
       .project-detail-columns { grid-template-columns:1fr; }
+      .workspace-grid,.dashboard-project-grid { grid-template-columns:1fr; }
       .field input,.field select,.field textarea,textarea { border-radius:13px; }
       .inline-form,.assistant-resource { display:grid; grid-template-columns:1fr; }
       .chat-form { display:grid; grid-template-columns:1fr; }
@@ -307,7 +325,7 @@
   <section class="auth-screen" id="authScreen">
     <form class="auth-card" id="loginForm">
       <div class="login-logo">
-        <img src="https://drive.google.com/file/d/1WZTRNRA0_gaYGydQBDh4Als8FUQBVMRr/view?usp=sharing" alt="Mortgage Marketplace">
+        <img src="mortgage-marketplace-wide-logo.png" alt="Mortgage Marketplace">
         <div class="login-divider"></div>
       </div>
       <div class="login-title">
@@ -357,65 +375,32 @@
   </header>
   <main class="main" id="main">
     <section class="page active" id="page-dashboard">
-      <div class="dashboard-layout">
-        <div>
-          <div class="hero">
-            <div class="hero-card">
-              <div>
-                <div class="eyebrow">Mortgage Marketplace Hub</div>
-                <h1>Better home loans start with better team tools.</h1>
-                <p class="lead">Track Mortgage Marketplace projects, manage marketing materials, organize courses, and keep current-rate resources close for purchase, refinance, and investor conversations.</p>
-                <div class="button-row hero-actions">
-                  <button class="btn dark" data-go="projects" type="button">Open projects</button>
-                  <button class="btn secondary" data-go="marketing" type="button">Browse materials</button>
-                </div>
-              </div>
+      <div class="dashboard-simple">
+        <div class="hero-card">
+          <div>
+            <div class="eyebrow">Mortgage Marketplace Hub</div>
+            <h1>Better home loans start with better team tools.</h1>
+            <p class="lead">Track projects, organize marketing materials, open training resources, and keep current-rate tools close for everyday conversations.</p>
+            <div class="button-row hero-actions">
+              <button class="btn dark" data-go="projects" type="button">Open projects</button>
+              <button class="btn secondary" data-go="marketing" type="button">Browse materials</button>
             </div>
-            <div class="balance-card">
-              <div><span>Project workspace</span><strong class="is-hidden-count" id="heroProjectCount"></strong></div>
-              <small class="muted">Customize, upload, review, and approve team projects.</small>
-            </div>
-          </div>
-          <div class="metric-grid">
-            <div class="metric"><div class="metric-top"><span>Marketing</span><span class="metric-icon">M</span></div><strong class="is-hidden-count" id="flyerCount"></strong><small>Flyers, forms, campaign links, and co-branded assets.</small></div>
-            <div class="metric"><div class="metric-top"><span>Courses</span><span class="metric-icon">C</span></div><strong class="is-hidden-count" id="trainingCount"></strong><small>Decks, onboarding, and partner education resources.</small></div>
-            <div class="metric"><div class="metric-top"><span>Loan options</span><span class="metric-icon">%</span></div><strong class="is-hidden-count"></strong><small>Purchase, refinance, government, jumbo, and specialty programs.</small></div>
-          </div>
-          <div class="wide-card card">
-            <div class="project-line"><h2>Project Activity</h2><span class="pill" id="dashRole">Admin</span></div>
-            <div class="bar-chart">
-              <div class="bar"><i style="--h:62%"></i><span>Projects</span></div>
-              <div class="bar"><i style="--h:82%"></i><span>Marketing</span></div>
-              <div class="bar"><i style="--h:70%"></i><span>Courses</span></div>
-              <div class="bar"><i style="--h:48%"></i><span>Rates</span></div>
-              <div class="bar"><i style="--h:88%"></i><span>Hub</span></div>
-            </div>
-          </div>
-          <div class="wide-card card">
-            <div class="project-line"><h2>Priority Projects</h2><button class="btn secondary" data-go="projects" type="button">View all</button></div>
-            <div class="table-scroll"><table class="project-table"><thead><tr><th>Name</th><th>Owner</th><th>Status</th><th>Priority</th></tr></thead><tbody id="dashboardProjects"></tbody></table></div>
           </div>
         </div>
-        <aside class="side-stack">
-          <div class="task-card card">
-            <div class="project-line"><h2>Task</h2><span class="pill">Live</span></div>
-            <div class="task-percent" id="taskPercent">94%</div>
-            <p class="muted">Involvement work</p>
-            <div class="wave"><svg viewBox="0 0 420 150" preserveAspectRatio="none"><path d="M0,120 C55,100 40,35 95,45 C155,60 135,115 210,100 C270,85 250,40 315,58 C370,78 360,18 420,55" fill="none" stroke="#2da8ff" stroke-width="5"/><path d="M0,120 C55,100 40,35 95,45 C155,60 135,115 210,100 C270,85 250,40 315,58 C370,78 360,18 420,55 L420,150 L0,150 Z" fill="rgba(45,168,255,.08)"/></svg></div>
+        <section class="dashboard-section">
+          <div class="dashboard-section-head"><h2>Workspace</h2></div>
+          <div class="workspace-grid">
+            <button class="workspace-card" data-go="projects" type="button"><span class="workspace-card-top"><span class="quick-icon">P</span><span class="pill">Open</span></span><span><h3>Projects</h3><p>Review active work, open progress details, share links, and add feedback.</p></span></button>
+            <button class="workspace-card" data-go="marketing" type="button"><span class="workspace-card-top"><span class="quick-icon">M</span><span class="pill">Browse</span></span><span><h3>Marketing Materials</h3><p>Find flyers, forms, campaign links, and co-branded assets.</p></span></button>
+            <button class="workspace-card" data-go="courses" type="button"><span class="workspace-card-top"><span class="quick-icon">C</span><span class="pill">Learn</span></span><span><h3>Courses</h3><p>Open onboarding decks and partner education resources.</p></span></button>
+            <button class="workspace-card" data-go="rates" type="button"><span class="workspace-card-top"><span class="quick-icon">%</span><span class="pill">View</span></span><span><h3>Live Rates</h3><p>Keep rate links and loan option references within reach.</p></span></button>
+            <button class="workspace-card" data-go="assistant" type="button"><span class="workspace-card-top"><span class="quick-icon">AI</span><span class="pill">Ask</span></span><span><h3>AI Assistant</h3><p>Open quick answers and your dedicated mortgage assistant.</p></span></button>
           </div>
-          <div class="card wide-card">
-            <h2>Progress</h2>
-            <div class="progress-row">
-              <div class="ring"><div class="ring-circle" style="--c:var(--lav);--p:64%"><span>64%</span></div><small>Weekly activity</small></div>
-              <div class="ring"><div class="ring-circle" style="--c:#7197ff;--p:72%"><span>26:43</span></div><small>Worked this week</small></div>
-              <div class="ring"><div class="ring-circle" style="--c:var(--teal);--p:77%"><span>77%</span></div><small>Focus time</small></div>
-            </div>
-          </div>
-          <div class="quick-grid">
-            <button class="quick-card" data-go="marketing" type="button"><span class="quick-icon">M</span><h3>Marketing Materials</h3><p>Flyers, forms, compliance links, and campaign assets.</p></button>
-            <button class="quick-card" data-go="rates" type="button"><span class="quick-icon">%</span><h3>Live Rates</h3><p>Keep current-rate links and loan option references close.</p></button>
-          </div>
-        </aside>
+        </section>
+        <section class="dashboard-section">
+          <div class="dashboard-section-head"><h2>Priority Projects</h2><button class="btn secondary" data-go="projects" type="button">View all projects</button></div>
+          <div class="dashboard-project-grid" id="dashboardProjects"></div>
+        </section>
       </div>
     </section>
     <section class="page" id="page-projects">
@@ -512,7 +497,7 @@
     function showAuthError(message){const el=qs("#authMessage");el.textContent=message;el.classList.add("show")}
     function clearAuthError(){const el=qs("#authMessage");el.textContent="";el.classList.remove("show")}
     function setupAuth(){qs("#loginForm").onsubmit=async e=>{e.preventDefault();const btn=qs("#loginBtn");clearAuthError();btn.disabled=true;btn.textContent="Signing in...";try{await signInWithEmailAndPassword(auth,qs("#loginEmail").value.trim(),qs("#loginPassword").value)}catch{showAuthError("Login failed. Check the email and password.")}finally{btn.disabled=false;btn.textContent="Sign In"}};qs("#googleLoginBtn").onclick=async()=>{clearAuthError();try{await signInWithPopup(auth,googleProvider)}catch{showAuthError("Google sign-in was not completed. Please try again.")}};qs("#logoutBtn").onclick=()=>signOut(auth);onAuthStateChanged(auth,async user=>{if(!user){appUser=null;qs("#authScreen").classList.remove("hidden");return}await loadUserProfile(user);qs("#authScreen").classList.add("hidden");init()})}
-    function init(){renderNav();renderResources();renderFilters();ensureProjects();renderProjects();renderChecklistTabs();renderChecklist();if(!initialized){renderSuggestions();bindEvents();addMessage("Hi. I am the Mortgage Marketplace assistant. Use the custom GPT link above for deeper scenarios.","bot");initialized=true}calcMortgage();updateMetrics();qs("#roleLine").textContent=`${appUser.name} - ${appUser.role.toUpperCase()}`;qs("#dashRole").textContent=appUser.role.toUpperCase();qs("#avatar").textContent=isAdmin()?"AD":"US";}
+    function init(){renderNav();renderResources();renderFilters();ensureProjects();renderProjects();renderChecklistTabs();renderChecklist();if(!initialized){renderSuggestions();bindEvents();addMessage("Hi. I am the Mortgage Marketplace assistant. Use the custom GPT link above for deeper scenarios.","bot");initialized=true}calcMortgage();updateMetrics();qs("#roleLine").textContent=`${appUser.name} - ${appUser.role.toUpperCase()}`;qs("#avatar").textContent=isAdmin()?"AD":"US";}
     function renderNav(){const nav=qs("#nav");nav.innerHTML="";let g="";pages.forEach(p=>{if(p.group!==g){const l=document.createElement("div");l.className="nav-label";l.textContent=p.group;nav.append(l);g=p.group}const b=document.createElement("button");b.className="nav-item"+(p.id===currentPage?" active":"");b.dataset.page=p.id;b.innerHTML=`<span>${p.i}</span><span>${p.title}</span>`;b.onclick=()=>navigate(p.id);nav.append(b)})}
     function navigate(id){currentPage=id;qsa(".page").forEach(p=>p.classList.remove("active"));qs(`#page-${id}`)?.classList.add("active");qsa(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===id));qs("#topbarTitle").textContent=pages.find(p=>p.id===id)?.title||id;if(id==="projects"&&qs("#projectBrowser"))showProjectBrowser();closeSidebar()}
     function bindEvents(){qs("#menuBtn").onclick=toggleSidebar;qs("#overlay").onclick=closeSidebar;qsa("[data-go]").forEach(el=>el.onclick=()=>navigate(el.dataset.go));qs("#calcForm").onsubmit=e=>{e.preventDefault();calcMortgage()};qsa("#calcForm input,#calcForm select").forEach(el=>el.oninput=calcMortgage);qs("#globalSearch").oninput=()=>{renderResources();if(currentPage!=="marketing")navigate("marketing")};qs("#searchJump").onclick=()=>navigate("marketing");qs("#clearSearch").onclick=()=>{qs("#globalSearch").value="";activeFilter="All";renderFilters();renderResources()};qs("#resetChecklist").onclick=resetActiveChecklist;qs("#addProjectBtn").onclick=addProject;qs("#resetProjectsBtn").onclick=resetProjects;qs("#chatForm").onsubmit=e=>{e.preventDefault();sendChat(qs("#chatInput").value)};window.onkeydown=e=>{if(e.key==="Escape")closeSidebar()}}
@@ -532,10 +517,10 @@
     function openProjectPreview(id){activeProjectId=id;qs("#projectBrowser").hidden=true;qs("#projectDetail").hidden=false;renderProjectDetail()}
 function renderProjects(){const projects=getProjects();if(!projects.find(p=>p.id===activeProjectId)&&projects.length)activeProjectId=projects[0].id;qs("#permissionNote").textContent=isAdmin()?"Admin mode: open a project preview to edit details, review links, and manage assets.":"Select a project to review progress, links, descriptions, comments, and uploads.";qs("#addProjectBtn").disabled=!isAdmin();qs("#resetProjectsBtn").disabled=!isAdmin();const grid=qs("#projectList");grid.className="project-gallery"+(projectViewMode==="list"?" list":"");grid.innerHTML="";projects.forEach(p=>{const pct=projectPct(p),card=document.createElement("article");card.className="project-preview-card"+(projectViewMode==="list"?" list":"");card.innerHTML=`<div><div class="project-line"><span class="pill">${esc(p.priority)} priority</span><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="project-card-meta"><span>Owner: ${esc(p.owner)}</span></div><div class="project-progress"><div class="project-progress-line"><span style="width:${pct}%"></span></div><div class="project-progress-text"><span>${pct}% progress</span><span>${esc(p.status)}</span></div></div></div><div class="project-preview-actions"><button class="btn dark" type="button">View progress</button></div>`;card.querySelector("button").onclick=()=>openProjectPreview(p.id);grid.append(card)});qs("#gridViewBtn").classList.toggle("active",projectViewMode==="grid");qs("#listViewBtn").classList.toggle("active",projectViewMode==="list");qs("#gridViewBtn").onclick=()=>setProjectView("grid");qs("#listViewBtn").onclick=()=>setProjectView("list");renderDashboardProjects();updateMetrics()}
     function renderProjectDetail(){const p=activeProject();if(!p)return;const pct=projectPct(p),admin=isAdmin(),disabled=admin?"":"disabled";qs("#projectDetail").innerHTML=`<div class="project-detail-nav"><button class="btn secondary" id="backProjectsBtn" type="button">Back to projects</button><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><div class="project-detail-hero"><span class="pill">${esc(p.priority)} priority</span><h1>${esc(p.name)}</h1><p>${esc(p.description)}</p><div class="project-progress"><div class="project-progress-line"><span style="width:${pct}%"></span></div><div class="project-progress-text"><span>${pct}% complete</span><span>${esc(p.status)}</span></div></div></div><div class="project-detail-columns"><div class="project-detail-page"><div class="project-read-card"><h3>Project links and assets</h3><div class="asset-list">${renderAssets(p.assets)}</div><div class="inline-form"><div class="field"><label>Add a project link</label><input id="projectLink" placeholder="https://..."></div><button class="btn secondary" id="addLinkBtn" type="button">Add link</button></div><div class="field"><label>Upload files or screenshots</label><input class="file-input" id="projectFiles" type="file" multiple></div></div><div class="project-read-card"><h3>Comments and feedback</h3><div class="field"><label>Add a comment as ${esc(appUser.name)}</label><textarea id="commentText" placeholder="Add feedback, notes, or a revision request..."></textarea></div><div class="field"><label>Attach files to comment</label><input class="file-input" id="commentFiles" type="file" multiple></div><button class="btn dark" id="addCommentBtn" type="button">Post comment</button><div class="comment-list">${renderComments(p.comments)}</div></div></div><aside class="project-detail-page"><div class="project-read-card"><h3>Project overview</h3><p class="project-description">Owner: ${esc(p.owner)}</p><p class="project-description">Collaborators: ${esc(p.collaborators||"None listed")}</p><p class="project-description">Viewers: ${esc(p.viewers||"None listed")}</p><div class="button-row"><button class="btn secondary" data-review="Approved" type="button">Approve</button><button class="btn secondary" data-review="Needs Revisions" type="button">Needs revisions</button></div></div>${admin?`<div class="project-read-card"><h3>Admin editing</h3><div class="field"><label>Project name</label><input id="projectName" value="${esc(p.name)}"></div><div class="field"><label>Owner</label><input id="projectOwner" value="${esc(p.owner)}"></div><div class="field"><label>Priority</label><select id="projectPriority">${["Low","Medium","High","Urgent"].map(x=>`<option ${x===p.priority?"selected":""}>${x}</option>`).join("")}</select></div><div class="field"><label>Status</label><select id="projectStatus">${["Not Started","Planning","In Progress","Waiting for Review","Needs Revisions","Approved","Complete","On Hold","Backlog"].map(x=>`<option ${x===p.status?"selected":""}>${x}</option>`).join("")}</select></div><div class="field"><label>Description</label><textarea id="projectDescription">${esc(p.description)}</textarea></div><div class="field"><label>Collaborators</label><input id="projectCollaborators" value="${esc(p.collaborators)}"></div><div class="field"><label>Viewers</label><input id="projectViewers" value="${esc(p.viewers)}"></div><button class="btn dark" id="saveProjectBtn" type="button">Save details</button></div>`:""}</aside></div>`;qs("#backProjectsBtn").onclick=showProjectBrowser;qs("#addLinkBtn").onclick=addProjectLink;qs("#projectFiles").onchange=e=>addProjectFiles(e.target.files,"Project asset");qs("#addCommentBtn").onclick=addProjectComment;qsa("[data-review]",qs("#projectDetail")).forEach(b=>b.onclick=()=>updateProjectStatus(b.dataset.review,true));if(admin){qs("#saveProjectBtn").onclick=saveProjectDetails;qs("#projectStatus").onchange=e=>updateProjectStatus(e.target.value)}}
-    function renderDashboardProjects(){const body=qs("#dashboardProjects");if(!body)return;body.innerHTML="";getProjects().slice(0,5).forEach(p=>{const tr=document.createElement("tr");tr.innerHTML=`<td><strong>${esc(p.name)}</strong></td><td>${esc(p.owner)}</td><td><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></td><td>${esc(p.priority)}</td>`;body.append(tr)})}
+    function renderDashboardProjects(){const body=qs("#dashboardProjects");if(!body)return;body.innerHTML="";getProjects().slice(0,6).forEach(p=>{const pct=projectPct(p),card=document.createElement("article");card.className="project-preview-card";card.innerHTML=`<div><div class="project-line"><span class="pill">${esc(p.priority)} priority</span><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="project-card-meta"><span>Owner: ${esc(p.owner)}</span></div><div class="project-progress"><div class="project-progress-line"><span style="width:${pct}%"></span></div><div class="project-progress-text"><span>${pct}% progress</span><span>${esc(p.status)}</span></div></div></div><div class="project-preview-actions"><button class="btn dark" type="button">View progress</button></div>`;card.querySelector("button").onclick=()=>{navigate("projects");openProjectPreview(p.id)};body.append(card)})}
     function renderChecklistTabs(){const tabs=qs("#checkTabs");tabs.innerHTML="";Object.entries(checklistData).forEach(([id,d])=>{const b=document.createElement("button");b.className="tab"+(id===activeChecklist?" active":"");b.textContent=d.title;b.onclick=()=>{activeChecklist=id;renderChecklistTabs();renderChecklist()};tabs.append(b)})}const checklistKey=(id=activeChecklist)=>`mmhub-checklist-${id}`;function getDone(id=activeChecklist){try{return JSON.parse(localStorage.getItem(checklistKey(id)))||[]}catch{return[]}}function setDone(done,id=activeChecklist){localStorage.setItem(checklistKey(id),JSON.stringify(done))}function renderChecklist(){const d=checklistData[activeChecklist],done=getDone(),pct=Math.round(done.length/d.items.length*100);qs("#checkMeta").textContent=`${done.length} of ${d.items.length} complete`;qs("#checkProgress").style.width=`${pct}%`;qs("#checkList").innerHTML="";d.items.forEach((t,i)=>{const b=document.createElement("button");b.className="check-item"+(done.includes(i)?" done":"");b.innerHTML=`<span class="box"></span><span class="check-text">${esc(t)}</span>`;b.onclick=()=>{const n=new Set(getDone());n.has(i)?n.delete(i):n.add(i);setDone([...n].sort((a,b)=>a-b));renderChecklist()};qs("#checkList").append(b)})}function resetActiveChecklist(){localStorage.removeItem(checklistKey());renderChecklist()}
     function renderSuggestions(){const row=qs("#suggestions");answers.forEach(a=>{const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=a.label;b.onclick=()=>sendChat(a.label);row.append(b)})}function addMessage(text,role){const msg=document.createElement("div");msg.className=`msg ${role}`;const av=document.createElement("div");av.className="msg-avatar";av.textContent=role==="bot"?"MM":"You";const bu=document.createElement("div");bu.className="bubble";bu.textContent=text;msg.append(av,bu);qs("#messages").append(msg);qs("#messages").scrollTop=qs("#messages").scrollHeight}function findAnswer(text){const l=text.toLowerCase(),m=answers.find(a=>a.trigger.some(t=>l.includes(t)));return m?m.text:"That is a good one to add to the Mortgage Marketplace answer bank. Use the custom GPT link above for a deeper answer."}function sendChat(text){const clean=text.trim();if(!clean)return;addMessage(clean,"user");qs("#chatInput").value="";setTimeout(()=>addMessage(findAnswer(clean),"bot"),220)}
-    function updateMetrics(){const count=getProjects().length;qs("#flyerCount").textContent=resources.filter(r=>r.category==="Flyers"||r.category==="Forms").length;qs("#trainingCount").textContent=resources.filter(r=>r.category==="Training").length;qs("#heroProjectCount").textContent=count;qs("#taskPercent").textContent=isAdmin()?"94%":"72%"}
+    function updateMetrics(){const role=qs("#dashRole");if(role)role.textContent=isAdmin()?"Admin":"User"}
     setupAuth();
   </script>
 </body>
