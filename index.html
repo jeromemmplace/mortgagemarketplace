@@ -1,1115 +1,542 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mortgage Marketplace LLC</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-<!-- Firebase SDK (compat) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-
-<style>
-/* ═══════════════════════════════════
-   GLOBAL + ROUTING
-═══════════════════════════════════ */
-:root{--navy:#1a2f50;--navy-dark:#0f1e35;--navy-light:#2a4670;--gold:#c9a84c;--gold-light:#e8d7a0;--gold-dark:#a8892e;--blue:#4A9EDB;--blue-light:#CCE0F5;--blue-pale:#EBF3FB;--white:#fff;--gray-50:#f8f9fa;--gray-100:#f1f3f5;--gray-200:#e9ecef;--gray-300:#dee2e6;--gray-400:#ced4da;--gray-500:#adb5bd;--gray-600:#868e96;--gray-700:#495057;--gray-800:#343a40;--green:#2ecc71;--green-bg:#eafaf1;--orange:#f39c12;--orange-bg:#fef9e7;--red:#e74c3c;--red-bg:#fdedec;--purple:#8e44ad;--purple-bg:#f4ecf7;--teal:#1abc9c;--teal-bg:#e8f8f5;--pptx-color:#D04423;--pptx-bg:#fdeae5;--pdf-color:#B30B00;--pdf-bg:#fde8e7;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--shadow-sm:0 1px 3px rgba(26,47,80,0.08);--shadow-md:0 4px 12px rgba(26,47,80,0.1);--shadow-lg:0 8px 30px rgba(26,47,80,0.12);--transition:0.2s ease;}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--gray-50);color:var(--gray-800);line-height:1.5;-webkit-font-smoothing:antialiased;}
-.page{display:none;}.page.active{display:block;}
-
-/* ═══════════════════════════════════
-   PAGE 1: LOGIN
-═══════════════════════════════════ */
-#page-login{display:none;min-height:100vh;background:var(--navy-dark);position:relative;overflow:hidden;}
-#page-login.active{display:flex;align-items:center;justify-content:center;}
-
-.login-bg{position:absolute;inset:0;overflow:hidden;}
-.login-bg::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%);top:-200px;right:-150px;}
-.login-bg::after{content:'';position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(74,158,219,0.05) 0%,transparent 70%);bottom:-300px;left:-200px;}
-
-.login-card{position:relative;z-index:2;width:100%;max-width:440px;margin:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;backdrop-filter:blur(20px);padding:48px 40px;animation:loginFadeIn 0.6s ease;}
-@keyframes loginFadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-.login-logo{text-align:center;margin-bottom:32px;}
-.login-logo img{width:280px;max-width:100%;filter:brightness(0) invert(1);opacity:0.95;}
-.login-divider{width:60px;height:2px;background:var(--gold);margin:20px auto 0;border-radius:1px;}
-
-.login-title{text-align:center;margin-bottom:32px;}
-.login-title h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);font-weight:700;margin-bottom:6px;}
-.login-title p{font-size:13px;color:rgba(255,255,255,0.5);}
-
-.login-form{display:flex;flex-direction:column;gap:16px;}
-.login-field{position:relative;}
-.login-field label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.45);margin-bottom:6px;}
-.login-field input{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);color:var(--white);font-family:inherit;font-size:14px;transition:var(--transition);}
-.login-field input::placeholder{color:rgba(255,255,255,0.25);}
-.login-field input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.09);}
-
-.login-btn{width:100%;padding:14px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:all 0.25s;margin-top:4px;}
-.login-btn:hover{background:var(--gold-dark);transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,168,76,0.3);}
-.login-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
-
-.login-sep{display:flex;align-items:center;gap:12px;margin:4px 0;}
-.login-sep span{font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;}
-.login-sep::before,.login-sep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);}
-
-.login-google{width:100%;padding:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);color:var(--white);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:10px;}
-.login-google:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);}
-.login-google svg{width:18px;height:18px;}
-
-.login-error{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.25);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#ff8a80;display:none;text-align:center;}
-.login-error.show{display:block;}
-
-.login-footer{text-align:center;margin-top:20px;font-size:11px;color:rgba(255,255,255,0.25);}
-
-/* ═══════════════════════════════════
-   PAGE 2: DASHBOARD
-═══════════════════════════════════ */
-#page-dashboard{display:none;}
-#page-dashboard.active{display:block;}
-
-.dash-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(26,47,80,0.25);}
-.dash-nav-left{display:flex;align-items:center;gap:14px;}
-.dash-nav-logo{height:36px;filter:brightness(0) invert(1);opacity:0.9;}
-.dash-nav h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);font-weight:700;}
-.dash-nav-right{display:flex;align-items:center;gap:10px;}
-.dash-user{font-size:12px;color:rgba(255,255,255,0.6);margin-right:4px;}
-.dash-btn{padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}
-.dash-btn-gold{background:var(--gold);color:var(--navy-dark);}.dash-btn-gold:hover{background:var(--gold-dark);}
-.dash-btn-ghost{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.15);}.dash-btn-ghost:hover{background:rgba(255,255,255,0.18);}
-.dash-btn-red{background:rgba(231,76,60,0.15);color:#ff8a80;border:1px solid rgba(231,76,60,0.25);}.dash-btn-red:hover{background:rgba(231,76,60,0.25);}
-
-.dash-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);padding:48px 32px 56px;position:relative;overflow:hidden;}
-.dash-hero::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);top:-200px;right:-100px;}
-.dash-hero-content{max-width:700px;position:relative;z-index:2;margin:0 auto;text-align:center;}
-.dash-hero h2{font-family:'Playfair Display',serif;font-size:30px;color:var(--white);font-weight:700;margin-bottom:8px;}
-.dash-hero p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.6;max-width:560px;margin:0 auto;}
-
-.dash-stats{display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
-.dash-stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:16px 20px;min-width:130px;}
-.dash-stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;}
-.dash-stat-label{font-size:11px;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;letter-spacing:0.5px;}
-
-.dash-body{padding:32px;max-width:1200px;margin:0 auto;}
-
-.dash-filters{display:flex;align-items:center;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
-.dash-filter-btn{padding:8px 18px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-600);transition:var(--transition);font-family:inherit;}
-.dash-filter-btn:hover{border-color:var(--navy);color:var(--navy);}
-.dash-filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.dash-search{margin-left:auto;position:relative;}
-.dash-search input{padding:9px 14px 9px 34px;border:1px solid var(--gray-300);border-radius:20px;font-size:13px;font-family:inherit;width:240px;background:var(--white);transition:var(--transition);}
-.dash-search input:focus{outline:none;border-color:var(--blue);width:300px;}
-.dash-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px;pointer-events:none;}
-
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
-
-.class-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.25s;cursor:pointer;position:relative;}
-.class-card:hover{box-shadow:var(--shadow-md);border-color:var(--gray-300);transform:translateY(-2px);}
-.class-card-accent{height:4px;width:100%;}
-.class-card-body{padding:20px 22px 18px;}
-.class-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
-.class-card-icon{width:48px;height:48px;border-radius:var(--radius-md);background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.class-card-info{flex:1;min-width:0;}
-.class-card-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;}
-.class-card-title{font-size:15px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:4px;}
-.class-card-desc{font-size:12px;color:var(--gray-600);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-
-.class-card-meta{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--gray-100);}
-.class-card-progress{flex:1;}
-.class-card-progress-bar{height:5px;background:var(--gray-200);border-radius:3px;overflow:hidden;margin-bottom:4px;}
-.class-card-progress-fill{height:100%;border-radius:3px;transition:width 0.4s;}
-.class-card-progress-text{font-size:10px;color:var(--gray-500);display:flex;justify-content:space-between;}
-.class-card-assets{text-align:right;}
-.class-card-assets-num{font-size:18px;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif;line-height:1;}
-.class-card-assets-label{font-size:10px;color:var(--gray-500);}
-.class-card-status{position:absolute;top:16px;right:16px;}
-
-.class-card-actions{display:flex;gap:8px;padding:0 22px 18px;}
-.class-card-action{flex:1;padding:9px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:var(--transition);border:none;font-family:inherit;text-decoration:none;display:block;}
-.cca-primary{background:var(--navy);color:var(--white);}.cca-primary:hover{background:var(--navy-light);}
-.cca-secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200);}.cca-secondary:hover{background:var(--gray-200);}
-
-.dash-empty{text-align:center;padding:80px 24px;color:var(--gray-500);}
-.dash-empty-icon{font-size:48px;margin-bottom:12px;opacity:0.4;}
-
-/* Asset Viewer Modal */
-.av-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.85);z-index:300;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;backdrop-filter:blur(4px);}.av-overlay.show{display:flex;}
-.av-modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:900px;margin:20px auto;box-shadow:0 24px 80px rgba(0,0,0,0.4);overflow:hidden;animation:avSlideIn 0.3s ease;}
-@keyframes avSlideIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.av-header{background:var(--navy);padding:20px 28px;display:flex;align-items:center;gap:16px;position:relative;}
-.av-header-icon{width:48px;height:48px;border-radius:var(--radius-md);background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
-.av-header-info{flex:1;min-width:0;}
-.av-header-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:2px;}
-.av-header-sub{font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.av-header-sub .badge{font-size:10px;}
-.av-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:24px;cursor:pointer;padding:4px 8px;transition:var(--transition);position:absolute;top:16px;right:16px;font-family:inherit;}.av-close:hover{color:var(--white);}
-
-.av-body{padding:24px 28px 28px;}
-.av-section{margin-bottom:24px;}
-.av-section:last-child{margin-bottom:0;}
-.av-section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-200);}
-.av-section-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.av-section-icon.si-deck{background:var(--pptx-bg);color:var(--pptx-color);}
-.av-section-icon.si-funnel{background:#dbeafe;color:#2563eb;}
-.av-section-icon.si-canva{background:#e0f2fe;color:#0284c7;}
-.av-section-icon.si-bonus{background:#fef3c7;color:#b45309;}
-.av-section-icon.si-emails{background:#ede9fe;color:#7c3aed;}
-.av-section-icon.si-workflow{background:#d1fae5;color:#059669;}
-.av-section-icon.si-checkin{background:#fef3c7;color:#d97706;}
-.av-section-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;}
-.av-section-count{font-size:11px;color:var(--gray-500);margin-left:auto;}
-
-.av-assets{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.av-asset{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);transition:var(--transition);min-width:0;}
-.av-asset:hover{border-color:var(--gray-300);box-shadow:var(--shadow-sm);}
-.av-asset-info{flex:1;min-width:0;}
-.av-asset-name{font-size:13px;font-weight:600;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.av-asset-note{font-size:10px;color:var(--gray-500);margin-top:1px;}
-.av-asset-actions{display:flex;gap:4px;align-items:center;flex-shrink:0;}
-.av-asset .resource-badge{font-size:9px;padding:2px 6px;}
-.av-btn-open{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;background:var(--blue);color:var(--white);border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:var(--transition);white-space:nowrap;font-family:inherit;}.av-btn-open:hover{background:#3a8ec8;}
-.av-btn-empty{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:500;background:var(--gray-100);color:var(--gray-400);border:1px solid var(--gray-200);cursor:default;white-space:nowrap;}
-
-.av-footer{padding:16px 28px;border-top:1px solid var(--gray-200);display:flex;gap:10px;justify-content:flex-end;}
-.av-footer-btn{padding:9px 18px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}
-.av-footer-primary{background:var(--navy);color:var(--white);}.av-footer-primary:hover{background:var(--navy-light);}
-.av-footer-secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200);}.av-footer-secondary:hover{background:var(--gray-200);}
-
-@media(max-width:768px){.av-assets{grid-template-columns:1fr;}.av-modal{margin:8px;}.av-header{padding:16px 20px;}.av-body{padding:16px 20px 20px;}.av-footer{padding:12px 20px;}}
-
-/* ═══════════════════════════════════
-   PAGE 3: TRACKER (existing styles)
-═══════════════════════════════════ */
-.top-bar{position:sticky;top:0;z-index:100;background:var(--navy);color:var(--white);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(26,47,80,0.25);}
-.top-bar-left{display:flex;align-items:center;gap:14px;}.logo-mark{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:var(--navy-dark);}
-.top-bar h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:-0.3px;}.top-bar .subtitle{font-size:12px;opacity:0.7;margin-top:1px;}
-.top-bar-right{display:flex;align-items:center;gap:12px;}
-.btn-top{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:7px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:inherit;}.btn-top:hover{background:rgba(255,255,255,0.22);}
-.btn-top.gold{background:var(--gold);color:var(--navy-dark);border-color:var(--gold);}.btn-top.gold:hover{background:var(--gold-dark);}
-.btn-top.logout{background:var(--red);color:var(--white);border-color:var(--red);}
-.summary-strip{background:var(--white);border-bottom:1px solid var(--gray-200);padding:18px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
-.stat-card{display:flex;align-items:center;gap:10px;padding:8px 16px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);}.stat-num{font-size:22px;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif;}.stat-label{font-size:12px;color:var(--gray-600);line-height:1.3;}
-.toolbar{padding:16px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--white);border-bottom:1px solid var(--gray-200);}
-.search-box{position:relative;flex:1;min-width:220px;max-width:360px;}.search-box input{width:100%;padding:9px 14px 9px 36px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--gray-50);transition:var(--transition);}.search-box input:focus{outline:none;border-color:var(--blue);background:var(--white);}.search-box .icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-500);font-size:15px;pointer-events:none;}
-.filter-select{padding:9px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;background:var(--gray-50);cursor:pointer;}.toolbar-spacer{flex:1;}
-.btn-action{padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}.btn-expand{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-300);}.btn-expand:hover{background:var(--gray-200);}
-.project-grid{padding:24px 32px 48px;display:flex;flex-direction:column;gap:16px;}
-.project-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;transition:box-shadow 0.2s;}.project-card:hover{box-shadow:var(--shadow-md);}.project-card.collapsed .card-body{display:none;}
-.card-header{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none;transition:background 0.15s;}.card-header:hover{background:var(--gray-50);}
-.card-chevron{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gray-500);transition:transform 0.25s;}.project-card.collapsed .card-chevron{transform:rotate(-90deg);}
-.card-icon{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
-.card-title-area{flex:1;min-width:0;}.card-title{font-size:15px;font-weight:700;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.card-subtitle{font-size:12px;color:var(--gray-600);margin-top:1px;}
-.badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}.badge-complete{background:var(--green-bg);color:#1a8a4a;}.badge-progress{background:var(--blue-pale);color:#1a6aab;}.badge-review{background:var(--orange-bg);color:#b37a00;}.badge-not-started{background:var(--gray-100);color:var(--gray-600);}.badge-missing{background:var(--red-bg);color:#c0392b;}.badge-waiting-link{background:var(--purple-bg);color:#6c3483;}.badge-waiting-approval{background:var(--teal-bg);color:#148f77;}
-.progress-bar-wrap{width:100px;height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden;}.progress-bar-fill{height:100%;border-radius:3px;transition:width 0.4s;}
-.card-body{border-top:1px solid var(--gray-200);}.tab-strip{display:flex;border-bottom:1px solid var(--gray-200);background:var(--gray-50);overflow-x:auto;}
-.tab-btn{padding:10px 18px;font-size:13px;font-weight:500;color:var(--gray-600);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:var(--transition);font-family:inherit;}.tab-btn:hover{color:var(--navy);background:var(--gray-100);}.tab-btn.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:600;}
-.tab-panel{display:none;padding:20px;}.tab-panel.active{display:block;}
-.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}.ov-field label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-500);margin-bottom:4px;}.ov-field .val{font-size:14px;color:var(--gray-800);}.ov-full{grid-column:1/-1;}
-.ov-notes{width:100%;padding:10px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;min-height:60px;background:var(--gray-50);}.ov-notes:focus{outline:none;border-color:var(--blue);background:var(--white);}
-.deck-files-strip{grid-column:1/-1;display:flex;gap:12px;flex-wrap:wrap;padding:14px 0 4px;border-top:1px solid var(--gray-200);margin-top:4px;}.deck-files-strip>.strip-label{width:100%;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-500);margin-bottom:2px;}
-.deck-file-card{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-md);flex:1;min-width:240px;transition:var(--transition);}.deck-file-card:hover{border-color:var(--gray-400);box-shadow:var(--shadow-sm);}
-.file-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;letter-spacing:-0.3px;flex-shrink:0;}.file-icon.pptx{background:var(--pptx-bg);color:var(--pptx-color);}.file-icon.pdf{background:var(--pdf-bg);color:var(--pdf-color);}
-.file-info{flex:1;min-width:0;}.file-info .file-name{font-size:13px;font-weight:600;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.file-info .file-type{font-size:11px;color:var(--gray-500);}
-.file-actions{display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;}
-.resource-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}.resource-header h4{font-size:14px;font-weight:700;color:var(--navy);}
-.resource-list{display:flex;flex-direction:column;gap:10px;}
-.resource-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);flex-wrap:wrap;}
-.resource-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}.resource-icon.funnel{background:#dbeafe;color:#2563eb;}.resource-icon.marketing{background:#fce7f3;color:#db2777;}.resource-icon.workflow{background:#d1fae5;color:#059669;}.resource-icon.checkin{background:#fef3c7;color:#d97706;}.resource-icon.email{background:#ede9fe;color:#7c3aed;}.resource-icon.canva{background:#e0f2fe;color:#0284c7;}.resource-icon.bonus{background:#fef3c7;color:#b45309;}
-.resource-info{flex:1;min-width:0;}.resource-label{font-size:13px;font-weight:600;color:var(--gray-800);}.resource-note{font-size:11px;color:var(--gray-500);margin-top:2px;}
-.resource-badge{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}.rb-added{background:var(--green-bg);color:#1a8a4a;}.rb-missing{background:var(--red-bg);color:#c0392b;}.rb-review{background:var(--orange-bg);color:#b37a00;}.rb-draft{background:var(--purple-bg);color:#6c3483;}.rb-final{background:var(--blue-pale);color:#1a6aab;}
-.btn-preview{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--blue);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;font-family:inherit;}.btn-preview:hover{background:#3a8ec8;}
-.btn-dl{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--navy);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;font-family:inherit;}.btn-dl:hover{background:var(--navy-light);}
-.btn-placeholder{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;background:var(--gray-200);color:var(--gray-500);display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:none;cursor:default;}
-.btn-edit{background:var(--gold);color:var(--navy-dark);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition);font-family:inherit;}.btn-edit:hover{background:var(--gold-dark);}
-.btn-rename{background:none;border:1px solid var(--gray-300);color:var(--gray-600);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-rename:hover{background:var(--gray-100);color:var(--navy);}
-.btn-delete-res{background:none;border:1px solid var(--red-bg);color:var(--red);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-delete-res:hover{background:var(--red-bg);}
-.btn-upload{background:var(--green);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-upload:hover{background:#27ae60;}
-.btn-replace{background:var(--orange);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-replace:hover{background:#e08e0b;}
-.btn-add-res{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:2px dashed var(--gray-300);background:var(--white);color:var(--gray-600);transition:var(--transition);margin-top:12px;font-family:inherit;}.btn-add-res:hover{border-color:var(--gold);color:var(--gold);background:#fffdf5;}
-.edit-row{display:none;gap:8px;align-items:center;padding:10px 14px;background:#fffbe6;border:1px solid var(--gold-light);border-radius:var(--radius-sm);margin-top:6px;width:100%;}.edit-row.visible{display:flex;}
-.edit-row input{flex:1;padding:8px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;}.edit-row input:focus{outline:none;border-color:var(--blue);}
-.edit-row select{padding:8px 10px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:12px;}
-.btn-save-url{background:var(--green);color:var(--white);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}.btn-save-url:hover{background:#27ae60;}
-.btn-cancel-url{background:var(--gray-200);color:var(--gray-700);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
-.admin-only{display:none!important;}body.is-admin .admin-only{display:flex!important;}
-.tab-notes-area{margin-top:14px;}.tab-notes-area label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-500);margin-bottom:4px;display:block;}
-.save-indicator{font-size:11px;color:var(--green);font-weight:600;opacity:0;transition:opacity 0.3s;white-space:nowrap;}.save-indicator.show{opacity:1;}
-.prev-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.85);z-index:300;align-items:center;justify-content:center;padding:20px;}.prev-overlay.show{display:flex;}
-.prev-modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:1060px;height:85vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.4);overflow:hidden;}
-.prev-head{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--navy);color:var(--white);flex-shrink:0;}.prev-head h3{font-size:14px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-right:12px;}
-.prev-btns{display:flex;gap:8px;align-items:center;}
-.prev-btn-dl{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;color:var(--navy-dark);background:var(--gold);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}.prev-btn-dl:hover{background:var(--gold-dark);}
-.prev-btn-tab{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;color:var(--white);background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:5px;}.prev-btn-tab:hover{background:rgba(255,255,255,0.25);}
-.prev-close{background:none;border:none;color:var(--white);font-size:22px;cursor:pointer;opacity:0.7;padding:0 4px;font-family:inherit;}.prev-close:hover{opacity:1;}
-.prev-body{flex:1;position:relative;background:var(--gray-100);}.prev-body iframe{width:100%;height:100%;border:none;}
-.prev-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;color:var(--gray-600);font-size:14px;text-align:center;padding:24px;}
-.modal-ov{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.7);z-index:250;align-items:center;justify-content:center;}.modal-ov.show{display:flex;}
-.modal-box{background:var(--white);border-radius:var(--radius-lg);width:90%;max-width:420px;box-shadow:var(--shadow-lg);overflow:hidden;}
-.modal-hd{background:var(--navy);color:var(--white);padding:20px 24px;text-align:center;}.modal-hd h3{font-size:16px;font-weight:700;margin-bottom:4px;}.modal-hd p{font-size:12px;opacity:0.7;}
-.modal-bd{padding:24px;}.modal-bd label{display:block;font-size:12px;font-weight:600;color:var(--gray-700);margin-bottom:5px;}
-.modal-bd input{width:100%;padding:10px 14px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;margin-bottom:14px;}.modal-bd input:focus{outline:none;border-color:var(--gold);}
-.btn-modal{width:100%;padding:12px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:8px;}.btn-modal:hover{background:var(--gold-dark);}
-.btn-modal.secondary{background:var(--gray-200);color:var(--gray-700);}.btn-modal.danger{background:var(--red);color:var(--white);}
-.modal-err{color:var(--red);font-size:12px;text-align:center;margin-top:8px;display:none;}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.6);z-index:200;align-items:center;justify-content:center;}.modal-overlay.show{display:flex;}
-.modal{background:var(--white);border-radius:var(--radius-lg);width:90%;max-width:640px;max-height:85vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--gray-200);background:var(--navy);color:var(--white);border-radius:var(--radius-lg) var(--radius-lg) 0 0;}.modal-head h3{font-size:16px;font-weight:700;}
-.modal-close{background:none;border:none;color:var(--white);font-size:20px;cursor:pointer;opacity:0.7;font-family:inherit;}.modal-close:hover{opacity:1;}
-.modal-body{padding:24px;}.form-group{margin-bottom:16px;}.form-group label{display:block;font-size:12px;font-weight:600;color:var(--gray-700);margin-bottom:5px;}
-.form-group input,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;background:var(--gray-50);}.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--blue);background:var(--white);}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--gray-200);}.btn-cancel{padding:9px 18px;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-700);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}.btn-save{padding:9px 18px;border:none;background:var(--gold);color:var(--navy-dark);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}.btn-save:hover{background:var(--gold-dark);}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:var(--white);padding:12px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:400;}.toast.show{transform:translateY(0);opacity:1;}.toast.error{background:var(--red);}
-.loading-bar{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:999;transition:width 0.3s;width:0;}.loading-bar.active{width:60%;}.loading-bar.done{width:100%;}
-.error-state{text-align:center;padding:60px 24px;color:var(--gray-600);}.error-state .err-icon{font-size:48px;margin-bottom:16px;opacity:0.5;}.error-state h3{font-size:18px;color:var(--navy);margin-bottom:8px;}.error-state p{font-size:14px;max-width:480px;margin:0 auto;line-height:1.6;}
-
-@media(max-width:768px){
-  .login-card{padding:36px 24px;margin:16px;}
-  .login-logo img{width:220px;}
-  .dash-nav{padding:12px 16px;}.dash-hero{padding:32px 16px 40px;}
-  .dash-hero h2{font-size:24px;}.dash-stats{gap:10px;}
-  .dash-body{padding:20px 16px;}.dash-grid{grid-template-columns:1fr;}
-  .dash-filters{gap:6px;}.dash-search input{width:180px;}
-  .dash-search input:focus{width:220px;}
-  .top-bar{padding:12px 16px;flex-wrap:wrap;gap:8px;}.summary-strip{padding:14px 16px;gap:12px;}.toolbar{padding:12px 16px;}.project-grid{padding:16px;}.overview-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.search-box{max-width:100%;}.card-header{padding:12px 14px;}.tab-panel{padding:14px;}.deck-files-strip{flex-direction:column;}.deck-file-card{min-width:0;}.prev-modal{height:75vh;}
-}
-
-/* Loading spinner */
-.auth-loading{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--navy-dark);}
-.spinner{width:40px;height:40px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mortgage Marketplace Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display:none !important; }
+    :root {
+      --ink:#26313f; --body:#f3f6f9; --surface:#ffffff; --surface2:#f8fafc; --line:#e0e7ee;
+      --muted:#657486; --soft:#eaf3fa; --soft2:#eef4f8; --nav:#2f3a49; --nav2:#45698d;
+      --gold:#c9a64b; --blue:#45698d; --teal:#4fb7ad; --coral:#de7d64; --lav:#8fa3bd;
+      --green:#92efad; --shadow:0 18px 48px rgba(21,32,50,.12); --radius:18px;
+      --sidebar:292px; --topbar:76px; --font:"Montserrat",system-ui,sans-serif;
+      --brand-bg:url("mortgage-marketplace-background.jpg");
+    }
+    body { min-height:100vh; font-family:var(--font); color:var(--ink); background:linear-gradient(135deg,#eaf0f5,#fbfcfd 46%,#f2f5f8); }
+    button,input,select,textarea { font:inherit; }
+    button { border:0; }
+    a { color:inherit; }
+    .auth-screen { position:fixed; inset:0; z-index:2000; display:grid; place-items:center; padding:24px; overflow:hidden; font-family:"DM Sans",system-ui,sans-serif; background:#0f1e35; }
+    .auth-screen.hidden { display:none; }
+    .auth-screen::before,.auth-screen::after { content:""; position:absolute; border-radius:50%; pointer-events:none; }
+    .auth-screen::before { width:600px; height:600px; top:-200px; right:-150px; background:radial-gradient(circle,rgba(201,168,76,.08),transparent 70%); }
+    .auth-screen::after { width:800px; height:800px; bottom:-300px; left:-200px; background:radial-gradient(circle,rgba(74,158,219,.05),transparent 70%); }
+    .auth-card { position:relative; z-index:2; width:min(100%,440px); margin:24px; padding:48px 40px; border:1px solid rgba(255,255,255,.08); border-radius:20px; background:rgba(255,255,255,.03); box-shadow:none; backdrop-filter:blur(20px); animation:loginFadeIn .6s ease; }
+    @keyframes loginFadeIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .login-logo { text-align:center; margin-bottom:32px; }
+    .login-logo img { width:280px; max-width:100%; filter:brightness(0) invert(1); opacity:.95; }
+    .login-divider { width:60px; height:2px; margin:20px auto 0; border-radius:1px; background:#c9a84c; }
+    .login-title { text-align:center; margin-bottom:32px; }
+    .login-title h1 { margin-bottom:6px; color:#fff; font-family:"Playfair Display",serif; font-size:22px; font-weight:700; }
+    .login-title p { color:rgba(255,255,255,.5); font-size:13px; }
+    .login-form { display:flex; flex-direction:column; gap:16px; }
+    .login-field label { display:block; margin-bottom:6px; color:rgba(255,255,255,.45); font-size:11px; font-weight:600; letter-spacing:.8px; text-transform:uppercase; }
+    .login-field input { width:100%; padding:13px 16px; border:1px solid rgba(255,255,255,.1); border-radius:6px; outline:none; color:#fff; background:rgba(255,255,255,.06); font:14px "DM Sans",sans-serif; transition:.2s ease; }
+    .login-field input::placeholder { color:rgba(255,255,255,.25); }
+    .login-field input:focus { border-color:#c9a84c; background:rgba(255,255,255,.09); }
+    .login-btn { width:100%; margin-top:4px; padding:14px; border-radius:6px; cursor:pointer; color:#0f1e35; background:#c9a84c; font:700 14px "DM Sans",sans-serif; letter-spacing:.3px; transition:.25s ease; }
+    .login-btn:hover { background:#a8892e; transform:translateY(-1px); box-shadow:0 4px 16px rgba(201,168,76,.3); }
+    .login-btn:disabled { opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
+    .login-sep { display:flex; align-items:center; gap:12px; margin:4px 0; }
+    .login-sep::before,.login-sep::after { content:""; flex:1; height:1px; background:rgba(255,255,255,.08); }
+    .login-sep span { color:rgba(255,255,255,.3); font-size:11px; letter-spacing:1px; text-transform:uppercase; }
+    .login-google { width:100%; display:flex; align-items:center; justify-content:center; gap:10px; padding:12px; border:1px solid rgba(255,255,255,.12); border-radius:6px; cursor:pointer; color:#fff; background:rgba(255,255,255,.07); font:500 13px "DM Sans",sans-serif; transition:.2s ease; }
+    .login-google:hover { border-color:rgba(255,255,255,.2); background:rgba(255,255,255,.12); }
+    .login-google svg { width:18px; height:18px; }
+    .auth-message { display:none; padding:10px 14px; border:1px solid rgba(231,76,60,.25); border-radius:6px; color:#ff8a80; background:rgba(231,76,60,.12); font-size:12px; text-align:center; }
+    .auth-message.show { display:block; }
+    .login-footer { margin-top:20px; color:rgba(255,255,255,.25); font-size:11px; text-align:center; }
+    .overlay { position:fixed; inset:0; z-index:50; background:rgba(23,25,35,.35); opacity:0; pointer-events:none; transition:opacity .2s ease; }
+    .overlay.visible { opacity:1; pointer-events:auto; }
+    .sidebar { position:fixed; inset:18px auto 18px 18px; width:var(--sidebar); z-index:60; display:flex; flex-direction:column; background:#fff; border:1px solid rgba(255,255,255,.8); border-radius:28px; box-shadow:var(--shadow); overflow:hidden; }
+    .brand { padding:22px 20px 12px; }
+    .brand-row { display:block; }
+    .brand-mark { width:100%; height:92px; border-radius:18px; background:#f8fafc; border:1px solid #dfe8f1; display:grid; place-items:center; overflow:visible; position:relative; color:var(--blue); padding:8px; }
+    .brand-mark svg { display:none; }
+    .brand-logo-img { width:100%; height:100%; object-fit:contain; object-position:center; display:block; }
+    .brand-name { display:none; font-size:1.05rem; font-weight:800; line-height:1.05; }
+    .brand-name span { color:#9a7622; }
+    .brand-subtitle { margin-top:12px; color:var(--muted); font-size:.78rem; line-height:1.45; }
+    .nav { flex:1; overflow:auto; padding:4px 18px 18px; }
+    .nav-label { color:#94a0ad; text-transform:uppercase; letter-spacing:.12em; font-size:.65rem; font-weight:800; padding:16px 12px 8px; }
+    .nav-item { width:100%; min-height:48px; display:flex; align-items:center; gap:12px; color:#334256; background:transparent; padding:10px 12px; border-radius:16px; cursor:pointer; text-align:left; font-weight:700; }
+    .nav-item:hover,.nav-item.active { background:var(--nav); color:#fff; }
+    .nav-item span:first-child { width:34px; height:34px; display:grid; place-items:center; border-radius:12px; background:#eef3f8; color:var(--blue); font-size:.9rem; flex:0 0 auto; }
+    .nav-item.active span:first-child,.nav-item:hover span:first-child { background:rgba(255,255,255,.16); color:#fff; }
+    .sidebar-footer { margin:0 18px 18px; padding:18px; border-radius:22px; background:#eef3f8; color:#344252; font-size:.86rem; line-height:1.35; border:1px solid #dde7ef; }
+    .topbar { position:fixed; top:18px; left:calc(var(--sidebar) + 38px); right:18px; height:var(--topbar); z-index:40; background:rgba(255,255,255,.88); border:1px solid rgba(255,255,255,.8); border-radius:26px; box-shadow:var(--shadow); display:flex; align-items:center; justify-content:space-between; gap:16px; padding:0 22px; backdrop-filter:blur(18px); }
+    .topbar-left,.topbar-actions { display:flex; align-items:center; gap:12px; min-width:0; }
+    .menu-btn,.icon-btn { width:44px; height:44px; border-radius:14px; display:grid; place-items:center; color:var(--ink); background:#f1f5f8; cursor:pointer; }
+    .menu-btn { display:none; }
+    .topbar-title { font-weight:800; font-size:1.03rem; }
+    .topbar-kicker { color:var(--muted); font-size:.78rem; margin-top:2px; }
+    .search-field { position:relative; min-width:min(32vw,390px); }
+    .search-field input { width:100%; min-height:46px; border-radius:16px; border:1px solid var(--line); background:#f7f9fc; color:var(--ink); padding:11px 12px 11px 42px; outline:0; }
+    .search-field svg { position:absolute; left:14px; top:50%; transform:translateY(-50%); width:18px; color:var(--muted); }
+    .avatar { width:46px; height:46px; border-radius:50%; display:grid; place-items:center; color:#1d2030; background:#f3cc5d; font-weight:900; }
+    .main { margin-left:calc(var(--sidebar) + 20px); padding:calc(var(--topbar) + 38px) 18px 18px; min-height:100vh; }
+    .page { display:none; }
+    .page.active { display:block; }
+    .page-head { display:flex; align-items:end; justify-content:space-between; gap:18px; margin:6px 6px 20px; }
+    h1 { font-size:clamp(2rem,4vw,3.25rem); line-height:1.02; letter-spacing:-.02em; }
+    .lead { color:var(--muted); line-height:1.58; max-width:780px; margin-top:10px; font-size:1rem; }
+    .btn { min-height:44px; display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:16px; padding:11px 16px; color:#1b1d25; background:#f2c85d; cursor:pointer; font-weight:800; text-decoration:none; }
+    .btn.secondary { background:#f3f6fa; color:#273346; border:1px solid var(--line); }
+    .btn.dark { background:var(--nav); color:#fff; }
+    .btn:disabled { opacity:.45; cursor:not-allowed; }
+    .btn.full { width:100%; }
+    .button-row { display:flex; gap:10px; flex-wrap:wrap; }
+    .dashboard-layout { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(330px,.78fr); gap:22px; }
+    .hero { display:grid; grid-template-columns:minmax(0,1.25fr) 280px; gap:18px; margin-bottom:22px; }
+    .card,.hero-card,.panel,.metric,.quick-card,.resource-card,.project-card { background:rgba(255,255,255,.94); border:1px solid rgba(255,255,255,.9); border-radius:28px; box-shadow:var(--shadow); }
+    .hero-card { min-height:220px; padding:30px; position:relative; overflow:hidden; display:grid; align-content:space-between; }
+    .hero-card::before { content:""; position:absolute; inset:0; background:linear-gradient(110deg,rgba(255,255,255,.96),rgba(255,255,255,.78)),var(--brand-bg) center/cover no-repeat; }
+    .hero-card > * { position:relative; }
+    .eyebrow { color:#8b6b1f; text-transform:uppercase; letter-spacing:.12em; font-size:.72rem; font-weight:900; margin-bottom:14px; }
+    .hero-card h1 { max-width:780px; }
+    .balance-card { padding:24px; background:#e8eff6; border-radius:24px; display:grid; align-content:space-between; min-height:160px; }
+    .balance-card span { color:#4c4267; font-weight:700; }
+    .balance-card strong { font-size:2.1rem; margin-top:8px; display:block; }
+    .metric-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-bottom:22px; }
+    .metric { padding:20px; min-height:138px; }
+    .metric-top { display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-weight:700; font-size:.86rem; }
+    .metric-icon { width:42px; height:42px; border-radius:14px; display:grid; place-items:center; background:#e8eff6; color:var(--blue); }
+    .metric strong { display:block; margin-top:18px; font-size:2.1rem; letter-spacing:-.03em; }
+    .metric strong.is-hidden-count,.balance-card strong.is-hidden-count { display:none; }
+    .metric small { color:var(--muted); display:block; margin-top:4px; }
+    .wide-card { padding:24px; margin-bottom:22px; }
+    .bar-chart { display:flex; align-items:end; gap:24px; height:210px; padding-top:26px; }
+    .bar { flex:1; min-width:34px; display:grid; align-content:end; gap:10px; text-align:center; color:#3c4b5c; font-size:.82rem; }
+    .bar i { display:block; border-radius:16px; background:#dff1ff; overflow:hidden; height:150px; position:relative; }
+    .bar i::after { content:""; position:absolute; left:0; right:0; bottom:0; height:var(--h); background:#2da8ff; border-radius:16px; }
+    .side-stack { display:grid; gap:20px; }
+    .task-card { padding:24px; min-height:300px; position:relative; overflow:hidden; }
+    .task-card h2,.wide-card h2,.panel h2 { font-size:1.15rem; margin-bottom:12px; }
+    .task-percent { font-size:3rem; font-weight:800; letter-spacing:-.04em; }
+    .wave { height:135px; margin-top:20px; border-radius:18px; background:linear-gradient(180deg,#eff8ff,#fff); position:relative; overflow:hidden; }
+    .wave svg { width:100%; height:100%; }
+    .progress-row { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .ring { display:grid; place-items:center; gap:10px; text-align:center; }
+    .ring-circle { width:112px; height:112px; border-radius:50%; display:grid; place-items:center; background:conic-gradient(var(--c) var(--p),#edf2f7 0); }
+    .ring-circle span { width:78px; height:78px; border-radius:50%; background:#fff; display:grid; place-items:center; font-weight:800; }
+    .quick-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; }
+    .quick-card,.resource-card { padding:20px; display:grid; gap:14px; text-align:left; cursor:pointer; color:var(--ink); min-height:158px; }
+    .quick-card:hover,.resource-card:hover { transform:translateY(-2px); }
+    .quick-icon,.resource-icon { width:46px; height:46px; border-radius:16px; display:grid; place-items:center; background:#e8eff6; color:var(--blue); font-weight:900; }
+    .rate-grid,.course-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
+    .rate-card,.course-card { min-height:180px; padding:22px; display:grid; gap:12px; background:#fff; border:1px solid rgba(255,255,255,.9); border-radius:28px; box-shadow:var(--shadow); }
+    .rate-card strong { font-size:1.55rem; color:var(--blue); }
+    .rate-card span,.course-card span { color:var(--muted); line-height:1.48; font-size:.9rem; }
+    .source-note { margin-top:16px; padding:16px 18px; border-radius:20px; background:#eef3f8; color:#526274; line-height:1.5; }
+    .quick-card p,.resource-card p { color:var(--muted); line-height:1.45; font-size:.9rem; }
+    .table-scroll { width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .project-table { width:100%; border-collapse:collapse; }
+    .project-table th,.project-table td { text-align:left; padding:14px 10px; border-top:1px solid var(--line); font-size:.9rem; }
+    .project-table th { color:var(--muted); font-size:.78rem; text-transform:uppercase; letter-spacing:.06em; }
+    .pill,.tag,.status-chip { display:inline-flex; border-radius:999px; padding:7px 11px; font-weight:800; font-size:.78rem; background:#e9efff; color:#315bb4; white-space:nowrap; }
+    .status-chip.revisions { background:#ffe6e0; color:#b94331; }
+    .status-chip.approved { background:#daf9e1; color:#216d36; }
+    .status-chip.review { background:#e0f1ff; color:#0b73bd; }
+    .status-chip.hold { background:#fff2d2; color:#8c6513; }
+    .filter-row,.tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+    .filter-btn,.tab,.chip { border:1px solid var(--line); color:#3e4d5f; background:#fff; border-radius:999px; padding:9px 14px; cursor:pointer; font-weight:800; font-size:.82rem; }
+    .filter-btn.active,.tab.active,.filter-btn:hover,.tab:hover { background:var(--nav); color:#fff; }
+    .resource-footer,.card-top,.project-line { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .resource-footer { margin-top:auto; border-top:1px solid var(--line); padding-top:12px; color:var(--muted); font-size:.82rem; }
+    .open-text { color:#0a7fca; font-weight:800; }
+    .two-col,.project-board { display:grid; grid-template-columns:minmax(280px,.85fr) minmax(320px,1fr); gap:18px; align-items:start; }
+    .project-board { grid-template-columns:minmax(270px,.72fr) minmax(360px,1.28fr); }
+    .panel,.project-card { padding:24px; }
+    .field { margin-bottom:14px; }
+    .field label { display:block; color:#536276; font-size:.82rem; font-weight:800; margin-bottom:7px; }
+    .field input,.field select,.field textarea,textarea { width:100%; min-height:44px; border-radius:15px; border:1px solid var(--line); background:#f8fafc; color:var(--ink); padding:11px 13px; outline:0; }
+    .field textarea,textarea { min-height:98px; resize:vertical; }
+    .field input:disabled,.field select:disabled,textarea:disabled { opacity:.7; cursor:not-allowed; }
+    .form-grid,.results { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .result { background:#f8fafc; border:1px solid var(--line); border-radius:18px; padding:16px; }
+    .result span,.muted { color:var(--muted); font-size:.82rem; }
+    .result strong { display:block; margin-top:5px; font-size:1.25rem; }
+    .result.total { grid-column:1/-1; text-align:center; background:#fff5d8; border-color:#f1d47b; }
+    .result.total strong { color:#9a7622; font-size:2rem; }
+    .project-list { display:grid; gap:10px; max-height:calc(100vh - var(--topbar) - 230px); overflow:auto; padding-right:4px; }
+    .project-item { width:100%; display:grid; gap:8px; padding:16px; border:1px solid var(--line); border-radius:18px; background:#fff; color:var(--ink); cursor:pointer; text-align:left; }
+    .project-item:hover,.project-item.active { border-color:#b9dfff; background:#f1f9ff; }
+    .project-item small { color:var(--muted); }
+    .project-browser { display:grid; gap:18px; }
+    .project-browser-head { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .view-switch { display:flex; gap:6px; padding:4px; border:1px solid var(--line); border-radius:14px; background:#fff; }
+    .view-switch button { min-height:36px; padding:8px 12px; border-radius:10px; cursor:pointer; color:var(--muted); background:transparent; font-weight:800; }
+    .view-switch button.active { color:#fff; background:var(--nav); }
+    .project-gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(285px,1fr)); gap:16px; }
+    .project-gallery.list { grid-template-columns:1fr; }
+    .project-preview-card { display:grid; gap:14px; padding:20px; border:1px solid var(--line); border-top:4px solid var(--blue); border-radius:20px; background:#fff; box-shadow:0 8px 24px rgba(21,32,50,.07); }
+    .project-preview-card.list { grid-template-columns:minmax(0,1fr) auto; align-items:center; }
+    .project-preview-card h3 { color:var(--nav); font-size:1rem; line-height:1.32; }
+    .project-preview-card p { color:var(--muted); font-size:.86rem; line-height:1.5; }
+    .project-card-meta { display:flex; gap:8px; flex-wrap:wrap; align-items:center; color:var(--muted); font-size:.76rem; }
+    .project-progress { display:grid; gap:6px; }
+    .project-progress-line { height:7px; border-radius:99px; overflow:hidden; background:#e7edf3; }
+    .project-progress-line span { display:block; height:100%; border-radius:99px; background:linear-gradient(90deg,var(--blue),var(--teal)); }
+    .project-progress-text { display:flex; justify-content:space-between; gap:10px; color:var(--muted); font-size:.74rem; }
+    .project-preview-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .project-preview-actions .btn { flex:1; min-height:40px; border-radius:12px; padding:9px 12px; font-size:.8rem; }
+    .project-detail-page { display:grid; gap:16px; }
+    .project-detail-nav { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .project-detail-hero { display:grid; gap:12px; padding:24px; border-radius:22px; color:#fff; background:linear-gradient(135deg,var(--nav),#1d304b); }
+    .project-detail-hero p { color:rgba(255,255,255,.72); line-height:1.55; }
+    .project-detail-hero .project-progress-line { background:rgba(255,255,255,.16); }
+    .project-detail-hero .project-progress-text { color:rgba(255,255,255,.72); }
+    .project-detail-columns { display:grid; grid-template-columns:minmax(0,1fr) minmax(280px,.72fr); gap:16px; align-items:start; }
+    .project-read-card { padding:20px; border:1px solid var(--line); border-radius:20px; background:#fff; box-shadow:0 8px 24px rgba(21,32,50,.06); }
+    .project-read-card h3 { margin-bottom:12px; color:var(--nav); }
+    .project-description { color:#536276; line-height:1.65; }
+    .asset-list,.comment-list { display:grid; gap:9px; margin-top:12px; }
+    .asset-item,.comment-item { border:1px solid var(--line); border-radius:16px; background:#f8fafc; padding:12px; }
+    .asset-item a { color:#0a7fca; font-weight:800; overflow-wrap:anywhere; text-decoration:none; }
+    .asset-item span,.comment-item span { display:block; color:var(--muted); font-size:.78rem; margin-top:3px; }
+    .inline-form { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:end; }
+    .file-input { display:block; width:100%; color:#536276; border:1px dashed #b9dfff; border-radius:16px; padding:11px; background:#f1f9ff; }
+    .progress { height:9px; background:#e8eef5; border-radius:999px; overflow:hidden; margin-bottom:12px; }
+    .progress span { display:block; height:100%; background:linear-gradient(90deg,var(--blue),var(--teal)); }
+    .check-item { display:grid; grid-template-columns:24px 1fr; gap:12px; padding:13px 0; border-top:1px solid var(--line); background:transparent; color:var(--ink); cursor:pointer; text-align:left; }
+    .box { width:22px; height:22px; border-radius:8px; border:2px solid #b9c5d3; display:grid; place-items:center; }
+    .check-item.done .box { background:var(--blue); border-color:var(--blue); color:#fff; }
+    .check-item.done .box::after { content:"✓"; font-weight:900; }
+    .check-item.done .check-text { color:var(--muted); text-decoration:line-through; }
+    .assistant-resource { display:flex; justify-content:space-between; gap:14px; margin-bottom:14px; padding:16px; border:1px solid #d9cef7; border-radius:22px; background:#f2edff; }
+    .chat-shell { min-height:540px; display:grid; grid-template-rows:auto auto 1fr auto; overflow:hidden; }
+    .messages { overflow:auto; display:grid; align-content:start; gap:14px; padding:18px; background:#f8fafc; border-radius:20px; }
+    .msg { display:flex; gap:10px; align-items:start; }
+    .msg.user { flex-direction:row-reverse; }
+    .msg-avatar { width:32px; height:32px; border-radius:50%; display:grid; place-items:center; background:#f2c85d; color:#1d2030; font-weight:900; font-size:.72rem; }
+    .msg.user .msg-avatar { color:#fff; background:#171923; }
+    .bubble { max-width:min(74%,720px); background:#fff; border:1px solid var(--line); padding:12px 14px; border-radius:6px 16px 16px 16px; line-height:1.55; }
+    .msg.user .bubble { border-radius:16px 6px 16px 16px; background:#eaf6ff; border-color:#cce9ff; }
+    .chat-form { display:flex; gap:10px; border-top:1px solid var(--line); padding:14px; }
+    .chat-form input { flex:1; min-height:44px; border-radius:15px; border:1px solid var(--line); background:#f8fafc; color:var(--ink); padding:11px 13px; }
+    .empty { color:var(--muted); padding:20px; text-align:center; border:1px dashed var(--line); border-radius:18px; background:#fbfcfe; }
+    .error { color:#c93d32; font-size:.82rem; margin-bottom:12px; display:none; }
+    .error.visible { display:block; }
+    @media (max-width:1180px) {
+      .dashboard-layout,.hero,.two-col,.project-board { grid-template-columns:1fr; }
+      .project-list { max-height:none; }
+      .side-stack { grid-template-columns:repeat(2,minmax(0,1fr)); align-items:start; }
+      .side-stack .quick-grid { grid-column:1/-1; }
+    }
+    @media (max-width:980px) {
+      .sidebar { inset:12px auto 12px 12px; width:min(86vw,320px); transform:translateX(-120%); transition:.2s; }
+      .sidebar.open { transform:translateX(0); }
+      .topbar { left:18px; }
+      .main { margin-left:0; }
+      .menu-btn { display:grid; }
+      .brand-mark { height:88px; }
+    }
+    @media (max-width:720px) {
+      :root { --topbar:68px; }
+      body { background:#f3f6f9; }
+      .auth-screen { padding:14px; }
+      .auth-card { margin:16px; padding:36px 24px; border-radius:20px; }
+      .login-logo img { width:220px; }
+      .sidebar { border-radius:22px; }
+      .brand { padding:18px 18px 12px; }
+      .brand-mark { height:84px; }
+      .brand-subtitle { font-size:.76rem; }
+      .nav { padding:4px 12px 12px; }
+      .nav-label { padding:12px 10px 6px; }
+      .nav-item { min-height:44px; border-radius:14px; padding:10px 12px; }
+      .sidebar-footer { margin:0 12px 12px; padding:14px; border-radius:16px; font-size:.78rem; }
+      .topbar { top:10px; left:10px; right:10px; height:var(--topbar); padding:0 10px; border-radius:20px; gap:8px; }
+      .topbar-left { gap:8px; overflow:hidden; }
+      .topbar-actions { gap:7px; flex:0 0 auto; }
+      .topbar-title { font-size:.92rem; max-width:42vw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .topbar-kicker { display:none; }
+      .menu-btn,.icon-btn { width:40px; height:40px; border-radius:13px; font-size:.72rem; }
+      .avatar { width:40px; height:40px; font-size:.78rem; }
+      #logoutBtn { min-height:40px; padding:9px 10px; font-size:.78rem; }
+      .search-field { display:none; }
+      .main { padding:calc(var(--topbar) + 24px) 10px 14px; }
+      .page-head { display:block; }
+      .button-row { margin-top:14px; }
+      h1 { font-size:clamp(1.65rem,9vw,2.25rem); }
+      .lead { font-size:.92rem; }
+      .card,.hero-card,.panel,.metric,.quick-card,.resource-card,.project-card,.rate-card,.course-card { border-radius:20px; }
+      .hero-card,.panel,.project-card,.wide-card,.task-card { padding:18px; }
+      .hero-card { min-height:250px; }
+      .balance-card { min-height:132px; border-radius:20px; }
+      .metric-grid,.quick-grid,.form-grid,.results,.progress-row,.rate-grid,.course-grid,.side-stack { grid-template-columns:1fr; }
+      .metric { min-height:118px; padding:17px; }
+      .metric strong,.balance-card strong { font-size:1.85rem; }
+      .bar-chart { gap:10px; height:160px; overflow:hidden; }
+      .bar { min-width:0; font-size:.68rem; }
+      .bar i { height:112px; border-radius:12px; }
+      .task-card { min-height:auto; }
+      .task-percent { font-size:2.45rem; }
+      .wave { height:104px; }
+      .ring-circle { width:96px; height:96px; }
+      .ring-circle span { width:66px; height:66px; }
+      .project-line { align-items:flex-start; flex-wrap:wrap; }
+      .project-table { min-width:620px; }
+      .project-table th,.project-table td { padding:12px 8px; }
+      .project-list { max-height:none; }
+      .project-item { padding:14px; border-radius:16px; }
+      .project-preview-card.list { display:grid; grid-template-columns:1fr; }
+      .project-detail-columns { grid-template-columns:1fr; }
+      .field input,.field select,.field textarea,textarea { border-radius:13px; }
+      .inline-form,.assistant-resource { display:grid; grid-template-columns:1fr; }
+      .chat-form { display:grid; grid-template-columns:1fr; }
+      .bubble { max-width:86%; }
+    }
+    @media (max-width:430px) {
+      .topbar-title { max-width:34vw; }
+      #logoutBtn { display:none; }
+      .hero-card { min-height:280px; }
+      .btn,.btn.secondary,.btn.dark { width:100%; }
+      .filter-btn,.tab,.chip { font-size:.76rem; padding:8px 11px; }
+      .rate-card,.course-card,.quick-card,.resource-card { min-height:auto; }
+    }
+  </style>
 </head>
 <body>
-
-<!-- AUTH LOADING STATE -->
-<div class="auth-loading" id="authLoading"><div class="spinner"></div></div>
-
-<!-- ═══════════════════════════════════
-     PAGE 1: LOGIN
-═══════════════════════════════════ -->
-<div class="page" id="page-login">
-  <div class="login-bg"></div>
-  <div class="login-card">
-    <div class="login-logo">
-      <img src="https://lh3.googleusercontent.com/d/1h3AciZW4bmJCSeJKOUw8r1_CIyAD0rg_" alt="Mortgage Marketplace">
-      <div class="login-divider"></div>
-    </div>
-    <div class="login-title">
-      <h2>Welcome Back</h2>
-      <p>Sign in to access the Presentation Tracker</p>
-    </div>
-    <div class="login-error" id="loginError"></div>
-    <div class="login-form">
-      <div class="login-field">
-        <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
+  <section class="auth-screen" id="authScreen">
+    <form class="auth-card" id="loginForm">
+      <div class="login-logo">
+        <img src="mortgage-marketplace-wide-logo.png" alt="Mortgage Marketplace">
+        <div class="login-divider"></div>
       </div>
-      <div class="login-field">
-        <label>Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+      <div class="login-title">
+        <h1>Welcome Back</h1>
+        <p>Sign in to access the Mortgage Marketplace Hub</p>
       </div>
-      <button class="login-btn" id="loginBtn" onclick="firebaseLogin()">Sign In</button>
-      <div class="login-sep"><span>or</span></div>
-      <button class="login-google" onclick="googleLogin()">
-        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        Continue with Google
-      </button>
-    </div>
-    <div class="login-footer">Mortgage Marketplace LLC &middot; NMLS #2367229</div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     PAGE 2: DASHBOARD
-═══════════════════════════════════ -->
-<div class="page" id="page-dashboard">
-  <nav class="dash-nav">
-    <div class="dash-nav-left">
-      <img src="https://lh3.googleusercontent.com/d/1h3AciZW4bmJCSeJKOUw8r1_CIyAD0rg_" alt="MM" class="dash-nav-logo">
-      <h1>Class Hub</h1>
-    </div>
-    <div class="dash-nav-right">
-      <span class="dash-user" id="dashUser"></span>
-      <button class="dash-btn dash-btn-gold" onclick="navigateTo('tracker')">Open Tracker</button>
-      <button class="dash-btn dash-btn-red" onclick="firebaseLogout()">Sign Out</button>
-    </div>
-  </nav>
-
-  <div class="dash-hero">
-    <div class="dash-hero-content">
-      <h2>Realtor Education Classes</h2>
-      <p>Browse all classes and their production assets. Click any card to view its full details in the tracker.</p>
-      <div class="dash-stats" id="dashStats"></div>
-    </div>
-  </div>
-
-  <div class="dash-body">
-    <div class="dash-filters" id="dashFilters">
-      <button class="dash-filter-btn active" data-cat="all" onclick="filterDash('all',this)">All Classes</button>
-      <button class="dash-filter-btn" data-cat="marketing" onclick="filterDash('marketing',this)">Marketing</button>
-      <button class="dash-filter-btn" data-cat="tech" onclick="filterDash('tech',this)">Technology &amp; AI</button>
-      <button class="dash-filter-btn" data-cat="loan" onclick="filterDash('loan',this)">Loan Programs</button>
-      <button class="dash-filter-btn" data-cat="growth" onclick="filterDash('growth',this)">Business Growth</button>
-      <div class="dash-search">
-        <span class="dash-search-icon">&#128269;</span>
-        <input type="text" id="dashSearchInput" placeholder="Search classes..." oninput="filterDashSearch()">
+      <div class="auth-message" id="authMessage"></div>
+      <div class="login-form">
+        <div class="login-field"><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+        <div class="login-field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" placeholder="Enter your password" autocomplete="current-password" required></div>
+        <button class="login-btn" id="loginBtn" type="submit">Sign In</button>
+        <div class="login-sep"><span>or</span></div>
+        <button class="login-google" id="googleLoginBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          Continue with Google
+        </button>
       </div>
-    </div>
-    <div class="dash-grid" id="dashGrid">
-      <div class="dash-empty"><div class="dash-empty-icon">&#9203;</div><p>Loading classes...</p></div>
-    </div>
-  </div>
-
-  <!-- Asset Viewer Modal -->
-  <div class="av-overlay" id="avOverlay" onclick="if(event.target===this)closeAssetViewer()">
-    <div class="av-modal">
-      <div class="av-header" id="avHeader"></div>
-      <div class="av-body" id="avBody"></div>
-      <div class="av-footer">
-        <button class="av-footer-btn av-footer-secondary" onclick="closeAssetViewer()">Close</button>
-        <button class="av-footer-btn av-footer-primary" id="avTrackerBtn">Open in Tracker</button>
+      <div class="login-footer">Mortgage Marketplace LLC · NMLS #2367229</div>
+    </form>
+  </section>
+  <div class="overlay" id="overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-row">
+        <div class="brand-mark">
+          <img class="brand-logo-img" src="mortgage-marketplace-wide-logo.png" alt="Mortgage Marketplace">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-7h6v7"/></svg>
+        </div>
+        <div class="brand-name">Mortgage<br><span>Marketplace</span></div>
       </div>
+      <p class="brand-subtitle">Mortgage Marketplace LLC · NMLS #2367229<br>Internal workspace for projects, materials, courses, and rate tools.</p>
     </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     PAGE 3: TRACKER (existing, unchanged)
-═══════════════════════════════════ -->
-<div class="page" id="page-tracker">
-<div class="loading-bar" id="loadingBar"></div>
-<header class="top-bar">
-  <div class="top-bar-left">
-    <div class="logo-mark" id="logoMark">M</div>
-    <div><h1 id="headerTitle">Mortgage Marketplace LLC</h1><div class="subtitle" id="headerSub">Presentation Tracker &amp; Resource Hub</div></div>
-    <button class="btn-top admin-only" style="padding:5px 8px;font-size:11px;" onclick="editHeader()">&#9998;</button>
-  </div>
-  <div class="top-bar-right">
-    <span class="save-indicator admin-only" id="saveIndicator">Saved</span>
-    <button class="btn-top gold admin-only" onclick="openAddModal()">+ Add Presentation</button>
-    <button class="btn-top admin-only" onclick="openSettings()">&#9881; Settings</button>
-    <button class="btn-top admin-only" onclick="syncFromGitHub()">&#8635; Sync</button>
-    <button class="btn-top" onclick="navigateTo('dashboard')" style="background:rgba(255,255,255,0.08);">&#8592; Dashboard</button>
-    <button class="btn-top" id="adminBtn" onclick="toggleAdmin()">&#128274; Admin</button>
-  </div>
-</header>
-<div class="summary-strip" id="summaryStrip"></div>
-<div class="toolbar">
-  <div class="search-box"><span class="icon">&#128269;</span><input type="text" id="searchInput" placeholder="Search presentations..." oninput="applyFilters()"></div>
-  <select class="filter-select" id="statusFilter" onchange="applyFilters()"><option value="">All Statuses</option><option value="Complete">Complete</option><option value="In Progress">In Progress</option><option value="Needs Review">Needs Review</option><option value="Not Started">Not Started</option><option value="Missing Assets">Missing Assets</option><option value="Waiting on Link">Waiting on Link</option><option value="Waiting on Approval">Waiting on Approval</option></select>
-  <div class="toolbar-spacer"></div>
-  <button class="btn-action btn-expand" onclick="toggleAll(false)">&#9660; Expand All</button>
-  <button class="btn-action btn-expand" onclick="toggleAll(true)">&#9650; Collapse All</button>
-</div>
-<div class="project-grid" id="projectGrid"><div style="text-align:center;padding:48px;color:var(--gray-500);">Loading...</div></div>
-
-<div class="modal-ov" id="loginOv"><div class="modal-box"><div class="modal-hd"><h3>&#128274; Admin Access</h3><p>Enter password to manage resources</p></div><div class="modal-bd"><input type="password" id="adminPass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"><button class="btn-modal" onclick="doLogin()">Unlock Admin Mode</button><div class="modal-err" id="loginErr">Incorrect password</div></div></div></div>
-
-<div class="modal-ov" id="settingsOv"><div class="modal-box" style="max-width:480px;"><div class="modal-hd"><h3>&#9881; GitHub Settings</h3><p>Connect to GitHub for shared storage</p></div><div class="modal-bd">
-  <label>GitHub Personal Access Token</label><input type="password" id="cfgToken" placeholder="ghp_xxxxxxxxxxxx">
-  <label>Repo Owner</label><input type="text" id="cfgOwner" placeholder="jeromemmplace">
-  <label>Repo Name</label><input type="text" id="cfgRepo" placeholder="mortgagemarketplace">
-  <label>Branch</label><input type="text" id="cfgBranch" value="main">
-  <label>data.json Path</label><input type="text" id="cfgDataPath" value="data.json">
-  <p style="font-size:11px;color:var(--gray-500);margin:-8px 0 14px;">Token needs "repo" scope. <a href="https://github.com/settings/tokens/new?scopes=repo&description=Presentation+Tracker" target="_blank" style="color:var(--blue);">Generate one here</a></p>
-  <button class="btn-modal" onclick="saveSettings()">Save Settings</button>
-  <button class="btn-modal secondary" onclick="testConnection()">Test Connection</button>
-  <button class="btn-modal secondary" onclick="importLegacy()">Import Legacy Browser Data</button>
-  <button class="btn-modal secondary" onclick="closeSettings()">Cancel</button>
-</div></div></div>
-
-<div class="modal-overlay" id="modalOverlay"><div class="modal"><div class="modal-head"><h3>Add New Presentation</h3><button class="modal-close" onclick="closeModal()">&times;</button></div><div class="modal-body"><div class="form-group"><label>Presentation Title</label><input type="text" id="fTitle" placeholder="e.g. YouTube Secrets for Real Estate"></div><div class="form-group"><label>Short Description</label><input type="text" id="fDesc" placeholder="Brief description of this class"></div><div class="form-row"><div class="form-group"><label>Owner</label><input type="text" id="fOwner" value="Mike Gillett"></div><div class="form-group"><label>Status</label><select id="fStatus"><option>Complete</option><option>In Progress</option><option>Needs Review</option><option>Not Started</option><option>Missing Assets</option><option>Waiting on Link</option><option>Waiting on Approval</option></select></div></div><div class="form-group"><label>Emoji Icon</label><input type="text" id="fIcon" value="&#128218;" maxlength="4" style="width:60px;"></div></div><div class="modal-foot"><button class="btn-cancel" onclick="closeModal()">Cancel</button><button class="btn-save" onclick="addPresentation()">Save Presentation</button></div></div></div>
-
-<div class="prev-overlay" id="prevOv"><div class="prev-modal"><div class="prev-head"><h3 id="prevTitle">Preview</h3><div class="prev-btns"><a class="prev-btn-dl" id="prevDl" href="#" target="_blank">&#11015; Download</a><a class="prev-btn-tab" id="prevTab" href="#" target="_blank">&#8599; Open in New Tab</a><button class="prev-close" onclick="closePrev()">&times;</button></div></div><div class="prev-body" id="prevBody"></div></div></div>
-
-</div><!-- end page-tracker -->
-
-<div class="toast" id="toast"></div>
-
-<!-- ═══════════════════════════════════
-     FIREBASE CONFIG
-═══════════════════════════════════ -->
-<script>
-/*
-  FIREBASE SETUP
-  Replace the config below with your Firebase project credentials.
-  Go to: Firebase Console > Project Settings > General > Your apps > Web app
-*/
-const firebaseConfig = {
-  apiKey: "AIzaSyC8tx5zowOyDzll82FzN3C_UVWD_QM_JU8",
-  authDomain: "mortgage-marketplace-classes.firebaseapp.com",
-  projectId: "mortgage-marketplace-classes",
-  storageBucket: "mortgage-marketplace-classes.firebasestorage.app",
-  messagingSenderId: "1099035625790",
-  appId: "1:1099035625790:web:69f868b5460f667ba8046f"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-</script>
-
-<!-- ═══════════════════════════════════
-     ROUTING + AUTH
-═══════════════════════════════════ -->
-<script>
-let currentUser = null;
-let trackerInitialized = false;
-let dashDataLoaded = false;
-
-/* Navigation */
-function navigateTo(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('authLoading').style.display = 'none';
-
-  if (page === 'login') {
-    document.getElementById('page-login').classList.add('active');
-  } else if (page === 'dashboard') {
-    document.getElementById('page-dashboard').classList.add('active');
-    if (!dashDataLoaded) loadDashboard();
-  } else if (page === 'tracker') {
-    document.getElementById('page-tracker').classList.add('active');
-    if (!trackerInitialized) { trackerInitialized = true; initTracker(); }
-  }
-  window.location.hash = page;
-}
-
-/* Firebase Auth */
-function firebaseLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pw = document.getElementById('loginPassword').value;
-  const errEl = document.getElementById('loginError');
-  const btn = document.getElementById('loginBtn');
-
-  if (!email || !pw) { errEl.textContent = 'Enter email and password.'; errEl.classList.add('show'); return; }
-  btn.disabled = true; btn.textContent = 'Signing in...';
-  errEl.classList.remove('show');
-
-  auth.signInWithEmailAndPassword(email, pw)
-    .then(() => { btn.disabled = false; btn.textContent = 'Sign In'; })
-    .catch(err => {
-      btn.disabled = false; btn.textContent = 'Sign In';
-      const msgs = {
-        'auth/invalid-email': 'Invalid email address.',
-        'auth/user-not-found': 'No account found with this email.',
-        'auth/wrong-password': 'Incorrect password.',
-        'auth/invalid-credential': 'Invalid email or password.',
-        'auth/too-many-requests': 'Too many attempts. Try again later.'
-      };
-      errEl.textContent = msgs[err.code] || err.message;
-      errEl.classList.add('show');
-    });
-}
-
-function googleLogin() {
-  auth.signInWithPopup(googleProvider).catch(err => {
-    const errEl = document.getElementById('loginError');
-    errEl.textContent = err.message;
-    errEl.classList.add('show');
-  });
-}
-
-function firebaseLogout() {
-  auth.signOut();
-}
-
-/* Handle Enter key on login form */
-document.addEventListener('DOMContentLoaded', () => {
-  const pwInput = document.getElementById('loginPassword');
-  if (pwInput) pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') firebaseLogin(); });
-  const emInput = document.getElementById('loginEmail');
-  if (emInput) emInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
-});
-
-/* Auth state listener */
-auth.onAuthStateChanged(user => {
-  currentUser = user;
-  if (user) {
-    document.getElementById('dashUser').textContent = user.email;
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'tracker') navigateTo('tracker');
-    else navigateTo('dashboard');
-  } else {
-    trackerInitialized = false;
-    dashDataLoaded = false;
-    navigateTo('login');
-  }
-});
-</script>
-
-<!-- ═══════════════════════════════════
-     DASHBOARD LOGIC
-═══════════════════════════════════ -->
-<script>
-let dashPresentations = [];
-
-/* Category detection based on class title */
-function detectCategory(title) {
-  const t = title.toLowerCase();
-  if (t.includes('facebook') || t.includes('instagram') || t.includes('linkedin') || t.includes('youtube') || t.includes('database marketing') || t.includes('reels')) return 'marketing';
-  if (t.includes('ai') || t.includes('google business') || t.includes('search') || t.includes('technology') || t.includes('agent')) return 'tech';
-  if (t.includes('va loan') || t.includes('down payment') || t.includes('dpa') || t.includes('investor') || t.includes('renovation') || t.includes('loan') || t.includes('financing')) return 'loan';
-  if (t.includes('12 week') || t.includes('business plan') || t.includes('planning') || t.includes('growth')) return 'growth';
-  return 'marketing';
-}
-
-function catLabel(cat) {
-  const m = { marketing: 'Marketing', tech: 'Technology & AI', loan: 'Loan Programs', growth: 'Business Growth' };
-  return m[cat] || 'General';
-}
-
-function catColor(cat) {
-  const m = { marketing: '#2563eb', tech: '#7c3aed', loan: '#059669', growth: '#d97706' };
-  return m[cat] || '#6b7280';
-}
-
-/* Fetch data for dashboard */
-async function loadDashboard() {
-  const DEF_DASH = { owner: 'jeromemmplace', repo: 'mortgagemarketplace', branch: 'main', dataPath: 'data.json' };
-  const owner = localStorage.getItem('mm_gh_owner') || DEF_DASH.owner;
-  const repo = localStorage.getItem('mm_gh_repo') || DEF_DASH.repo;
-  const branch = localStorage.getItem('mm_gh_branch') || DEF_DASH.branch;
-  const dataPath = localStorage.getItem('mm_gh_datapath') || DEF_DASH.dataPath;
-  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${dataPath}?t=${Date.now()}`;
-
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    dashPresentations = data.presentations || (Array.isArray(data) ? data : []);
-    dashDataLoaded = true;
-    renderDashboard();
-  } catch (e) {
-    document.getElementById('dashGrid').innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">&#9888;</div><p>Could not load class data. Make sure GitHub settings are configured in the tracker.</p></div>';
-  }
-}
-
-function countAllDash(p) { return 2 + p.funnel.resources.length + p.marketing.resources.length + p.workflow.resources.length + p.checkin.resources.length; }
-function countLinkedDash(p) { let c = 0; if (p.deck.pptx.url) c++; if (p.deck.pdf.url) c++; [p.funnel, p.marketing, p.workflow, p.checkin].forEach(cat => c += cat.resources.filter(r => r.url).length); return c; }
-function pctDash(p) { const t = countAllDash(p), f = countLinkedDash(p); return t ? Math.round(f / t * 100) : 0; }
-
-function renderDashboard() {
-  /* Stats */
-  const total = dashPresentations.length;
-  const complete = dashPresentations.filter(p => p.status === 'Complete').length;
-  const totalAssets = dashPresentations.reduce((s, p) => s + countAllDash(p), 0);
-  const linkedAssets = dashPresentations.reduce((s, p) => s + countLinkedDash(p), 0);
-
-  document.getElementById('dashStats').innerHTML =
-    `<div class="dash-stat"><div class="dash-stat-num">${total}</div><div class="dash-stat-label">Classes</div></div>` +
-    `<div class="dash-stat"><div class="dash-stat-num">${complete}</div><div class="dash-stat-label">Complete</div></div>` +
-    `<div class="dash-stat"><div class="dash-stat-num">${linkedAssets}</div><div class="dash-stat-label">Assets Linked</div></div>` +
-    `<div class="dash-stat"><div class="dash-stat-num">${totalAssets - linkedAssets}</div><div class="dash-stat-label">Pending</div></div>`;
-
-  renderDashGrid(dashPresentations);
-}
-
-function renderDashGrid(list) {
-  const grid = document.getElementById('dashGrid');
-  if (!list.length) { grid.innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">&#128218;</div><p>No classes match your filter.</p></div>'; return; }
-
-  grid.innerHTML = list.map(p => {
-    const cat = detectCategory(p.title);
-    const color = catColor(cat);
-    const pct = pctDash(p);
-    const linked = countLinkedDash(p);
-    const total = countAllDash(p);
-    const statusMap = { 'Complete': 'badge-complete', 'In Progress': 'badge-progress', 'Needs Review': 'badge-review', 'Not Started': 'badge-not-started', 'Missing Assets': 'badge-missing', 'Waiting on Link': 'badge-waiting-link', 'Waiting on Approval': 'badge-waiting-approval' };
-    const pctColor = pct === 100 ? 'var(--green)' : 'var(--blue)';
-    const desc = p.description || 'Click to view all assets and resources for this class.';
-
-    return `<div class="class-card" data-cat="${cat}" data-title="${p.title.toLowerCase()}" onclick="openClassInTracker('${p.id}')">
-      <div class="class-card-accent" style="background:${color};"></div>
-      <div class="class-card-body">
-        <div class="class-card-status"><span class="badge ${statusMap[p.status] || 'badge-not-started'}">${p.status}</span></div>
-        <div class="class-card-top">
-          <div class="class-card-icon">${p.icon || '&#128218;'}</div>
-          <div class="class-card-info">
-            <div class="class-card-cat" style="color:${color};">${catLabel(cat)}</div>
-            <div class="class-card-title">${escDash(p.title)}</div>
-            <div class="class-card-desc">${escDash(desc)}</div>
+    <nav class="nav" id="nav"></nav>
+    <div class="sidebar-footer"><strong>Better rates, clearer paths</strong><br>Compare options across multiple lenders and keep team assets organized.</div>
+  </aside>
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-btn" id="menuBtn" type="button" aria-label="Open navigation">Menu</button>
+      <div><div class="topbar-title" id="topbarTitle">Dashboard</div><div class="topbar-kicker" id="roleLine">Mortgage Marketplace team workspace</div></div>
+    </div>
+    <div class="topbar-actions">
+      <label class="search-field"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="globalSearch" type="search" placeholder="Search marketing materials..."></label>
+      <button class="icon-btn" id="searchJump" type="button" aria-label="Open marketing search">Go</button>
+      <button class="btn secondary" id="logoutBtn" type="button">Sign out</button>
+      <div class="avatar" id="avatar">MM</div>
+    </div>
+  </header>
+  <main class="main" id="main">
+    <section class="page active" id="page-dashboard">
+      <div class="dashboard-layout">
+        <div>
+          <div class="hero">
+            <div class="hero-card">
+              <div>
+                <div class="eyebrow">Mortgage Marketplace Hub</div>
+                <h1>Better home loans start with better team tools.</h1>
+                <p class="lead">Track Mortgage Marketplace projects, manage marketing materials, organize courses, and keep current-rate resources close for purchase, refinance, and investor conversations.</p>
+                <div class="button-row hero-actions">
+                  <button class="btn dark" data-go="projects" type="button">Open projects</button>
+                  <button class="btn secondary" data-go="marketing" type="button">Browse materials</button>
+                </div>
+              </div>
+            </div>
+            <div class="balance-card">
+              <div><span>Project workspace</span><strong class="is-hidden-count" id="heroProjectCount"></strong></div>
+              <small class="muted">Customize, upload, review, and approve team projects.</small>
+            </div>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><div class="metric-top"><span>Marketing</span><span class="metric-icon">M</span></div><strong class="is-hidden-count" id="flyerCount"></strong><small>Flyers, forms, campaign links, and co-branded assets.</small></div>
+            <div class="metric"><div class="metric-top"><span>Courses</span><span class="metric-icon">C</span></div><strong class="is-hidden-count" id="trainingCount"></strong><small>Decks, onboarding, and partner education resources.</small></div>
+            <div class="metric"><div class="metric-top"><span>Loan options</span><span class="metric-icon">%</span></div><strong class="is-hidden-count"></strong><small>Purchase, refinance, government, jumbo, and specialty programs.</small></div>
+          </div>
+          <div class="wide-card card">
+            <div class="project-line"><h2>Project Activity</h2><span class="pill" id="dashRole">Admin</span></div>
+            <div class="bar-chart">
+              <div class="bar"><i style="--h:62%"></i><span>Projects</span></div>
+              <div class="bar"><i style="--h:82%"></i><span>Marketing</span></div>
+              <div class="bar"><i style="--h:70%"></i><span>Courses</span></div>
+              <div class="bar"><i style="--h:48%"></i><span>Rates</span></div>
+              <div class="bar"><i style="--h:88%"></i><span>Hub</span></div>
+            </div>
+          </div>
+          <div class="wide-card card">
+            <div class="project-line"><h2>Priority Projects</h2><button class="btn secondary" data-go="projects" type="button">View all</button></div>
+            <div class="table-scroll"><table class="project-table"><thead><tr><th>Name</th><th>Owner</th><th>Status</th><th>Priority</th></tr></thead><tbody id="dashboardProjects"></tbody></table></div>
           </div>
         </div>
-        <div class="class-card-meta">
-          <div class="class-card-progress">
-            <div class="class-card-progress-bar"><div class="class-card-progress-fill" style="width:${pct}%;background:${pctColor};"></div></div>
-            <div class="class-card-progress-text"><span>${pct}% complete</span><span>${linked}/${total} assets</span></div>
+        <aside class="side-stack">
+          <div class="task-card card">
+            <div class="project-line"><h2>Task</h2><span class="pill">Live</span></div>
+            <div class="task-percent" id="taskPercent">94%</div>
+            <p class="muted">Involvement work</p>
+            <div class="wave"><svg viewBox="0 0 420 150" preserveAspectRatio="none"><path d="M0,120 C55,100 40,35 95,45 C155,60 135,115 210,100 C270,85 250,40 315,58 C370,78 360,18 420,55" fill="none" stroke="#2da8ff" stroke-width="5"/><path d="M0,120 C55,100 40,35 95,45 C155,60 135,115 210,100 C270,85 250,40 315,58 C370,78 360,18 420,55 L420,150 L0,150 Z" fill="rgba(45,168,255,.08)"/></svg></div>
+          </div>
+          <div class="card wide-card">
+            <h2>Progress</h2>
+            <div class="progress-row">
+              <div class="ring"><div class="ring-circle" style="--c:var(--lav);--p:64%"><span>64%</span></div><small>Weekly activity</small></div>
+              <div class="ring"><div class="ring-circle" style="--c:#7197ff;--p:72%"><span>26:43</span></div><small>Worked this week</small></div>
+              <div class="ring"><div class="ring-circle" style="--c:var(--teal);--p:77%"><span>77%</span></div><small>Focus time</small></div>
+            </div>
+          </div>
+          <div class="quick-grid">
+            <button class="quick-card" data-go="marketing" type="button"><span class="quick-icon">M</span><h3>Marketing Materials</h3><p>Flyers, forms, compliance links, and campaign assets.</p></button>
+            <button class="quick-card" data-go="rates" type="button"><span class="quick-icon">%</span><h3>Live Rates</h3><p>Keep current-rate links and loan option references close.</p></button>
+          </div>
+        </aside>
+      </div>
+    </section>
+    <section class="page" id="page-projects">
+      <div class="page-head">
+        <div><h1>Projects</h1><p class="lead">Browse active Mortgage Marketplace projects, review progress, open links, and add feedback.</p></div>
+        <div class="button-row"><button class="btn dark" id="addProjectBtn" type="button">Add project</button><button class="btn secondary" id="resetProjectsBtn" type="button">Reset placeholders</button></div>
+      </div>
+      <div class="project-toolbar"><p class="muted" id="permissionNote"></p></div>
+      <section class="project-browser" id="projectBrowser">
+        <div class="project-browser-head">
+          <h2>Project Library</h2>
+          <div class="view-switch" aria-label="Project view">
+            <button type="button" id="gridViewBtn">Grid view</button>
+            <button type="button" id="listViewBtn">List view</button>
           </div>
         </div>
+        <div class="project-gallery" id="projectList"></div>
+      </section>
+      <section class="project-detail-page" id="projectDetail" hidden></section>
+    </section>
+    <section class="page" id="page-calculator">
+      <div class="page-head"><div><h1>Mortgage Calculator</h1><p class="lead">A practical PITI estimate with monthly debts, LTV, and DTI context.</p></div></div>
+      <div class="two-col">
+        <form class="panel" id="calcForm">
+          <h2>Loan Details</h2><p class="error" id="calcError"></p>
+          <div class="field"><label>Home price</label><input id="homePrice" type="number" value="400000"></div>
+          <div class="form-grid"><div class="field"><label>Down payment</label><input id="downPayment" type="number" value="20000"></div><div class="field"><label>Interest rate</label><input id="interestRate" type="number" step=".01" value="7.25"></div></div>
+          <div class="form-grid"><div class="field"><label>Loan term</label><select id="loanTerm"><option value="30">30 years</option><option value="20">20 years</option><option value="15">15 years</option></select></div><div class="field"><label>Gross monthly income</label><input id="grossIncome" type="number" value="8500"></div></div>
+          <div class="form-grid"><div class="field"><label>Monthly debts</label><input id="monthlyDebt" type="number" value="650"></div><div class="field"><label>Property tax monthly</label><input id="propertyTax" type="number" value="350"></div></div>
+          <div class="form-grid"><div class="field"><label>Insurance monthly</label><input id="insurance" type="number" value="120"></div><div class="field"><label>HOA monthly</label><input id="hoa" type="number" value="0"></div></div>
+          <button class="btn dark full" type="submit">Calculate payment</button>
+        </form>
+        <div class="panel"><h2>Payment Breakdown</h2><div class="results" id="resultGrid"></div><p class="muted" id="affordNote"></p></div>
       </div>
-      <div class="class-card-actions">
-        <button class="class-card-action cca-primary" onclick="event.stopPropagation();openAssetViewer('${p.id}')">View Assets</button>
-        <button class="class-card-action cca-secondary" onclick="event.stopPropagation();openClassInTracker('${p.id}')">Open in Tracker</button>
+    </section>
+    <section class="page" id="page-marketing">
+      <div class="page-head"><div><h1>Marketing Materials</h1><p class="lead">Search and filter Mortgage Marketplace flyers, forms, campaign links, realtor materials, and co-branded assets.</p></div><button class="btn secondary" id="clearSearch" type="button">Clear search</button></div>
+      <div class="filter-row" id="filters"></div><div class="quick-grid" id="resourceGrid"></div>
+    </section>
+    <section class="page" id="page-courses">
+      <div class="page-head"><div><h1>Courses</h1><p class="lead">A clean home for training decks, partner education, loan program classes, and internal onboarding.</p></div></div>
+      <div class="course-grid">
+        <div class="course-card"><span class="pill">Realtor class</span><h3>Business Planning Class</h3><span>Workshop deck for realtor business planning, follow-up, and relationship building.</span></div>
+        <div class="course-card"><span class="pill">Loan program</span><h3>Down Payment Assistance</h3><span>State and local DPA eligibility, buyer talking points, and program comparison notes.</span></div>
+        <div class="course-card"><span class="pill">Partner education</span><h3>VA Loans for Realtors</h3><span>Entitlement, eligibility, appraisal expectations, and offer-strength positioning.</span></div>
+        <div class="course-card"><span class="pill">Loan training</span><h3>Renovation Loans Overview</h3><span>FHA 203k and conventional rehab loan basics for borrower and realtor conversations.</span></div>
+        <div class="course-card"><span class="pill">Onboarding</span><h3>New LO Onboarding</h3><span>CRM workflow, Mortgage Marketplace tools, project process, and team expectations.</span></div>
+        <div class="course-card"><span class="pill">AI support</span><h3>AI Assistant Training</h3><span>How the team should use approved prompts, borrower explanations, and custom GPT resources.</span></div>
       </div>
-    </div>`;
-  }).join('');
-}
-
-function escDash(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-
-function openClassInTracker(id) {
-  navigateTo('tracker');
-  /* Wait for tracker to render, then expand the target card */
-  setTimeout(() => {
-    const card = document.getElementById('card-' + id);
-    if (card) {
-      card.classList.remove('collapsed');
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, 600);
-}
-
-/* Dashboard filters */
-let activeDashCat = 'all';
-
-function filterDash(cat, btn) {
-  activeDashCat = cat;
-  document.querySelectorAll('.dash-filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  applyDashFilters();
-}
-
-function filterDashSearch() { applyDashFilters(); }
-
-function applyDashFilters() {
-  const q = document.getElementById('dashSearchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.class-card');
-  cards.forEach(c => {
-    let show = true;
-    if (activeDashCat !== 'all' && c.dataset.cat !== activeDashCat) show = false;
-    if (q && !c.dataset.title.includes(q)) show = false;
-    c.style.display = show ? '' : 'none';
-  });
-}
-
-/* ═══════════════════════════════════
-   ASSET VIEWER MODAL
-═══════════════════════════════════ */
-function openAssetViewer(id) {
-  const p = dashPresentations.find(x => x.id === id);
-  if (!p) return;
-
-  const cat = detectCategory(p.title);
-  const color = catColor(cat);
-  const pct = pctDash(p);
-  const linked = countLinkedDash(p);
-  const total = countAllDash(p);
-  const statusMap = { 'Complete': 'badge-complete', 'In Progress': 'badge-progress', 'Needs Review': 'badge-review', 'Not Started': 'badge-not-started', 'Missing Assets': 'badge-missing', 'Waiting on Link': 'badge-waiting-link', 'Waiting on Approval': 'badge-waiting-approval' };
-
-  /* Header */
-  document.getElementById('avHeader').innerHTML = `
-    <div class="av-header-icon">${p.icon || '&#128218;'}</div>
-    <div class="av-header-info">
-      <div class="av-header-title">${escDash(p.title)}</div>
-      <div class="av-header-sub">
-        <span class="badge ${statusMap[p.status] || 'badge-not-started'}">${p.status}</span>
-        <span>${linked}/${total} assets linked</span>
-        <span>${pct}% complete</span>
+    </section>
+    <section class="page" id="page-rates">
+      <div class="page-head"><div><h1>Live Rates</h1><p class="lead">Mortgage rates change daily and vary by borrower profile, property, lender, and program. Use this page as the hub for rate links and comparison tools.</p></div><a class="btn dark" href="https://www.mortgagemarketplace.biz/" target="_blank" rel="noreferrer">Open public site</a></div>
+      <div class="rate-grid">
+        <div class="rate-card"><span class="pill">Current rates</span><h3>Personalized Rate Quote</h3><strong>Connect feed</strong><span>Link this card to your live quote tool or pricing engine when ready.</span></div>
+        <div class="rate-card"><span class="pill">Purchase</span><h3>Home Purchase Rates</h3><strong>Daily variable</strong><span>For buyers comparing payment ranges, lender options, and pre-approval strategy.</span></div>
+        <div class="rate-card"><span class="pill">Refinance</span><h3>Refinance Rates</h3><strong>Daily variable</strong><span>For scenarios involving lower payment, term change, cash out, or debt consolidation.</span></div>
+        <div class="rate-card"><span class="pill">Fixed</span><h3>30-Year / 15-Year Fixed</h3><strong>Quote needed</strong><span>Public site includes fixed-rate quote paths for custom borrower scenarios.</span></div>
+        <div class="rate-card"><span class="pill">Government</span><h3>FHA, VA, USDA</h3><strong>Program-based</strong><span>Use program and borrower details before quoting payment expectations.</span></div>
+        <div class="rate-card"><span class="pill">Investor</span><h3>Jumbo, DSCR, Alternative Doc</h3><strong>Scenario-based</strong><span>Keep specialty loan option notes and pricing resources here.</span></div>
       </div>
-    </div>
-    <button class="av-close" onclick="closeAssetViewer()">&times;</button>`;
-
-  /* Body - build sections */
-  let html = '';
-
-  /* Deck Files */
-  const deckItems = [
-    { label: 'Presentation (PPTX)', url: p.deck.pptx.url, status: p.deck.pptx.status, notes: p.deck.pptx.notes },
-    { label: 'Presentation (PDF)', url: p.deck.pdf.url, status: p.deck.pdf.status, notes: p.deck.pdf.notes }
-  ];
-  html += avSection('Deck Files', 'si-deck', '&#128196;', deckItems);
-
-  /* Funnel */
-  html += avSection('Funnel Resources', 'si-funnel', '&#9889;', p.funnel.resources);
-
-  /* Marketing - Canva */
-  const canvaRes = (p.marketing.resources || []).filter(r => r.group === 'canva');
-  if (canvaRes.length) html += avSection('Canva Resources', 'si-canva', '&#127912;', canvaRes);
-
-  /* Marketing - Bonus */
-  const bonusRes = (p.marketing.resources || []).filter(r => r.group === 'bonus');
-  if (bonusRes.length) html += avSection('Class Bonus / Lead Magnet', 'si-bonus', '&#127873;', bonusRes);
-
-  /* Marketing - Emails */
-  const emailRes = (p.marketing.resources || []).filter(r => r.group === 'emails');
-  if (emailRes.length) html += avSection('Email Templates', 'si-emails', '&#128231;', emailRes);
-
-  /* Workflow */
-  html += avSection('Workflow', 'si-workflow', '&#9881;', p.workflow.resources);
-
-  /* Check-in */
-  html += avSection('Check-in Forms', 'si-checkin', '&#9745;', p.checkin.resources);
-
-  document.getElementById('avBody').innerHTML = html;
-
-  /* Footer button */
-  document.getElementById('avTrackerBtn').onclick = function() {
-    closeAssetViewer();
-    openClassInTracker(id);
-  };
-
-  document.getElementById('avOverlay').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeAssetViewer() {
-  document.getElementById('avOverlay').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function avSection(title, iconClass, iconChar, items) {
-  if (!items || !items.length) return '';
-  const linked = items.filter(r => r.url).length;
-  const rbMap = { 'Added': 'rb-added', 'Missing': 'rb-missing', 'Needs Review': 'rb-review', 'Draft': 'rb-draft', 'Final': 'rb-final' };
-
-  let rows = items.map(r => {
-    const hasUrl = !!r.url;
-    const badge = `<span class="resource-badge ${rbMap[r.status] || 'rb-draft'}">${r.status || 'Added'}</span>`;
-    const noteText = r.notes && r.notes !== 'Placeholder' ? r.notes : (hasUrl ? 'Ready' : 'Pending');
-    const actionBtn = hasUrl
-      ? `<a class="av-btn-open" href="${escDash(r.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#8599; Open</a>`
-      : `<span class="av-btn-empty">Pending</span>`;
-    return `<div class="av-asset">
-      <div class="av-asset-info">
-        <div class="av-asset-name">${escDash(r.label)}</div>
-        <div class="av-asset-note">${escDash(noteText)}</div>
+      <p class="source-note">Public Mortgage Marketplace messaging highlights competitive rates, flexible loan programs, multiple-lender comparisons, and personalized rate quotes. Avoid displaying static rates here until a live feed is connected.</p>
+    </section>
+    <section class="page" id="page-checklists">
+      <div class="page-head"><div><h1>Checklists</h1><p class="lead">Progress saves in this browser.</p></div><button class="btn secondary" id="resetChecklist" type="button">Reset current checklist</button></div>
+      <div class="panel"><div class="tabs" id="checkTabs"></div><div class="muted" id="checkMeta"></div><div class="progress"><span id="checkProgress"></span></div><div id="checkList"></div></div>
+    </section>
+    <section class="page" id="page-assistant">
+      <div class="page-head"><div><h1>AI Assistant</h1><p class="lead">Quick answer bank plus your dedicated My Mortgage Assistant GPT.</p></div><a class="btn dark" href="https://chatgpt.com/g/g-6a011111a8c481918c68977fb7cabb54-my-mortgage-assistant" target="_blank">Open My Mortgage Assistant</a></div>
+      <div class="panel chat-shell">
+        <div class="assistant-resource"><div><strong>Additional AI resource</strong><p class="muted">Use your custom GPT for deeper borrower scenarios, realtor scripts, and loan-program support.</p></div><a class="btn secondary" href="https://chatgpt.com/g/g-6a011111a8c481918c68977fb7cabb54-my-mortgage-assistant" target="_blank">Launch GPT</a></div>
+        <div class="filter-row" id="suggestions"></div><div class="messages" id="messages"></div>
+        <form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Ask a mortgage question..."><button class="btn dark" type="submit">Send</button></form>
       </div>
-      <div class="av-asset-actions">${badge} ${actionBtn}</div>
-    </div>`;
-  }).join('');
-
-  return `<div class="av-section">
-    <div class="av-section-head">
-      <div class="av-section-icon ${iconClass}">${iconChar}</div>
-      <div class="av-section-title">${title}</div>
-      <div class="av-section-count">${linked}/${items.length} linked</div>
-    </div>
-    <div class="av-assets">${rows}</div>
-  </div>`;
-}
-
-/* Close on Escape key */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('avOverlay').classList.contains('show')) closeAssetViewer();
-});
-</script>
-
-<!-- ═══════════════════════════════════
-     TRACKER LOGIC (existing, unchanged)
-═══════════════════════════════════ -->
-<script>
-const ADMIN_PASS='mm2026';
-const DEF={owner:'jeromemmplace',repo:'mortgagemarketplace',branch:'main',dataPath:'data.json'};
-let isAdmin=false, presentations=[], dataSha=null, saving=false;
-
-function getCfg(){return{
-  token:localStorage.getItem('mm_gh_token')||'',
-  owner:localStorage.getItem('mm_gh_owner')||DEF.owner,
-  repo:localStorage.getItem('mm_gh_repo')||DEF.repo,
-  branch:localStorage.getItem('mm_gh_branch')||DEF.branch,
-  dataPath:localStorage.getItem('mm_gh_datapath')||DEF.dataPath
-};}
-function saveCfg(c){
-  localStorage.setItem('mm_gh_token',c.token);localStorage.setItem('mm_gh_owner',c.owner);
-  localStorage.setItem('mm_gh_repo',c.repo);localStorage.setItem('mm_gh_branch',c.branch);
-  localStorage.setItem('mm_gh_datapath',c.dataPath);
-}
-
-function rawUrl(path){const c=getCfg();return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path||c.dataPath}?t=${Date.now()}`;}
-function apiUrl(path){const c=getCfg();return`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}`;}
-function apiH(){const c=getCfg();const h={'Content-Type':'application/json'};if(c.token)h['Authorization']='token '+c.token;return h;}
-
-function isRepoFile(url){
-  if(!url)return false;
-  const c=getCfg();
-  return url.includes(`raw.githubusercontent.com/${c.owner}/${c.repo}/`)||url.includes(`github.com/${c.owner}/${c.repo}/`);
-}
-function repoPathFromUrl(url){
-  const c=getCfg();
-  const prefix=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/`;
-  if(url.startsWith(prefix))return url.substring(prefix.length).split('?')[0];
-  return null;
-}
-
-async function fetchDataFromGitHub(){
-  setLoading(true);
-  try{
-    const res=await fetch(rawUrl());
-    if(!res.ok)throw new Error('data.json not found (HTTP '+res.status+')');
-    const data=await res.json();
-    if(data.presentations){presentations=data.presentations;if(data.header){saveHeaderLocal(data.header);applyHeader();}}
-    else if(Array.isArray(data)){presentations=data;}
-    const c=getCfg();
-    try{const mr=await fetch(apiUrl(c.dataPath)+'?ref='+c.branch);if(mr.ok){const m=await mr.json();dataSha=m.sha;}}catch(e){}
-    runMigration();setLoading(false);return true;
-  }catch(e){console.error('Fetch failed:',e);setLoading(false);return false;}
-}
-
-async function saveDataToGitHub(){
-  if(saving)return false;const c=getCfg();
-  if(!c.token){showToast('Set GitHub token in Settings first','error');return false;}
-  saving=true;setSaveStatus('Saving...');
-  try{
-    const hd=loadHeaderLocal();
-    const payload=JSON.stringify({presentations,header:hd},null,2);
-    const content=btoa(unescape(encodeURIComponent(payload)));
-    const body={message:'Update tracker — '+new Date().toISOString().slice(0,16),content,branch:c.branch};
-    if(dataSha)body.sha=dataSha;
-    const res=await fetch(apiUrl(c.dataPath),{method:'PUT',headers:apiH(),body:JSON.stringify(body)});
-    if(!res.ok){const err=await res.json();throw new Error(err.message||'Save failed');}
-    const result=await res.json();dataSha=result.content.sha;
-    setSaveStatus('Saved to GitHub');saving=false;return true;
-  }catch(e){console.error('Save error:',e);setSaveStatus('Save failed!',true);showToast('Save failed: '+e.message,'error');saving=false;return false;}
-}
-
-async function uploadFileToGitHub(filePath,fileContent,commitMsg){
-  const c=getCfg();if(!c.token){showToast('Set GitHub token first','error');return null;}
-  try{
-    let sha=null;
-    try{const ck=await fetch(apiUrl(filePath)+'?ref='+c.branch,{headers:apiH()});if(ck.ok){const m=await ck.json();sha=m.sha;}}catch(e){}
-    const body={message:commitMsg||'Upload '+filePath,content:fileContent,branch:c.branch};
-    if(sha)body.sha=sha;
-    const res=await fetch(apiUrl(filePath),{method:'PUT',headers:apiH(),body:JSON.stringify(body)});
-    if(!res.ok){const err=await res.json();throw new Error(err.message);}
-    return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${filePath}`;
-  }catch(e){showToast('Upload failed: '+e.message,'error');return null;}
-}
-
-async function deleteFileFromGitHub(filePath){
-  const c=getCfg();if(!c.token)return false;
-  try{
-    const ck=await fetch(apiUrl(filePath)+'?ref='+c.branch,{headers:apiH()});
-    if(!ck.ok)return false;const m=await ck.json();
-    const res=await fetch(apiUrl(filePath),{method:'DELETE',headers:apiH(),body:JSON.stringify({message:'Delete '+filePath,sha:m.sha,branch:c.branch})});
-    return res.ok;
-  }catch(e){return false;}
-}
-
-async function renameFileInGitHub(oldPath,newPath){
-  const c=getCfg();if(!c.token)return null;
-  try{
-    const ck=await fetch(apiUrl(oldPath)+'?ref='+c.branch,{headers:apiH()});
-    if(!ck.ok)return null;const m=await ck.json();
-    const res=await fetch(apiUrl(newPath),{method:'PUT',headers:apiH(),body:JSON.stringify({message:'Rename '+oldPath+' to '+newPath,content:m.content,branch:c.branch})});
-    if(!res.ok)return null;
-    await fetch(apiUrl(oldPath),{method:'DELETE',headers:apiH(),body:JSON.stringify({message:'Delete old '+oldPath,sha:m.sha,branch:c.branch})});
-    return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${newPath}`;
-  }catch(e){showToast('Rename failed: '+e.message,'error');return null;}
-}
-
-function loadHeaderLocal(){try{const r=localStorage.getItem('mm_tracker_header');if(r)return JSON.parse(r);}catch(e){}return{title:'Mortgage Marketplace LLC',subtitle:'Presentation Tracker & Resource Hub',logo:'M'};}
-function saveHeaderLocal(hd){try{localStorage.setItem('mm_tracker_header',JSON.stringify(hd));}catch(e){}}
-function applyHeader(){const hd=loadHeaderLocal();document.getElementById('headerTitle').textContent=hd.title;document.getElementById('headerSub').textContent=hd.subtitle;document.getElementById('logoMark').textContent=hd.logo;document.title=hd.title+' | '+hd.subtitle;}
-function editHeader(){if(!isAdmin)return;const hd=loadHeaderLocal();const t=prompt('Company / Site Title:',hd.title);if(t===null)return;const s=prompt('Subtitle:',hd.subtitle);if(s===null)return;const l=prompt('Logo Letter (1-2 chars):',hd.logo);if(l===null)return;hd.title=t.trim()||'Mortgage Marketplace LLC';hd.subtitle=s.trim()||'Presentation Tracker & Resource Hub';hd.logo=l.trim().substring(0,2)||'M';saveHeaderLocal(hd);applyHeader();saveDataToGitHub();showToast('Header updated');}
-
-function runMigration(){
-  presentations.forEach(p=>{if(!p.marketing)return;const labels=p.marketing.resources.map(r=>r.label);
-    const needed=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Story Post',group:'canva'},{label:'Instagram Feed Post',group:'canva'},{label:'Email Banner',group:'canva'},{label:'Class Bonus / Lead Magnet',group:'bonus'},{label:'Promotional Email 1',group:'emails'},{label:'Promotional Email 2',group:'emails'},{label:'Promotional Email 3',group:'emails'},{label:'Confirmation & Reminders Email 1',group:'emails'},{label:'Confirmation & Reminders Email 2',group:'emails'},{label:'Confirmation & Reminders Email 3',group:'emails'},{label:'Thank You Email - After Attending Class',group:'emails'},{label:'Missed Class Email',group:'emails'}];
-    needed.forEach(n=>{if(!labels.includes(n.label))p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});});
-    p.marketing.resources.forEach(r=>{if(!r.group){const eL=['Promotional Email 1','Promotional Email 2','Promotional Email 3','Confirmation & Reminders Email 1','Confirmation & Reminders Email 2','Confirmation & Reminders Email 3','Thank You Email - After Attending Class','Missed Class Email'];const cL=['Class Flyer','Facebook Post','Instagram Story Post','Instagram Feed Post','Email Banner','Email Banners','Social Graphics'];const bL=['Class Bonus / Lead Magnet','AI Content System & Playbook'];if(eL.includes(r.label))r.group='emails';else if(cL.includes(r.label))r.group='canva';else if(bL.includes(r.label))r.group='bonus';else r.group='canva';}});
-  });
-}
-
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
-function statusBadge(s){const m={'Complete':'badge-complete','In Progress':'badge-progress','Needs Review':'badge-review','Not Started':'badge-not-started','Missing Assets':'badge-missing','Waiting on Link':'badge-waiting-link','Waiting on Approval':'badge-waiting-approval'};return'<span class="badge '+(m[s]||'badge-not-started')+'">'+s+'</span>';}
-function resBadge(s){const m={'Added':'rb-added','Missing':'rb-missing','Needs Review':'rb-review','Draft':'rb-draft','Final':'rb-final'};return'<span class="resource-badge '+(m[s]||'rb-draft')+'">'+s+'</span>';}
-function countAll(p){return 2+p.funnel.resources.length+p.marketing.resources.length+p.workflow.resources.length+p.checkin.resources.length;}
-function countLinked(p){let c=0;if(p.deck.pptx.url)c++;if(p.deck.pdf.url)c++;[p.funnel,p.marketing,p.workflow,p.checkin].forEach(cat=>c+=cat.resources.filter(r=>r.url).length);return c;}
-function pctVal(p){const t=countAll(p),f=countLinked(p);return t?Math.round(f/t*100):0;}
-function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type==='error'?' error':'');setTimeout(()=>t.classList.remove('show'),3500);}
-function setLoading(on){const b=document.getElementById('loadingBar');b.className='loading-bar '+(on?'active':'done');if(!on)setTimeout(()=>b.className='loading-bar',500);}
-function setSaveStatus(msg,isErr){const s=document.getElementById('saveIndicator');s.textContent=msg;s.style.color=isErr?'var(--red)':'var(--green)';s.classList.add('show');setTimeout(()=>{s.classList.remove('show');s.style.color='var(--green)';},3000);}
-
-function toggleAdmin(){if(isAdmin){isAdmin=false;document.body.classList.remove('is-admin');document.getElementById('adminBtn').innerHTML='&#128274; Admin';document.getElementById('adminBtn').className='btn-top';renderAll();showToast('Viewer mode');return;}document.getElementById('loginOv').classList.add('show');document.getElementById('adminPass').value='';document.getElementById('loginErr').style.display='none';setTimeout(()=>document.getElementById('adminPass').focus(),100);}
-function doLogin(){if(document.getElementById('adminPass').value===ADMIN_PASS){isAdmin=true;document.body.classList.add('is-admin');document.getElementById('loginOv').classList.remove('show');document.getElementById('adminBtn').innerHTML='&#128275; Logout';document.getElementById('adminBtn').className='btn-top logout';renderAll();showToast('Admin mode activated');}else{document.getElementById('loginErr').style.display='block';}}
-
-function openSettings(){const c=getCfg();document.getElementById('cfgToken').value=c.token;document.getElementById('cfgOwner').value=c.owner;document.getElementById('cfgRepo').value=c.repo;document.getElementById('cfgBranch').value=c.branch;document.getElementById('cfgDataPath').value=c.dataPath;document.getElementById('settingsOv').classList.add('show');}
-function closeSettings(){document.getElementById('settingsOv').classList.remove('show');}
-function saveSettings(){saveCfg({token:document.getElementById('cfgToken').value.trim(),owner:document.getElementById('cfgOwner').value.trim()||DEF.owner,repo:document.getElementById('cfgRepo').value.trim()||DEF.repo,branch:document.getElementById('cfgBranch').value.trim()||DEF.branch,dataPath:document.getElementById('cfgDataPath').value.trim()||DEF.dataPath});closeSettings();showToast('Settings saved');}
-async function testConnection(){const c=getCfg();if(!c.token){showToast('Enter a token first','error');return;}try{const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}`,{headers:apiH()});if(res.ok)showToast('Connected to '+c.owner+'/'+c.repo);else showToast('Connection failed: '+res.status,'error');}catch(e){showToast('Connection error','error');}}
-async function importLegacy(){const raw=localStorage.getItem('mm_presentation_tracker');if(!raw){showToast('No legacy data found in localStorage');return;}let d;try{d=JSON.parse(raw);}catch(e){showToast('Legacy data is corrupted','error');return;}if(!Array.isArray(d)||!d.length){showToast('No presentations found');return;}if(!confirm('Found '+d.length+' presentations in browser storage.\n\nThis will REPLACE current shared data.\n\nContinue?'))return;presentations=d;runMigration();const ok=await saveDataToGitHub();if(ok){showToast('Imported '+presentations.length+' presentations');renderAll();}}
-async function syncFromGitHub(){const ok=await fetchDataFromGitHub();renderAll();showToast(ok?'Synced from GitHub':'Sync failed — check settings',ok?undefined:'error');}
-
-function showEditDeck(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input[type="url"]').value=p.deck[type].url;el.querySelector('input[type="url"]').focus();}}
-async function saveDeckUrl(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);const url=el.querySelector('input[type="url"]').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p.deck[type].url=url;p.deck[type].status=status;p.deck[type].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast(type.toUpperCase()+' saved');}
-
-function uploadDeckFile(pid,type){
-  if(!isAdmin)return;
-  const input=document.createElement('input');input.type='file';input.accept='.'+type+',.pptx,.pdf';
-  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Uploading '+file.name+'...');
-    const reader=new FileReader();reader.onload=async function(){
-      const b64=reader.result.split(',')[1];const ext=file.name.split('.').pop().toLowerCase();
-      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-      const path='assets/'+(ext==='pdf'?'pdf':'pptx')+'/'+pid.substring(0,10)+'_'+safe;
-      const url=await uploadFileToGitHub(path,b64,'Upload '+safe);
-      if(url){const p=presentations.find(x=>x.id===pid);p.deck[type].url=url;p.deck[type].status='Added';p.deck[type].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Uploaded: '+file.name);}
-    };reader.readAsDataURL(file);};input.click();
-}
-
-function replaceDeckFile(pid,type){
-  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
-  const input=document.createElement('input');input.type='file';input.accept='.'+type+',.pptx,.pdf';
-  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Replacing with '+file.name+'...');
-    const reader=new FileReader();reader.onload=async function(){
-      const b64=reader.result.split(',')[1];const ext=file.name.split('.').pop().toLowerCase();
-      const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-      const oldPath=repoPathFromUrl(p.deck[type].url);
-      const path=oldPath||'assets/'+(ext==='pdf'?'pdf':'pptx')+'/'+pid.substring(0,10)+'_'+safe;
-      const url=await uploadFileToGitHub(path,b64,'Replace '+safe);
-      if(url){p.deck[type].url=url;p.deck[type].status='Added';p.deck[type].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Replaced: '+file.name);}
-    };reader.readAsDataURL(file);};input.click();
-}
-
-async function deleteDeckFile(pid,type){
-  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
-  if(!confirm('Remove '+type.toUpperCase()+' file from "'+p.title+'"?'))return;
-  if(isRepoFile(p.deck[type].url)){const rp=repoPathFromUrl(p.deck[type].url);if(rp)await deleteFileFromGitHub(rp);}
-  p.deck[type].url='';p.deck[type].status='Added';p.deck[type].notes='Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);
-  await saveDataToGitHub();renderAll();showToast(type.toUpperCase()+' file removed');
-}
-
-function showEditRes(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input[type="url"]').value=p[cat].resources[idx].url;el.querySelector('input[type="url"]').focus();}}
-async function saveResUrl(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);const url=el.querySelector('input[type="url"]').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p[cat].resources[idx].url=url;p[cat].resources[idx].status=status;p[cat].resources[idx].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Link saved');}
-
-function uploadResFile(pid,cat,idx){
-  if(!isAdmin)return;
-  const input=document.createElement('input');input.type='file';
-  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Uploading '+file.name+'...');
-    const reader=new FileReader();reader.onload=async function(){
-      const b64=reader.result.split(',')[1];const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-      const folder='assets/'+cat;const path=folder+'/'+pid.substring(0,10)+'_'+safe;
-      const url=await uploadFileToGitHub(path,b64,'Upload '+safe);
-      if(url){const p=presentations.find(x=>x.id===pid);p[cat].resources[idx].url=url;p[cat].resources[idx].status='Added';p[cat].resources[idx].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Uploaded: '+file.name);}
-    };reader.readAsDataURL(file);};input.click();
-}
-
-function replaceResFile(pid,cat,idx){
-  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
-  const input=document.createElement('input');input.type='file';
-  input.onchange=async function(){const file=input.files[0];if(!file)return;showToast('Replacing with '+file.name+'...');
-    const reader=new FileReader();reader.onload=async function(){
-      const b64=reader.result.split(',')[1];const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
-      const oldPath=repoPathFromUrl(p[cat].resources[idx].url);
-      const path=oldPath||'assets/'+cat+'/'+pid.substring(0,10)+'_'+safe;
-      const url=await uploadFileToGitHub(path,b64,'Replace '+safe);
-      if(url){p[cat].resources[idx].url=url;p[cat].resources[idx].status='Added';p[cat].resources[idx].notes=file.name;p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Replaced: '+file.name);}
-    };reader.readAsDataURL(file);};input.click();
-}
-
-async function renameRes(pid,cat,idx){
-  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
-  const r=p[cat].resources[idx];const nm=prompt('Rename resource:',r.label);
-  if(!nm||!nm.trim()||nm.trim()===r.label)return;
-  const newLabel=nm.trim();
-  if(isRepoFile(r.url)){
-    const oldPath=repoPathFromUrl(r.url);
-    if(oldPath){
-      const ext=oldPath.split('.').pop();const dir=oldPath.substring(0,oldPath.lastIndexOf('/'));
-      const safeName=newLabel.replace(/[^a-zA-Z0-9._-]/g,'_');
-      const newPath=dir+'/'+pid.substring(0,10)+'_'+safeName+'.'+ext;
-      if(newPath!==oldPath){
-        showToast('Renaming file...');
-        const newUrl=await renameFileInGitHub(oldPath,newPath);
-        if(newUrl){r.url=newUrl;r.notes=safeName+'.'+ext;}
-      }
-    }
-  }
-  r.label=newLabel;p.lastUpdated=new Date().toISOString().slice(0,10);
-  await saveDataToGitHub();renderAll();showToast('Renamed to: '+newLabel);
-}
-
-async function deleteRes(pid,cat,idx){
-  if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
-  const r=p[cat].resources[idx];
-  const hasRepoFile=isRepoFile(r.url);
-  const msg=hasRepoFile?'Delete "'+r.label+'" and its file from GitHub?':'Delete "'+r.label+'"?';
-  if(!confirm(msg))return;
-  if(hasRepoFile){const rp=repoPathFromUrl(r.url);if(rp){showToast('Deleting file...');await deleteFileFromGitHub(rp);}}
-  p[cat].resources.splice(idx,1);p.lastUpdated=new Date().toISOString().slice(0,10);
-  await saveDataToGitHub();renderAll();showToast('Deleted: '+r.label);
-}
-
-async function addResource(pid,cat,group){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;const nm=prompt('Enter resource name:');if(!nm||!nm.trim())return;const r={label:nm.trim(),url:'',status:'Added',notes:'Placeholder'};if(group)r.group=group;p[cat].resources.push(r);p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Added: '+nm.trim());}
-
-function updateField(id,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p){p[f]=v;p.lastUpdated=new Date().toISOString().slice(0,10);}}
-function updateCatField(id,cat,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p&&p[cat]){p[cat][f]=v;p.lastUpdated=new Date().toISOString().slice(0,10);}}
-let saveTimer;function debouncedSave(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDataToGitHub(),2000);}
-
-function openPrev(url,label){document.getElementById('prevTitle').textContent=label;document.getElementById('prevDl').href=url;document.getElementById('prevTab').href=url;const body=document.getElementById('prevBody');const ok=url.includes('canva.com')||url.includes('google.com')||url.includes('gamma.app')||url.includes('connectionincorporated.com')||url.includes('leadconnectorhq.com')||url.includes('githubusercontent.com')||url.endsWith('.pdf')||url.endsWith('.html');body.innerHTML=ok?'<iframe src="'+url+'" allow="fullscreen"></iframe>':'<div class="prev-fallback"><div style="font-size:48px;opacity:0.4;">&#128196;</div><div>Preview not available for this file type.<br>Use the buttons above to download or open in a new tab.</div></div>';document.getElementById('prevOv').classList.add('show');}
-function closePrev(){document.getElementById('prevOv').classList.remove('show');document.getElementById('prevBody').innerHTML='';}
-
-function renderAll(){renderSummary();renderGrid();}
-function renderSummary(){const t=presentations.length,c=presentations.filter(p=>p.status==='Complete').length,ip=presentations.filter(p=>p.status==='In Progress').length,nr=presentations.filter(p=>p.status==='Needs Review').length,ta=presentations.reduce((s,p)=>s+countAll(p),0),lk=presentations.reduce((s,p)=>s+countLinked(p),0);document.getElementById('summaryStrip').innerHTML='<div class="stat-card"><div class="stat-num">'+t+'</div><div class="stat-label">Total<br>Presentations</div></div><div class="stat-card"><div class="stat-num" style="color:var(--green);">'+c+'</div><div class="stat-label">Complete</div></div><div class="stat-card"><div class="stat-num" style="color:var(--blue);">'+ip+'</div><div class="stat-label">In Progress</div></div><div class="stat-card"><div class="stat-num" style="color:var(--orange);">'+nr+'</div><div class="stat-label">Needs Review</div></div><div class="stat-card"><div class="stat-num">'+lk+'</div><div class="stat-label">Assets<br>Linked</div></div><div class="stat-card"><div class="stat-num">'+(ta-lk)+'</div><div class="stat-label">Assets<br>Pending</div></div>';}
-
-function deckCard(p,type){
-  const f=p.deck[type],ph=!f.url,ext=type.toUpperCase(),nm=p.title.replace(/[^a-zA-Z0-9 ]/g,'').replace(/ /g,'-'),su=esc(f.url);
-  let vb=ph?'<span class="btn-placeholder">Coming Soon</span>':'<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(nm)+'.'+type+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';
-  let ab='';
-  if(ph){ab='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadDeckFile(\''+p.id+'\',\''+type+'\')">&#8679; Upload</button>';}
-  else{ab='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceDeckFile(\''+p.id+'\',\''+type+'\')">&#8635; Replace</button><button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteDeckFile(\''+p.id+'\',\''+type+'\')">&#10005;</button>';}
-  ab+='<button class="btn-edit admin-only" onclick="event.stopPropagation();showEditDeck(\''+p.id+'\',\''+type+'\')">&#9998; Edit URL</button>';
-  return'<div class="deck-file-card"><div class="file-icon '+type+'">'+ext+'</div><div class="file-info"><div class="file-name">'+esc(nm)+'.'+type+'</div><div class="file-type">'+(f.notes&&f.notes!=='Placeholder'?esc(f.notes):ext+' File')+'</div></div><div class="file-actions">'+resBadge(f.status)+' '+vb+' '+ab+'</div></div><div class="edit-row admin-only" id="edit-deck-'+p.id+'-'+type+'"><input type="url" placeholder="Paste '+ext+' URL..." value="'+su+'"><select><option '+(f.status==='Added'?'selected':'')+'>Added</option><option '+(f.status==='Missing'?'selected':'')+'>Missing</option><option '+(f.status==='Draft'?'selected':'')+'>Draft</option><option '+(f.status==='Final'?'selected':'')+'>Final</option><option '+(f.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveDeckUrl(\''+p.id+'\',\''+type+'\')">Save</button><button class="btn-cancel-url" onclick="showEditDeck(\''+p.id+'\',\''+type+'\')">Cancel</button></div>';
-}
-
-function resRow(p,cat,r,idx){
-  const ph=!r.url,icons={funnel:'\u26A1',marketing:'\u{1F3A8}',workflow:'\u2699',checkin:'\u2611'},su=esc(r.url);
-  const grp=r.group||'';const iconCls=grp==='emails'?'email':grp==='canva'?'canva':grp==='bonus'?'bonus':cat;
-  const iconChar=grp==='emails'?'\u{1F4E7}':grp==='canva'?'\u{1F3A8}':grp==='bonus'?'\u{1F381}':icons[cat]||'\u2611';
-  let vb=ph?'<span class="btn-placeholder">Coming Soon</span>':'<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(r.label)+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';
-  let ab='';
-  if(ph){ab='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadResFile(\''+p.id+'\',\''+cat+'\','+idx+')">&#8679; Upload</button>';}
-  else{ab='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceResFile(\''+p.id+'\',\''+cat+'\','+idx+')">&#8635; Replace</button>';}
-  ab+='<button class="btn-edit admin-only" onclick="event.stopPropagation();showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#9998; Edit</button>';
-  ab+='<button class="btn-rename admin-only" onclick="event.stopPropagation();renameRes(\''+p.id+'\',\''+cat+'\','+idx+')">Rename</button>';
-  ab+='<button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteRes(\''+p.id+'\',\''+cat+'\','+idx+')">&#10005;</button>';
-  return'<div class="resource-row"><div class="resource-icon '+iconCls+'">'+iconChar+'</div><div class="resource-info"><div class="resource-label">'+esc(r.label)+'</div><div class="resource-note">'+(r.notes&&r.notes!=='Placeholder'?esc(r.notes):(ph?'Pending':'Ready'))+'</div></div>'+resBadge(r.status)+' '+vb+' '+ab+'</div><div class="edit-row admin-only" id="edit-res-'+p.id+'-'+cat+'-'+idx+'"><input type="url" placeholder="Paste URL..." value="'+su+'"><select><option '+(r.status==='Added'?'selected':'')+'>Added</option><option '+(r.status==='Missing'?'selected':'')+'>Missing</option><option '+(r.status==='Draft'?'selected':'')+'>Draft</option><option '+(r.status==='Final'?'selected':'')+'>Final</option><option '+(r.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveResUrl(\''+p.id+'\',\''+cat+'\','+idx+')">Save</button><button class="btn-cancel-url" onclick="showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">Cancel</button></div>';
-}
-
-function renderCard(p){
-  const pc=pctVal(p),col=pc===100?'var(--green)':'var(--blue)';
-  return'<div class="project-card collapsed" id="card-'+p.id+'" data-status="'+p.status+'" data-title="'+p.title.toLowerCase()+'"><div class="card-header" onclick="toggleCard(\''+p.id+'\')"><div class="card-chevron">\u25BC</div><div class="card-icon">'+p.icon+'</div><div class="card-title-area"><div class="card-title">'+esc(p.title)+'</div><div class="card-subtitle">'+esc(p.owner)+' \u00B7 Updated '+p.lastUpdated+'</div></div>'+statusBadge(p.status)+'<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+pc+'%;background:'+col+'"></div></div><span style="font-size:11px;color:var(--gray-500);min-width:36px;text-align:right;">'+pc+'%</span></div><div class="card-body"><div class="tab-strip"><button class="tab-btn active" onclick="switchTab(this,\''+p.id+'\',\'overview\')">Overview</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'funnel\')">\u26A1 Funnel</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'marketing\')">\u{1F3A8} Marketing</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'workflow\')">\u2699 Workflow</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'checkin\')">\u2611 Check-in Forms</button></div>'+
-  '<div class="tab-panel active" id="tab-'+p.id+'-overview"><div class="overview-grid"><div class="ov-field"><label>Title</label><div class="val">'+esc(p.title)+'</div></div><div class="ov-field"><label>Owner</label><div class="val">'+esc(p.owner)+'</div></div><div class="ov-field ov-full"><label>Description</label><div class="val">'+esc(p.description)+'</div></div><div class="ov-field"><label>Status</label><div class="val">'+statusBadge(p.status)+'</div></div><div class="ov-field"><label>Last Updated</label><div class="val">'+p.lastUpdated+'</div></div><div class="deck-files-strip"><div class="strip-label">Presentation Files</div>'+deckCard(p,'pptx')+deckCard(p,'pdf')+'</div><div class="ov-field ov-full admin-only"><label>Notes</label><textarea class="ov-notes" placeholder="Add notes..." oninput="updateField(\''+p.id+'\',\'notes\',this.value);debouncedSave()">'+esc(p.notes)+'</textarea></div><div class="ov-field admin-only"><label>Missing Items</label><textarea class="ov-notes" style="min-height:40px" placeholder="Missing items..." oninput="updateField(\''+p.id+'\',\'missingItems\',this.value);debouncedSave()">'+esc(p.missingItems)+'</textarea></div><div class="ov-field admin-only"><label>Next Action</label><textarea class="ov-notes" style="min-height:40px" placeholder="Next action..." oninput="updateField(\''+p.id+'\',\'nextAction\',this.value);debouncedSave()">'+esc(p.nextAction)+'</textarea></div></div></div>'+
-  '<div class="tab-panel" id="tab-'+p.id+'-funnel"><div class="resource-header"><h4>\u26A1 Funnel Resources</h4>'+resBadge(p.funnel.status)+'</div><div class="resource-list">'+p.funnel.resources.map((r,i)=>resRow(p,'funnel',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'funnel\')">+ Add Funnel Resource</button><div class="tab-notes-area admin-only"><label>Funnel Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'funnel\',\'notes\',this.value);debouncedSave()">'+esc(p.funnel.notes)+'</textarea></div></div>'+
-  '<div class="tab-panel" id="tab-'+p.id+'-marketing"><div class="resource-header"><h4>\u{1F3A8} Canva Resources</h4>'+resBadge(p.marketing.status)+'</div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='canva').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'canva\')">+ Add Canva Resource</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F381} Class Bonus + Lead Magnet</h4></div></div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='bonus').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'bonus\')">+ Add Bonus / Lead Magnet</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F4E7} Email Templates</h4></div></div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='emails').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'emails\')">+ Add Email Template</button><div class="tab-notes-area admin-only"><label>Marketing Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'marketing\',\'notes\',this.value);debouncedSave()">'+esc(p.marketing.notes)+'</textarea></div></div>'+
-  '<div class="tab-panel" id="tab-'+p.id+'-workflow"><div class="resource-header"><h4>\u2699 Workflow inside the CRM</h4>'+resBadge(p.workflow.status)+'</div><div class="resource-list">'+p.workflow.resources.map((r,i)=>resRow(p,'workflow',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'workflow\')">+ Add Workflow Resource</button><div class="tab-notes-area admin-only"><label>Workflow Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'workflow\',\'notes\',this.value);debouncedSave()">'+esc(p.workflow.notes)+'</textarea></div></div>'+
-  '<div class="tab-panel" id="tab-'+p.id+'-checkin"><div class="resource-header"><h4>\u2611 Check-in Forms</h4>'+resBadge(p.checkin.status)+'</div><div class="resource-list">'+p.checkin.resources.map((r,i)=>resRow(p,'checkin',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'checkin\')">+ Add Check-in Resource</button><div class="tab-notes-area admin-only"><label>Check-in Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'checkin\',\'notes\',this.value);debouncedSave()">'+esc(p.checkin.notes)+'</textarea></div></div></div></div>';
-}
-
-function renderGrid(){
-  const g=document.getElementById('projectGrid');
-  if(!presentations.length){
-    g.innerHTML=isAdmin?'<div style="text-align:center;padding:48px;color:var(--gray-500);"><div style="font-size:40px;margin-bottom:12px;">\u{1F4DA}</div><p>No presentations yet. Click "+ Add Presentation" to get started.</p></div>':'<div class="error-state"><div class="err-icon">&#9888;</div><h3>No Data Available</h3><p>Shared presentation data could not be loaded from GitHub. This may be a temporary issue — try refreshing the page. If the problem persists, contact the administrator.</p></div>';
-    return;
-  }
-  g.innerHTML=presentations.map(p=>renderCard(p)).join('');applyFilters();
-}
-
-function toggleCard(id){document.getElementById('card-'+id).classList.toggle('collapsed');}
-function toggleAll(c){document.querySelectorAll('.project-card').forEach(el=>{c?el.classList.add('collapsed'):el.classList.remove('collapsed');});}
-function switchTab(btn,pid,tab){const card=document.getElementById('card-'+pid);card.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));card.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById('tab-'+pid+'-'+tab).classList.add('active');}
-function applyFilters(){const q=document.getElementById('searchInput').value.toLowerCase(),sf=document.getElementById('statusFilter').value;document.querySelectorAll('.project-card').forEach(c=>{let show=true;if(q&&!c.dataset.title.includes(q))show=false;if(sf&&c.dataset.status!==sf)show=false;c.style.display=show?'':'none';});}
-
-function openAddModal(){document.getElementById('fTitle').value='';document.getElementById('fDesc').value='';document.getElementById('fOwner').value='Mike Gillett';document.getElementById('fStatus').value='Complete';document.getElementById('fIcon').value='\u{1F4DA}';document.getElementById('modalOverlay').classList.add('show');}
-function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
-function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Feed Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Email Banner',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Bonus / Lead Magnet',url:'',status:'Added',notes:'Placeholder',group:'bonus'},{label:'Promotional Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Thank You Email - After Attending Class',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Missed Class Email',url:'',status:'Added',notes:'Placeholder',group:'emails'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'},{label:'Automation Doc',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
-async function addPresentation(){const title=document.getElementById('fTitle').value.trim();if(!title){showToast('Title is required','error');return;}const p=makePresentation(title,document.getElementById('fDesc').value.trim(),document.getElementById('fIcon').value||'\u{1F4DA}');p.owner=document.getElementById('fOwner').value.trim()||'Mike Gillett';p.status=document.getElementById('fStatus').value;presentations.push(p);await saveDataToGitHub();closeModal();renderAll();showToast('Added: '+title);}
-
-/* TRACKER INIT — called when navigating to tracker page */
-async function initTracker(){
-  applyHeader();
-  const ok=await fetchDataFromGitHub();
-  if(!ok){
-    const g=document.getElementById('projectGrid');
-    if(isAdmin){g.innerHTML='<div class="error-state"><div class="err-icon">&#9888;</div><h3>GitHub Fetch Failed</h3><p>Could not load shared data from GitHub. Check your Settings (token, repo owner, repo name, branch, and data.json path). Make sure the data.json file exists in your repository.</p></div>';}
-    else{g.innerHTML='<div class="error-state"><div class="err-icon">&#9888;</div><h3>Data Unavailable</h3><p>The shared presentation data could not be loaded right now. This may be a temporary issue. Try refreshing the page. If the problem continues, please contact the site administrator.</p></div>';}
-  }
-  renderAll();
-}
-</script>
-
+    </section>
+  </main>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+    const firebaseConfig = { apiKey:"AIzaSyCxGmR7lGukF4vX7mr0-g-Lf3MOnjRGNqI", authDomain:"mortgage-marketplace-hub.firebaseapp.com", projectId:"mortgage-marketplace-hub", storageBucket:"mortgage-marketplace-hub.firebasestorage.app", messagingSenderId:"771732677919", appId:"1:771732677919:web:51b557fe338ae2ec807c2a", measurementId:"G-3JZ3RJXKK9" };
+    const firebaseApp = initializeApp(firebaseConfig), auth = getAuth(firebaseApp), db = getFirestore(firebaseApp), googleProvider = new GoogleAuthProvider();
+    let appUser = null, currentPage = "dashboard", activeFilter = "All", activeChecklist = "buyer", activeProjectId = "p1", projectViewMode = "grid", initialized = false;
+    const pages = [{id:"dashboard",title:"Dashboard",group:"Main",i:"⌂"},{id:"projects",title:"Projects",group:"Main",i:"▣"},{id:"marketing",title:"Marketing Materials",group:"Main",i:"✦"},{id:"courses",title:"Courses",group:"Main",i:"▶"},{id:"rates",title:"Live Rates",group:"Main",i:"%"},{id:"assistant",title:"AI Assistant",group:"Main",i:"AI"}];
+    const resources = [
+      ["FHA Loan Program","Canva","Low down payment overview flyer for first-time buyers.","Flyers","Co-branded","#"],["VA Loan Program","Canva","Zero down payment flyer for eligible veterans and active service members.","Flyers","Co-branded","#"],["USDA Loan Program","Canva","Zero down rural homebuying flyer with eligibility area reminder.","Flyers","Co-branded","#"],["Down Payment Assistance","Canva","DPA overview for buyers who need help with funds to close.","Flyers","Co-branded","#"],["First-Time Homebuyer","Canva","Simple homebuying path for new buyers and realtor partners.","Flyers","Co-branded","#"],["Renovation Loan","Canva","FHA 203k and conventional renovation loan overview.","Flyers","Program flyer","#"],["Loan Application 1003","PDF","Uniform Residential Loan Application reference.","Forms","FNMA","#"],["Loan Estimate","PDF","Loan terms, projected payments, and closing cost disclosure.","Forms","CFPB","#"],["Closing Disclosure","PDF","Final costs and terms before closing.","Forms","CFPB","#"],["New LO Onboarding","Video","CRM, workflow, and team process walkthrough placeholder.","Training","Onboarding","#"],["Business Planning Class","Link","Realtor education deck for business planning workshop.","Training","Deck","#"],["My Mortgage Assistant GPT","Link","Dedicated ChatGPT assistant for borrower questions and realtor scripts.","AI Assistant","Custom GPT","https://chatgpt.com/g/g-6a011111a8c481918c68977fb7cabb54-my-mortgage-assistant"]
+    ].map(([title,type,description,category,meta,url])=>({title,type,description,category,meta,url}));
+    const defaultProjects = [
+      ["p1","FB Ad Lead Funnel Pages","Mike","In Progress","Urgent","Create two lead funnel pages: First Time Home Buyers and Housing Oregon's Heroes. Use prior sample fields as the starting point.","Jerome, Marketing Team","Stacy, Summer"],["p2","Funnel Thank You Pages","Mike","Not Started","High","Build thank you pages with a video placeholder, embedded calendar, and Mortgage Marketplace branding.","Jerome","Marketing Team"],["p3","Calendar Page Templates","Mike","Planning","High","Create 2-3 reusable calendar page templates for loan officers. Keep current live pages untouched until approved.","Jerome, Stacy","Summer"],["p4","Open House Sign-In Pages","Mike","Planning","High","Create 2-3 branded open house sign-in templates with matching property feedback pages and workflows.","Jerome, Marketing Team","Stacy, Summer"],["p5","E-Business Card Landing Pages","Mike","Not Started","Medium","Create 2-3 landing page templates for loan officers and realtors.","Jerome","Marketing Team"],["p6","Mortgage Marketplace Hub Logins","Jerome","In Progress","High","Create hub logins for Stacy and Summer and confirm access.","Mike","Stacy, Summer"],["p7","AI Voice Agent: Realtor Listings","Mike","Backlog","Medium","Scope a voice agent that can support realtor listing conversations and lead routing.","Jerome","Marketing Team"],["p8","AI Voice Agent: Mortgage Recruits","Mike","Backlog","Medium","Scope a voice agent for mortgage recruiting workflows and candidate follow-up.","Jerome","Marketing Team"],["p9","Realtor Resource Pages with QR Code","Mike","Backlog","Medium","Create realtor-facing resource pages with QR code access for classes, flyers, and partner tools.","Jerome, Marketing Team","Stacy, Summer"]
+    ].map(([id,name,owner,status,priority,description,collaborators,viewers])=>({id,name,owner,status,priority,description,collaborators,viewers,assets:[],comments:[]}));
+    const checklistData = { buyer:{title:"Buyer Onboarding",items:["Collect photo ID and Social Security Number","Pull tri-merge credit report","Collect last 2 years W2s and tax returns","Collect last 30 days pay stubs","Collect last 2 months bank statements","Complete 1003 loan application","Issue pre-approval letter","Send welcome email and set GHL pipeline stage"]}, processing:{title:"Loan Processing",items:["Order appraisal","Order title search and title insurance","Verify employment","Submit file to underwriting","Clear all underwriting conditions","Issue clear to close","Send Closing Disclosure 3 business days before closing"]}, closing:{title:"Closing Day",items:["Confirm wire transfer amount with title","Borrower brings valid photo ID to closing","Sign all closing documents","Confirm funding and disbursement","Record deed with county","Send congratulations email and request review"]}, contract:{title:"Listing & Contract",items:["Confirm purchase price and loan amount","Review earnest money deposit terms","Note inspection contingency deadline","Note financing contingency deadline","Confirm closing date and escrow officer","Update GHL pipeline to Under Contract"]} };
+    const answers = [{trigger:["piti"],label:"What is PITI?",text:"PITI stands for Principal, Interest, Taxes, and Insurance. HOA dues and mortgage insurance may also be part of the full housing expense."},{trigger:["fha","conventional"],label:"FHA vs conventional",text:"FHA is often easier to qualify for. Conventional can be more cost-effective for strong-credit borrowers, especially when PMI can drop off."},{trigger:["dti","debt"],label:"Good DTI ratio",text:"DTI compares monthly debt payments to gross monthly income. Many files are strongest at 43% or lower, though some programs allow higher."},{trigger:["closing","timeline"],label:"How long does closing take?",text:"A typical purchase closing often takes 30 to 45 days from contract to close."}];
+    const qs=(s,r=document)=>r.querySelector(s), qsa=(s,r=document)=>[...r.querySelectorAll(s)], esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c])), money=v=>"$"+Number(v||0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2}), isAdmin=()=>appUser?.role==="admin";
+    async function loadUserProfile(user){const snap=await getDoc(doc(db,"users",user.uid));const data=snap.exists()?snap.data():{};appUser={uid:user.uid,email:user.email,name:data.name||data.Name||user.email,role:String(data.role||data.Role||"user").toLowerCase()};}
+    function showAuthError(message){const el=qs("#authMessage");el.textContent=message;el.classList.add("show")}
+    function clearAuthError(){const el=qs("#authMessage");el.textContent="";el.classList.remove("show")}
+    function setupAuth(){qs("#loginForm").onsubmit=async e=>{e.preventDefault();const btn=qs("#loginBtn");clearAuthError();btn.disabled=true;btn.textContent="Signing in...";try{await signInWithEmailAndPassword(auth,qs("#loginEmail").value.trim(),qs("#loginPassword").value)}catch{showAuthError("Login failed. Check the email and password.")}finally{btn.disabled=false;btn.textContent="Sign In"}};qs("#googleLoginBtn").onclick=async()=>{clearAuthError();try{await signInWithPopup(auth,googleProvider)}catch{showAuthError("Google sign-in was not completed. Please try again.")}};qs("#logoutBtn").onclick=()=>signOut(auth);onAuthStateChanged(auth,async user=>{if(!user){appUser=null;qs("#authScreen").classList.remove("hidden");return}await loadUserProfile(user);qs("#authScreen").classList.add("hidden");init()})}
+    function init(){renderNav();renderResources();renderFilters();ensureProjects();renderProjects();renderChecklistTabs();renderChecklist();if(!initialized){renderSuggestions();bindEvents();addMessage("Hi. I am the Mortgage Marketplace assistant. Use the custom GPT link above for deeper scenarios.","bot");initialized=true}calcMortgage();updateMetrics();qs("#roleLine").textContent=`${appUser.name} - ${appUser.role.toUpperCase()}`;qs("#dashRole").textContent=appUser.role.toUpperCase();qs("#avatar").textContent=isAdmin()?"AD":"US";}
+    function renderNav(){const nav=qs("#nav");nav.innerHTML="";let g="";pages.forEach(p=>{if(p.group!==g){const l=document.createElement("div");l.className="nav-label";l.textContent=p.group;nav.append(l);g=p.group}const b=document.createElement("button");b.className="nav-item"+(p.id===currentPage?" active":"");b.dataset.page=p.id;b.innerHTML=`<span>${p.i}</span><span>${p.title}</span>`;b.onclick=()=>navigate(p.id);nav.append(b)})}
+    function navigate(id){currentPage=id;qsa(".page").forEach(p=>p.classList.remove("active"));qs(`#page-${id}`)?.classList.add("active");qsa(".nav-item").forEach(b=>b.classList.toggle("active",b.dataset.page===id));qs("#topbarTitle").textContent=pages.find(p=>p.id===id)?.title||id;if(id==="projects"&&qs("#projectBrowser"))showProjectBrowser();closeSidebar()}
+    function bindEvents(){qs("#menuBtn").onclick=toggleSidebar;qs("#overlay").onclick=closeSidebar;qsa("[data-go]").forEach(el=>el.onclick=()=>navigate(el.dataset.go));qs("#calcForm").onsubmit=e=>{e.preventDefault();calcMortgage()};qsa("#calcForm input,#calcForm select").forEach(el=>el.oninput=calcMortgage);qs("#globalSearch").oninput=()=>{renderResources();if(currentPage!=="marketing")navigate("marketing")};qs("#searchJump").onclick=()=>navigate("marketing");qs("#clearSearch").onclick=()=>{qs("#globalSearch").value="";activeFilter="All";renderFilters();renderResources()};qs("#resetChecklist").onclick=resetActiveChecklist;qs("#addProjectBtn").onclick=addProject;qs("#resetProjectsBtn").onclick=resetProjects;qs("#chatForm").onsubmit=e=>{e.preventDefault();sendChat(qs("#chatInput").value)};window.onkeydown=e=>{if(e.key==="Escape")closeSidebar()}}
+    function toggleSidebar(){const s=qs("#sidebar"),o=!s.classList.contains("open");s.classList.toggle("open",o);qs("#overlay").classList.toggle("visible",o)} function closeSidebar(){qs("#sidebar").classList.remove("open");qs("#overlay").classList.remove("visible")}
+    function calcMortgage(){const price=+qs("#homePrice").value,down=+qs("#downPayment").value,rate=+qs("#interestRate").value,term=+qs("#loanTerm").value,income=+qs("#grossIncome").value,debt=+qs("#monthlyDebt").value,tax=+qs("#propertyTax").value,ins=+qs("#insurance").value,hoa=+qs("#hoa").value,err=qs("#calcError");err.classList.remove("visible");if(price<=0||down>=price){err.textContent="Check the home price and down payment.";err.classList.add("visible");return}const principal=price-down,n=term*12,mo=rate/100/12,pi=mo>0?principal*(mo*Math.pow(1+mo,n))/(Math.pow(1+mo,n)-1):principal/n,total=pi+tax+ins+hoa,ltv=principal/price*100,dti=income>0?(total+debt)/income*100:0;qs("#resultGrid").innerHTML=`<div class="result"><span>Loan amount</span><strong>${money(principal)}</strong></div><div class="result"><span>Principal & interest</span><strong>${money(pi)}</strong></div><div class="result"><span>Taxes</span><strong>${money(tax)}</strong></div><div class="result"><span>Insurance</span><strong>${money(ins)}</strong></div><div class="result"><span>HOA</span><strong>${money(hoa)}</strong></div><div class="result"><span>LTV</span><strong>${ltv.toFixed(1)}%</strong></div><div class="result"><span>Estimated DTI</span><strong>${dti.toFixed(1)}%</strong></div><div class="result total"><span>Total monthly payment</span><strong>${money(total)}</strong></div>`;qs("#affordNote").textContent="Estimated DTI includes the mortgage payment plus listed monthly debts."}
+    function renderFilters(){const filters=["All",...new Set(resources.map(r=>r.category)),...new Set(resources.map(r=>r.type))];qs("#filters").innerHTML="";filters.forEach(f=>{const b=document.createElement("button");b.className="filter-btn"+(f===activeFilter?" active":"");b.textContent=f;b.onclick=()=>{activeFilter=f;renderFilters();renderResources()};qs("#filters").append(b)})}
+    function renderResources(){const term=qs("#globalSearch")?.value.trim().toLowerCase()||"",data=resources.filter(r=>(activeFilter==="All"||r.category===activeFilter||r.type===activeFilter)&&`${r.title} ${r.type} ${r.description} ${r.category} ${r.meta}`.toLowerCase().includes(term)),grid=qs("#resourceGrid");grid.innerHTML=data.length?"":'<div class="empty">No matching resources yet.</div>';data.forEach(r=>{const a=document.createElement("a");a.className="resource-card";a.href=r.url;a.target=r.url==="#"?"":"_blank";a.innerHTML=`<div class="card-top"><span class="resource-icon">↗</span><span class="tag">${r.type}</span></div><h3>${esc(r.title)}</h3><p>${esc(r.description)}</p><div class="resource-footer"><span>${esc(r.meta)}</span><span class="open-text">${r.url==="#"?"Add link":"Open"}</span></div>`;grid.append(a)})}
+    const projectKey=()=>"mmhub-projects";function ensureProjects(){if(!localStorage.getItem(projectKey()))localStorage.setItem(projectKey(),JSON.stringify(defaultProjects))}function getProjects(){try{return JSON.parse(localStorage.getItem(projectKey()))||defaultProjects}catch{return defaultProjects}}function saveProjects(p){localStorage.setItem(projectKey(),JSON.stringify(p))}function activeProject(){const p=getProjects();return p.find(x=>x.id===activeProjectId)||p[0]}
+    function statusClass(s){const l=s.toLowerCase();if(l.includes("revision"))return"revisions";if(l.includes("approved")||l.includes("complete"))return"approved";if(l.includes("review"))return"review";if(l.includes("hold")||l.includes("backlog"))return"hold";return""}
+    function renderProjects(){const projects=getProjects();if(!projects.find(p=>p.id===activeProjectId)&&projects.length)activeProjectId=projects[0].id;qs("#permissionNote").textContent=isAdmin()?"Admin mode: you can edit project details and create projects.":"User mode: you can view, comment, upload assets, and mark review status.";qs("#addProjectBtn").disabled=!isAdmin();qs("#resetProjectsBtn").disabled=!isAdmin();const list=qs("#projectList");list.innerHTML="";projects.forEach(p=>{const b=document.createElement("button");b.className="project-item"+(p.id===activeProjectId?" active":"");b.innerHTML=`<div class="project-line"><strong>${esc(p.name)}</strong><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><small>Owner: ${esc(p.owner)} · ${esc(p.priority)} priority</small><small>${p.assets?.length||0} assets · ${p.comments?.length||0} comments</small>`;b.onclick=()=>{activeProjectId=p.id;renderProjects()};list.append(b)});renderProjectDetail();renderDashboardProjects();updateMetrics()}
+    function renderProjectDetail(){const p=activeProject();if(!p)return;const disabled=isAdmin()?"":"disabled";qs("#projectDetail").innerHTML=`<div class="project-card"><div class="project-line"><h2>Project Details</h2><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><p class="muted">${isAdmin()?"You are Admin. You can edit this project.":"Only Admin can edit project details. You can still comment, upload assets, and mark status."}</p><div class="form-grid"><div class="field"><label>Project name</label><input id="projectName" value="${esc(p.name)}" ${disabled}></div><div class="field"><label>Owner</label><input id="projectOwner" value="${esc(p.owner)}" ${disabled}></div></div><div class="form-grid"><div class="field"><label>Priority</label><select id="projectPriority" ${disabled}>${["Low","Medium","High","Urgent"].map(x=>`<option ${x===p.priority?"selected":""}>${x}</option>`).join("")}</select></div><div class="field"><label>Status / review</label><select id="projectStatus">${["Not Started","Planning","In Progress","Waiting for Review","Needs Revisions","Approved","Complete","On Hold","Backlog"].map(x=>`<option ${x===p.status?"selected":""}>${x}</option>`).join("")}</select></div></div><div class="field"><label>Description</label><textarea id="projectDescription" ${disabled}>${esc(p.description)}</textarea></div><div class="form-grid"><div class="field"><label>Collaborators</label><input id="projectCollaborators" value="${esc(p.collaborators)}" ${disabled}></div><div class="field"><label>Viewers</label><input id="projectViewers" value="${esc(p.viewers)}" ${disabled}></div></div><div class="button-row"><button class="btn dark" id="saveProjectBtn" ${isAdmin()?"":"disabled"}>Save details</button><button class="btn secondary" data-review="Approved">Approve</button><button class="btn secondary" data-review="Needs Revisions">Needs revisions</button></div></div><div class="project-card"><h3>Assets & Links</h3><div class="inline-form"><div class="field"><label>Add a project link</label><input id="projectLink" placeholder="https://..."></div><button class="btn secondary" id="addLinkBtn">Add link</button></div><div class="field"><label>Upload files or screenshots</label><input class="file-input" id="projectFiles" type="file" multiple></div><div class="asset-list">${renderAssets(p.assets)}</div></div><div class="project-card"><h3>Comments</h3><div class="field"><label>Add a comment as ${esc(appUser.name)}</label><textarea id="commentText"></textarea></div><div class="field"><label>Attach files to comment</label><input class="file-input" id="commentFiles" type="file" multiple></div><button class="btn dark" id="addCommentBtn">Post comment</button><div class="comment-list">${renderComments(p.comments)}</div></div>`;qs("#saveProjectBtn").onclick=saveProjectDetails;qs("#projectStatus").onchange=e=>updateProjectStatus(e.target.value);qsa("[data-review]").forEach(b=>b.onclick=()=>updateProjectStatus(b.dataset.review,true));qs("#addLinkBtn").onclick=addProjectLink;qs("#projectFiles").onchange=e=>addProjectFiles(e.target.files,"Project asset");qs("#addCommentBtn").onclick=addProjectComment}
+    function renderAssets(a=[]){return a.length?a.map(x=>`<div class="asset-item"><a href="${esc(x.url||x.dataUrl||"#")}" target="_blank">${esc(x.name)}</a><span>${esc(x.type||"Asset")} · added by ${esc(x.by||"Team")}</span></div>`).join(""):'<div class="empty">No assets yet.</div>'}function renderComments(c=[]){return c.length?c.slice().reverse().map(x=>`<div class="comment-item"><p>${esc(x.text)}</p><span>${esc(x.by)} · ${esc(x.date)}</span>${x.assets?.length?`<div class="asset-list">${renderAssets(x.assets)}</div>`:""}</div>`).join(""):'<div class="empty">No comments yet.</div>'}
+    function mutateProject(fn){const p=getProjects(),i=p.findIndex(x=>x.id===activeProjectId);if(i<0)return;fn(p[i]);saveProjects(p);renderProjects();if(!qs("#projectDetail").hidden)renderProjectDetail()}function saveProjectDetails(){if(!isAdmin())return;mutateProject(p=>{p.name=qs("#projectName").value.trim()||p.name;p.owner=qs("#projectOwner").value.trim()||p.owner;p.priority=qs("#projectPriority").value;p.description=qs("#projectDescription").value.trim();p.collaborators=qs("#projectCollaborators").value.trim();p.viewers=qs("#projectViewers").value.trim()})}function updateProjectStatus(status,comment=false){mutateProject(p=>{p.status=status;if(comment){p.comments=p.comments||[];p.comments.push({by:appUser.name,date:new Date().toLocaleString(),text:`${appUser.name} marked this project as ${status}.`,assets:[]})}})}function addProjectLink(){const url=qs("#projectLink").value.trim();if(!url)return;mutateProject(p=>{p.assets=p.assets||[];p.assets.push({name:url,url,type:"Link",by:appUser.name})})}function addProjectFiles(files,label,cb){const list=[...files];if(!list.length)return;Promise.all(list.map(file=>new Promise(res=>{const r=new FileReader();r.onload=()=>res({name:file.name,type:label||file.type||"File",dataUrl:r.result,by:appUser.name});r.readAsDataURL(file)}))).then(assets=>{if(cb){cb(assets);return}mutateProject(p=>{p.assets=p.assets||[];p.assets.push(...assets)})})}function addProjectComment(){const text=qs("#commentText").value.trim(),files=qs("#commentFiles").files;if(!text&&!files.length)return;const post=assets=>mutateProject(p=>{p.comments=p.comments||[];p.comments.push({by:appUser.name,date:new Date().toLocaleString(),text:text||"Uploaded files.",assets})});files.length?addProjectFiles(files,"Comment attachment",post):post([])}function addProject(){if(!isAdmin())return;const p=getProjects(),id=`p${Date.now()}`;p.unshift({id,name:"New Project",owner:appUser.name,status:"Planning",priority:"Medium",description:"Add project details here.",collaborators:"",viewers:"",assets:[],comments:[]});activeProjectId=id;saveProjects(p);renderProjects()}function resetProjects(){if(!isAdmin())return;saveProjects(defaultProjects);activeProjectId="p1";renderProjects()}
+    function projectPct(p){const status={Backlog:12,"Not Started":18,Planning:28,"In Progress":58,"Waiting for Review":78,"Needs Revisions":68,Approved:92,Complete:100,"On Hold":42};return status[p.status]??35}
+    function setProjectView(mode){projectViewMode=mode;renderProjects()}
+    function showProjectBrowser(){qs("#projectDetail").hidden=true;qs("#projectBrowser").hidden=false;renderProjects()}
+    function openProjectPreview(id){activeProjectId=id;qs("#projectBrowser").hidden=true;qs("#projectDetail").hidden=false;renderProjectDetail()}
+function renderProjects(){const projects=getProjects();if(!projects.find(p=>p.id===activeProjectId)&&projects.length)activeProjectId=projects[0].id;qs("#permissionNote").textContent=isAdmin()?"Admin mode: open a project preview to edit details, review links, and manage assets.":"Select a project to review progress, links, descriptions, comments, and uploads.";qs("#addProjectBtn").disabled=!isAdmin();qs("#resetProjectsBtn").disabled=!isAdmin();const grid=qs("#projectList");grid.className="project-gallery"+(projectViewMode==="list"?" list":"");grid.innerHTML="";projects.forEach(p=>{const pct=projectPct(p),card=document.createElement("article");card.className="project-preview-card"+(projectViewMode==="list"?" list":"");card.innerHTML=`<div><div class="project-line"><span class="pill">${esc(p.priority)} priority</span><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><h3>${esc(p.name)}</h3><p>${esc(p.description)}</p><div class="project-card-meta"><span>Owner: ${esc(p.owner)}</span></div><div class="project-progress"><div class="project-progress-line"><span style="width:${pct}%"></span></div><div class="project-progress-text"><span>${pct}% progress</span><span>${esc(p.status)}</span></div></div></div><div class="project-preview-actions"><button class="btn dark" type="button">View progress</button></div>`;card.querySelector("button").onclick=()=>openProjectPreview(p.id);grid.append(card)});qs("#gridViewBtn").classList.toggle("active",projectViewMode==="grid");qs("#listViewBtn").classList.toggle("active",projectViewMode==="list");qs("#gridViewBtn").onclick=()=>setProjectView("grid");qs("#listViewBtn").onclick=()=>setProjectView("list");renderDashboardProjects();updateMetrics()}
+    function renderProjectDetail(){const p=activeProject();if(!p)return;const pct=projectPct(p),admin=isAdmin(),disabled=admin?"":"disabled";qs("#projectDetail").innerHTML=`<div class="project-detail-nav"><button class="btn secondary" id="backProjectsBtn" type="button">Back to projects</button><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></div><div class="project-detail-hero"><span class="pill">${esc(p.priority)} priority</span><h1>${esc(p.name)}</h1><p>${esc(p.description)}</p><div class="project-progress"><div class="project-progress-line"><span style="width:${pct}%"></span></div><div class="project-progress-text"><span>${pct}% complete</span><span>${esc(p.status)}</span></div></div></div><div class="project-detail-columns"><div class="project-detail-page"><div class="project-read-card"><h3>Project links and assets</h3><div class="asset-list">${renderAssets(p.assets)}</div><div class="inline-form"><div class="field"><label>Add a project link</label><input id="projectLink" placeholder="https://..."></div><button class="btn secondary" id="addLinkBtn" type="button">Add link</button></div><div class="field"><label>Upload files or screenshots</label><input class="file-input" id="projectFiles" type="file" multiple></div></div><div class="project-read-card"><h3>Comments and feedback</h3><div class="field"><label>Add a comment as ${esc(appUser.name)}</label><textarea id="commentText" placeholder="Add feedback, notes, or a revision request..."></textarea></div><div class="field"><label>Attach files to comment</label><input class="file-input" id="commentFiles" type="file" multiple></div><button class="btn dark" id="addCommentBtn" type="button">Post comment</button><div class="comment-list">${renderComments(p.comments)}</div></div></div><aside class="project-detail-page"><div class="project-read-card"><h3>Project overview</h3><p class="project-description">Owner: ${esc(p.owner)}</p><p class="project-description">Collaborators: ${esc(p.collaborators||"None listed")}</p><p class="project-description">Viewers: ${esc(p.viewers||"None listed")}</p><div class="button-row"><button class="btn secondary" data-review="Approved" type="button">Approve</button><button class="btn secondary" data-review="Needs Revisions" type="button">Needs revisions</button></div></div>${admin?`<div class="project-read-card"><h3>Admin editing</h3><div class="field"><label>Project name</label><input id="projectName" value="${esc(p.name)}"></div><div class="field"><label>Owner</label><input id="projectOwner" value="${esc(p.owner)}"></div><div class="field"><label>Priority</label><select id="projectPriority">${["Low","Medium","High","Urgent"].map(x=>`<option ${x===p.priority?"selected":""}>${x}</option>`).join("")}</select></div><div class="field"><label>Status</label><select id="projectStatus">${["Not Started","Planning","In Progress","Waiting for Review","Needs Revisions","Approved","Complete","On Hold","Backlog"].map(x=>`<option ${x===p.status?"selected":""}>${x}</option>`).join("")}</select></div><div class="field"><label>Description</label><textarea id="projectDescription">${esc(p.description)}</textarea></div><div class="field"><label>Collaborators</label><input id="projectCollaborators" value="${esc(p.collaborators)}"></div><div class="field"><label>Viewers</label><input id="projectViewers" value="${esc(p.viewers)}"></div><button class="btn dark" id="saveProjectBtn" type="button">Save details</button></div>`:""}</aside></div>`;qs("#backProjectsBtn").onclick=showProjectBrowser;qs("#addLinkBtn").onclick=addProjectLink;qs("#projectFiles").onchange=e=>addProjectFiles(e.target.files,"Project asset");qs("#addCommentBtn").onclick=addProjectComment;qsa("[data-review]",qs("#projectDetail")).forEach(b=>b.onclick=()=>updateProjectStatus(b.dataset.review,true));if(admin){qs("#saveProjectBtn").onclick=saveProjectDetails;qs("#projectStatus").onchange=e=>updateProjectStatus(e.target.value)}}
+    function renderDashboardProjects(){const body=qs("#dashboardProjects");if(!body)return;body.innerHTML="";getProjects().slice(0,5).forEach(p=>{const tr=document.createElement("tr");tr.innerHTML=`<td><strong>${esc(p.name)}</strong></td><td>${esc(p.owner)}</td><td><span class="status-chip ${statusClass(p.status)}">${esc(p.status)}</span></td><td>${esc(p.priority)}</td>`;body.append(tr)})}
+    function renderChecklistTabs(){const tabs=qs("#checkTabs");tabs.innerHTML="";Object.entries(checklistData).forEach(([id,d])=>{const b=document.createElement("button");b.className="tab"+(id===activeChecklist?" active":"");b.textContent=d.title;b.onclick=()=>{activeChecklist=id;renderChecklistTabs();renderChecklist()};tabs.append(b)})}const checklistKey=(id=activeChecklist)=>`mmhub-checklist-${id}`;function getDone(id=activeChecklist){try{return JSON.parse(localStorage.getItem(checklistKey(id)))||[]}catch{return[]}}function setDone(done,id=activeChecklist){localStorage.setItem(checklistKey(id),JSON.stringify(done))}function renderChecklist(){const d=checklistData[activeChecklist],done=getDone(),pct=Math.round(done.length/d.items.length*100);qs("#checkMeta").textContent=`${done.length} of ${d.items.length} complete`;qs("#checkProgress").style.width=`${pct}%`;qs("#checkList").innerHTML="";d.items.forEach((t,i)=>{const b=document.createElement("button");b.className="check-item"+(done.includes(i)?" done":"");b.innerHTML=`<span class="box"></span><span class="check-text">${esc(t)}</span>`;b.onclick=()=>{const n=new Set(getDone());n.has(i)?n.delete(i):n.add(i);setDone([...n].sort((a,b)=>a-b));renderChecklist()};qs("#checkList").append(b)})}function resetActiveChecklist(){localStorage.removeItem(checklistKey());renderChecklist()}
+    function renderSuggestions(){const row=qs("#suggestions");answers.forEach(a=>{const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=a.label;b.onclick=()=>sendChat(a.label);row.append(b)})}function addMessage(text,role){const msg=document.createElement("div");msg.className=`msg ${role}`;const av=document.createElement("div");av.className="msg-avatar";av.textContent=role==="bot"?"MM":"You";const bu=document.createElement("div");bu.className="bubble";bu.textContent=text;msg.append(av,bu);qs("#messages").append(msg);qs("#messages").scrollTop=qs("#messages").scrollHeight}function findAnswer(text){const l=text.toLowerCase(),m=answers.find(a=>a.trigger.some(t=>l.includes(t)));return m?m.text:"That is a good one to add to the Mortgage Marketplace answer bank. Use the custom GPT link above for a deeper answer."}function sendChat(text){const clean=text.trim();if(!clean)return;addMessage(clean,"user");qs("#chatInput").value="";setTimeout(()=>addMessage(findAnswer(clean),"bot"),220)}
+    function updateMetrics(){const count=getProjects().length;qs("#flyerCount").textContent=resources.filter(r=>r.category==="Flyers"||r.category==="Forms").length;qs("#trainingCount").textContent=resources.filter(r=>r.category==="Training").length;qs("#heroProjectCount").textContent=count;qs("#taskPercent").textContent=isAdmin()?"94%":"72%"}
+    setupAuth();
+  </script>
 </body>
 </html>
