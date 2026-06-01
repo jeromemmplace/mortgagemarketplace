@@ -3,191 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mortgage Marketplace LLC</title>
+<title>Presentation Tracker | Mortgage Marketplace LLC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-
-<!-- Firebase SDK (compat) -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-
 <style>
-/* ═══════════════════════════════════
-   GLOBAL + ROUTING
-═══════════════════════════════════ */
 :root{--navy:#1a2f50;--navy-dark:#0f1e35;--navy-light:#2a4670;--gold:#c9a84c;--gold-light:#e8d7a0;--gold-dark:#a8892e;--blue:#4A9EDB;--blue-light:#CCE0F5;--blue-pale:#EBF3FB;--white:#fff;--gray-50:#f8f9fa;--gray-100:#f1f3f5;--gray-200:#e9ecef;--gray-300:#dee2e6;--gray-400:#ced4da;--gray-500:#adb5bd;--gray-600:#868e96;--gray-700:#495057;--gray-800:#343a40;--green:#2ecc71;--green-bg:#eafaf1;--orange:#f39c12;--orange-bg:#fef9e7;--red:#e74c3c;--red-bg:#fdedec;--purple:#8e44ad;--purple-bg:#f4ecf7;--teal:#1abc9c;--teal-bg:#e8f8f5;--pptx-color:#D04423;--pptx-bg:#fdeae5;--pdf-color:#B30B00;--pdf-bg:#fde8e7;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--shadow-sm:0 1px 3px rgba(26,47,80,0.08);--shadow-md:0 4px 12px rgba(26,47,80,0.1);--shadow-lg:0 8px 30px rgba(26,47,80,0.12);--transition:0.2s ease;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--gray-50);color:var(--gray-800);line-height:1.5;-webkit-font-smoothing:antialiased;}
-.page{display:none;}.page.active{display:block;}
-
-/* ═══════════════════════════════════
-   PAGE 1: LOGIN
-═══════════════════════════════════ */
-#page-login{display:none;min-height:100vh;background:var(--navy-dark);position:relative;overflow:hidden;}
-#page-login.active{display:flex;align-items:center;justify-content:center;}
-
-.login-bg{position:absolute;inset:0;overflow:hidden;}
-.login-bg::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.08) 0%,transparent 70%);top:-200px;right:-150px;}
-.login-bg::after{content:'';position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(74,158,219,0.05) 0%,transparent 70%);bottom:-300px;left:-200px;}
-
-.login-card{position:relative;z-index:2;width:100%;max-width:440px;margin:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;backdrop-filter:blur(20px);padding:48px 40px;animation:loginFadeIn 0.6s ease;}
-@keyframes loginFadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
-.login-logo{text-align:center;margin-bottom:32px;}
-.login-logo img{width:280px;max-width:100%;filter:brightness(0) invert(1);opacity:0.95;}
-.login-divider{width:60px;height:2px;background:var(--gold);margin:20px auto 0;border-radius:1px;}
-
-.login-title{text-align:center;margin-bottom:32px;}
-.login-title h2{font-family:'Playfair Display',serif;font-size:22px;color:var(--white);font-weight:700;margin-bottom:6px;}
-.login-title p{font-size:13px;color:rgba(255,255,255,0.5);}
-
-.login-form{display:flex;flex-direction:column;gap:16px;}
-.login-field{position:relative;}
-.login-field label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.8px;color:rgba(255,255,255,0.45);margin-bottom:6px;}
-.login-field input{width:100%;padding:13px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);color:var(--white);font-family:inherit;font-size:14px;transition:var(--transition);}
-.login-field input::placeholder{color:rgba(255,255,255,0.25);}
-.login-field input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.09);}
-
-.login-btn{width:100%;padding:14px;background:var(--gold);color:var(--navy-dark);border:none;border-radius:var(--radius-sm);font-family:inherit;font-size:14px;font-weight:700;letter-spacing:0.3px;cursor:pointer;transition:all 0.25s;margin-top:4px;}
-.login-btn:hover{background:var(--gold-dark);transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,168,76,0.3);}
-.login-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;box-shadow:none;}
-
-.login-sep{display:flex;align-items:center;gap:12px;margin:4px 0;}
-.login-sep span{font-size:11px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;}
-.login-sep::before,.login-sep::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);}
-
-.login-google{width:100%;padding:12px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:var(--radius-sm);color:var(--white);font-family:inherit;font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:10px;}
-.login-google:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.2);}
-.login-google svg{width:18px;height:18px;}
-
-.login-error{background:rgba(231,76,60,0.12);border:1px solid rgba(231,76,60,0.25);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#ff8a80;display:none;text-align:center;}
-.login-error.show{display:block;}
-
-.login-footer{text-align:center;margin-top:20px;font-size:11px;color:rgba(255,255,255,0.25);}
-
-/* ═══════════════════════════════════
-   PAGE 2: DASHBOARD
-═══════════════════════════════════ */
-#page-dashboard{display:none;}
-#page-dashboard.active{display:block;}
-
-.dash-nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(26,47,80,0.25);}
-.dash-nav-left{display:flex;align-items:center;gap:14px;}
-.dash-nav-logo{height:36px;filter:brightness(0) invert(1);opacity:0.9;}
-.dash-nav h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);font-weight:700;}
-.dash-nav-right{display:flex;align-items:center;gap:10px;}
-.dash-user{font-size:12px;color:rgba(255,255,255,0.6);margin-right:4px;}
-.dash-btn{padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}
-.dash-btn-gold{background:var(--gold);color:var(--navy-dark);}.dash-btn-gold:hover{background:var(--gold-dark);}
-.dash-btn-ghost{background:rgba(255,255,255,0.1);color:var(--white);border:1px solid rgba(255,255,255,0.15);}.dash-btn-ghost:hover{background:rgba(255,255,255,0.18);}
-.dash-btn-red{background:rgba(231,76,60,0.15);color:#ff8a80;border:1px solid rgba(231,76,60,0.25);}.dash-btn-red:hover{background:rgba(231,76,60,0.25);}
-
-.dash-hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);padding:48px 32px 56px;position:relative;overflow:hidden;}
-.dash-hero::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.06) 0%,transparent 70%);top:-200px;right:-100px;}
-.dash-hero-content{max-width:700px;position:relative;z-index:2;margin:0 auto;text-align:center;}
-.dash-hero h2{font-family:'Playfair Display',serif;font-size:30px;color:var(--white);font-weight:700;margin-bottom:8px;}
-.dash-hero p{font-size:15px;color:rgba(255,255,255,0.55);line-height:1.6;max-width:560px;margin:0 auto;}
-
-.dash-stats{display:flex;gap:16px;margin-top:28px;flex-wrap:wrap;justify-content:center;}
-.dash-stat{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-md);padding:16px 20px;min-width:130px;}
-.dash-stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;}
-.dash-stat-label{font-size:11px;color:rgba(255,255,255,0.45);margin-top:4px;text-transform:uppercase;letter-spacing:0.5px;}
-
-.dash-body{padding:32px;max-width:1200px;margin:0 auto;}
-
-.dash-filters{display:flex;align-items:center;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
-.dash-filter-btn{padding:8px 18px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-600);transition:var(--transition);font-family:inherit;}
-.dash-filter-btn:hover{border-color:var(--navy);color:var(--navy);}
-.dash-filter-btn.active{background:var(--navy);color:var(--white);border-color:var(--navy);}
-.dash-search{margin-left:auto;position:relative;}
-.dash-search input{padding:9px 14px 9px 34px;border:1px solid var(--gray-300);border-radius:20px;font-size:13px;font-family:inherit;width:240px;background:var(--white);transition:var(--transition);}
-.dash-search input:focus{outline:none;border-color:var(--blue);width:300px;}
-.dash-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--gray-400);font-size:14px;pointer-events:none;}
-
-.dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px;}
-
-.class-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.25s;cursor:pointer;position:relative;}
-.class-card:hover{box-shadow:var(--shadow-md);border-color:var(--gray-300);transform:translateY(-2px);}
-.class-card-accent{height:4px;width:100%;}
-.class-card-body{padding:20px 22px 18px;}
-.class-card-top{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;}
-.class-card-icon{width:48px;height:48px;border-radius:var(--radius-md);background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.class-card-info{flex:1;min-width:0;}
-.class-card-cat{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:3px;}
-.class-card-title{font-size:15px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:4px;}
-.class-card-desc{font-size:12px;color:var(--gray-600);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-
-.class-card-meta{display:flex;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--gray-100);}
-.class-card-progress{flex:1;}
-.class-card-progress-bar{height:5px;background:var(--gray-200);border-radius:3px;overflow:hidden;margin-bottom:4px;}
-.class-card-progress-fill{height:100%;border-radius:3px;transition:width 0.4s;}
-.class-card-progress-text{font-size:10px;color:var(--gray-500);display:flex;justify-content:space-between;}
-.class-card-assets{text-align:right;}
-.class-card-assets-num{font-size:18px;font-weight:700;color:var(--navy);font-family:'Playfair Display',serif;line-height:1;}
-.class-card-assets-label{font-size:10px;color:var(--gray-500);}
-.class-card-status{position:absolute;top:16px;right:16px;}
-
-.class-card-actions{display:flex;gap:8px;padding:0 22px 18px;}
-.class-card-action{flex:1;padding:9px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;text-align:center;transition:var(--transition);border:none;font-family:inherit;text-decoration:none;display:block;}
-.cca-primary{background:var(--navy);color:var(--white);}.cca-primary:hover{background:var(--navy-light);}
-.cca-secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200);}.cca-secondary:hover{background:var(--gray-200);}
-
-.dash-empty{text-align:center;padding:80px 24px;color:var(--gray-500);}
-.dash-empty-icon{font-size:48px;margin-bottom:12px;opacity:0.4;}
-
-/* Asset Viewer Modal */
-.av-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.85);z-index:300;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;backdrop-filter:blur(4px);}.av-overlay.show{display:flex;}
-.av-modal{background:var(--white);border-radius:var(--radius-lg);width:100%;max-width:900px;margin:20px auto;box-shadow:0 24px 80px rgba(0,0,0,0.4);overflow:hidden;animation:avSlideIn 0.3s ease;}
-@keyframes avSlideIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-.av-header{background:var(--navy);padding:20px 28px;display:flex;align-items:center;gap:16px;position:relative;}
-.av-header-icon{width:48px;height:48px;border-radius:var(--radius-md);background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
-.av-header-info{flex:1;min-width:0;}
-.av-header-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:2px;}
-.av-header-sub{font-size:12px;color:rgba(255,255,255,0.5);display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.av-header-sub .badge{font-size:10px;}
-.av-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:24px;cursor:pointer;padding:4px 8px;transition:var(--transition);position:absolute;top:16px;right:16px;font-family:inherit;}.av-close:hover{color:var(--white);}
-
-.av-body{padding:24px 28px 28px;}
-.av-section{margin-bottom:24px;}
-.av-section:last-child{margin-bottom:0;}
-.av-section-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-200);}
-.av-section-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
-.av-section-icon.si-deck{background:var(--pptx-bg);color:var(--pptx-color);}
-.av-section-icon.si-funnel{background:#dbeafe;color:#2563eb;}
-.av-section-icon.si-canva{background:#e0f2fe;color:#0284c7;}
-.av-section-icon.si-bonus{background:#fef3c7;color:#b45309;}
-.av-section-icon.si-emails{background:#ede9fe;color:#7c3aed;}
-.av-section-icon.si-workflow{background:#d1fae5;color:#059669;}
-.av-section-icon.si-checkin{background:#fef3c7;color:#d97706;}
-.av-section-title{font-size:13px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.5px;}
-.av-section-count{font-size:11px;color:var(--gray-500);margin-left:auto;}
-
-.av-assets{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.av-asset{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-sm);transition:var(--transition);min-width:0;}
-.av-asset:hover{border-color:var(--gray-300);box-shadow:var(--shadow-sm);}
-.av-asset-info{flex:1;min-width:0;}
-.av-asset-name{font-size:13px;font-weight:600;color:var(--gray-800);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.av-asset-note{font-size:10px;color:var(--gray-500);margin-top:1px;}
-.av-asset-actions{display:flex;gap:4px;align-items:center;flex-shrink:0;}
-.av-asset .resource-badge{font-size:9px;padding:2px 6px;}
-.av-btn-open{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;background:var(--blue);color:var(--white);border:none;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:4px;transition:var(--transition);white-space:nowrap;font-family:inherit;}.av-btn-open:hover{background:#3a8ec8;}
-.av-btn-empty{padding:5px 10px;border-radius:4px;font-size:11px;font-weight:500;background:var(--gray-100);color:var(--gray-400);border:1px solid var(--gray-200);cursor:default;white-space:nowrap;}
-
-.av-footer{padding:16px 28px;border-top:1px solid var(--gray-200);display:flex;gap:10px;justify-content:flex-end;}
-.av-footer-btn{padding:9px 18px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}
-.av-footer-primary{background:var(--navy);color:var(--white);}.av-footer-primary:hover{background:var(--navy-light);}
-.av-footer-secondary{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-200);}.av-footer-secondary:hover{background:var(--gray-200);}
-
-@media(max-width:768px){.av-assets{grid-template-columns:1fr;}.av-modal{margin:8px;}.av-header{padding:16px 20px;}.av-body{padding:16px 20px 20px;}.av-footer{padding:12px 20px;}}
-
-/* ═══════════════════════════════════
-   PAGE 3: TRACKER (existing styles)
-═══════════════════════════════════ */
 .top-bar{position:sticky;top:0;z-index:100;background:var(--navy);color:var(--white);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px rgba(26,47,80,0.25);}
 .top-bar-left{display:flex;align-items:center;gap:14px;}.logo-mark{width:38px;height:38px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;color:var(--navy-dark);}
 .top-bar h1{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:-0.3px;}.top-bar .subtitle{font-size:12px;opacity:0.7;margin-top:1px;}
 .top-bar-right{display:flex;align-items:center;gap:12px;}
-.btn-top{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:7px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:inherit;}.btn-top:hover{background:rgba(255,255,255,0.22);}
+.btn-top{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:7px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);}.btn-top:hover{background:rgba(255,255,255,0.22);}
 .btn-top.gold{background:var(--gold);color:var(--navy-dark);border-color:var(--gold);}.btn-top.gold:hover{background:var(--gold-dark);}
 .btn-top.logout{background:var(--red);color:var(--white);border-color:var(--red);}
 .summary-strip{background:var(--white);border-bottom:1px solid var(--gray-200);padding:18px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
@@ -195,7 +22,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .toolbar{padding:16px 32px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--white);border-bottom:1px solid var(--gray-200);}
 .search-box{position:relative;flex:1;min-width:220px;max-width:360px;}.search-box input{width:100%;padding:9px 14px 9px 36px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-size:14px;font-family:inherit;background:var(--gray-50);transition:var(--transition);}.search-box input:focus{outline:none;border-color:var(--blue);background:var(--white);}.search-box .icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--gray-500);font-size:15px;pointer-events:none;}
 .filter-select{padding:9px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-size:13px;font-family:inherit;background:var(--gray-50);cursor:pointer;}.toolbar-spacer{flex:1;}
-.btn-action{padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);font-family:inherit;}.btn-expand{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-300);}.btn-expand:hover{background:var(--gray-200);}
+.btn-action{padding:9px 16px;border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:var(--transition);}.btn-expand{background:var(--gray-100);color:var(--gray-700);border:1px solid var(--gray-300);}.btn-expand:hover{background:var(--gray-200);}
 .project-grid{padding:24px 32px 48px;display:flex;flex-direction:column;gap:16px;}
 .project-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);overflow:hidden;transition:box-shadow 0.2s;}.project-card:hover{box-shadow:var(--shadow-md);}.project-card.collapsed .card-body{display:none;}
 .card-header{display:flex;align-items:center;gap:14px;padding:16px 20px;cursor:pointer;user-select:none;transition:background 0.15s;}.card-header:hover{background:var(--gray-50);}
@@ -205,7 +32,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap;}.badge-complete{background:var(--green-bg);color:#1a8a4a;}.badge-progress{background:var(--blue-pale);color:#1a6aab;}.badge-review{background:var(--orange-bg);color:#b37a00;}.badge-not-started{background:var(--gray-100);color:var(--gray-600);}.badge-missing{background:var(--red-bg);color:#c0392b;}.badge-waiting-link{background:var(--purple-bg);color:#6c3483;}.badge-waiting-approval{background:var(--teal-bg);color:#148f77;}
 .progress-bar-wrap{width:100px;height:6px;background:var(--gray-200);border-radius:3px;overflow:hidden;}.progress-bar-fill{height:100%;border-radius:3px;transition:width 0.4s;}
 .card-body{border-top:1px solid var(--gray-200);}.tab-strip{display:flex;border-bottom:1px solid var(--gray-200);background:var(--gray-50);overflow-x:auto;}
-.tab-btn{padding:10px 18px;font-size:13px;font-weight:500;color:var(--gray-600);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:var(--transition);font-family:inherit;}.tab-btn:hover{color:var(--navy);background:var(--gray-100);}.tab-btn.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:600;}
+.tab-btn{padding:10px 18px;font-size:13px;font-weight:500;color:var(--gray-600);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:var(--transition);}.tab-btn:hover{color:var(--navy);background:var(--gray-100);}.tab-btn.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:600;}
 .tab-panel{display:none;padding:20px;}.tab-panel.active{display:block;}
 .overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}.ov-field label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-500);margin-bottom:4px;}.ov-field .val{font-size:14px;color:var(--gray-800);}.ov-full{grid-column:1/-1;}
 .ov-notes{width:100%;padding:10px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;resize:vertical;min-height:60px;background:var(--gray-50);}.ov-notes:focus{outline:none;border-color:var(--blue);background:var(--white);}
@@ -220,32 +47,21 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .resource-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}.resource-icon.funnel{background:#dbeafe;color:#2563eb;}.resource-icon.marketing{background:#fce7f3;color:#db2777;}.resource-icon.workflow{background:#d1fae5;color:#059669;}.resource-icon.checkin{background:#fef3c7;color:#d97706;}.resource-icon.email{background:#ede9fe;color:#7c3aed;}.resource-icon.canva{background:#e0f2fe;color:#0284c7;}.resource-icon.bonus{background:#fef3c7;color:#b45309;}
 .resource-info{flex:1;min-width:0;}.resource-label{font-size:13px;font-weight:600;color:var(--gray-800);}.resource-note{font-size:11px;color:var(--gray-500);margin-top:2px;}
 .resource-badge{padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600;}.rb-added{background:var(--green-bg);color:#1a8a4a;}.rb-missing{background:var(--red-bg);color:#c0392b;}.rb-review{background:var(--orange-bg);color:#b37a00;}.rb-draft{background:var(--purple-bg);color:#6c3483;}.rb-final{background:var(--blue-pale);color:#1a6aab;}
-.btn-preview{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--blue);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;font-family:inherit;}.btn-preview:hover{background:#3a8ec8;}
-.btn-dl{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--navy);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;font-family:inherit;}.btn-dl:hover{background:var(--navy-light);}
+.btn-preview{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--blue);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;}.btn-preview:hover{background:#3a8ec8;}
+.btn-dl{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;color:var(--white);background:var(--navy);display:inline-flex;align-items:center;gap:5px;transition:var(--transition);white-space:nowrap;cursor:pointer;border:none;text-decoration:none;}.btn-dl:hover{background:var(--navy-light);}
 .btn-placeholder{padding:6px 12px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;background:var(--gray-200);color:var(--gray-500);display:inline-flex;align-items:center;gap:5px;white-space:nowrap;border:none;cursor:default;}
-.btn-edit{background:var(--gold);color:var(--navy-dark);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition);font-family:inherit;}.btn-edit:hover{background:var(--gold-dark);}
-.btn-rename{background:none;border:1px solid var(--gray-300);color:var(--gray-600);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-rename:hover{background:var(--gray-100);color:var(--navy);}
-.btn-delete-res{background:none;border:1px solid var(--red-bg);color:var(--red);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-delete-res:hover{background:var(--red-bg);}
-.btn-upload{background:var(--green);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-upload:hover{background:#27ae60;}
-.btn-replace{background:var(--orange);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;}.btn-replace:hover{background:#e08e0b;}
-.btn-add-res{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:2px dashed var(--gray-300);background:var(--white);color:var(--gray-600);transition:var(--transition);margin-top:12px;font-family:inherit;}.btn-add-res:hover{border-color:var(--gold);color:var(--gold);background:#fffdf5;}
+.btn-edit{background:var(--gold);color:var(--navy-dark);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;transition:var(--transition);}.btn-edit:hover{background:var(--gold-dark);}
+.btn-rename{background:none;border:1px solid var(--gray-300);color:var(--gray-600);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-rename:hover{background:var(--gray-100);color:var(--navy);}
+.btn-delete-res{background:none;border:1px solid var(--red-bg);color:var(--red);padding:4px 8px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-delete-res:hover{background:var(--red-bg);}
+.btn-upload{background:var(--green);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-upload:hover{background:#27ae60;}
+.btn-replace{background:var(--orange);color:var(--white);border:none;padding:5px 10px;border-radius:4px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;}.btn-replace:hover{background:#e08e0b;}
+.btn-add-res{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;border:2px dashed var(--gray-300);background:var(--white);color:var(--gray-600);transition:var(--transition);margin-top:12px;}.btn-add-res:hover{border-color:var(--gold);color:var(--gold);background:#fffdf5;}
 .edit-row{display:none;gap:8px;align-items:center;padding:10px 14px;background:#fffbe6;border:1px solid var(--gold-light);border-radius:var(--radius-sm);margin-top:6px;width:100%;}.edit-row.visible{display:flex;}
 .edit-row input{flex:1;padding:8px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;}.edit-row input:focus{outline:none;border-color:var(--blue);}
 .edit-row select{padding:8px 10px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:12px;}
-.btn-save-url{background:var(--green);color:var(--white);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}.btn-save-url:hover{background:#27ae60;}
-.btn-cancel-url{background:var(--gray-200);color:var(--gray-700);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;}
+.btn-save-url{background:var(--green);color:var(--white);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;}.btn-save-url:hover{background:#27ae60;}
+.btn-cancel-url{background:var(--gray-200);color:var(--gray-700);border:none;padding:7px 14px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;}
 .admin-only{display:none!important;}body.is-admin .admin-only{display:flex!important;}
-.class-res-card{background:var(--white);border:1px solid var(--gray-200);border-radius:10px;padding:16px 18px;transition:box-shadow 0.2s;}.class-res-card:hover{box-shadow:var(--shadow-sm);}
-.class-res-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}.class-res-desc{font-size:13px;color:var(--gray-600);line-height:1.5;margin-bottom:10px;}
-.class-res-link{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--blue);text-decoration:none;word-break:break-all;}.class-res-link:hover{text-decoration:underline;}
-.class-res-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center;}
-.class-res-edit-area{margin-top:10px;display:none;padding:12px;background:#fffbe6;border:1px solid var(--gold-light);border-radius:var(--radius-sm);}
-.class-res-edit-area.visible{display:block;}
-.class-res-edit-area label{display:block;font-size:11px;font-weight:600;color:var(--gray-600);margin-bottom:3px;margin-top:8px;}
-.class-res-edit-area label:first-child{margin-top:0;}
-.class-res-edit-area input,.class-res-edit-area textarea{width:100%;padding:8px 10px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;margin-bottom:4px;}
-.class-res-edit-area textarea{resize:vertical;min-height:50px;}
-.class-res-edit-area input:focus,.class-res-edit-area textarea:focus{outline:none;border-color:var(--blue);}
 .tab-notes-area{margin-top:14px;}.tab-notes-area label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--gray-500);margin-bottom:4px;display:block;}
 .save-indicator{font-size:11px;color:var(--green);font-weight:600;opacity:0;transition:opacity 0.3s;white-space:nowrap;}.save-indicator.show{opacity:1;}
 .prev-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.85);z-index:300;align-items:center;justify-content:center;padding:20px;}.prev-overlay.show{display:flex;}
@@ -254,7 +70,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .prev-btns{display:flex;gap:8px;align-items:center;}
 .prev-btn-dl{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;color:var(--navy-dark);background:var(--gold);border:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}.prev-btn-dl:hover{background:var(--gold-dark);}
 .prev-btn-tab{padding:7px 16px;border-radius:var(--radius-sm);font-size:12px;font-weight:600;text-decoration:none;color:var(--white);background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);cursor:pointer;display:inline-flex;align-items:center;gap:5px;}.prev-btn-tab:hover{background:rgba(255,255,255,0.25);}
-.prev-close{background:none;border:none;color:var(--white);font-size:22px;cursor:pointer;opacity:0.7;padding:0 4px;font-family:inherit;}.prev-close:hover{opacity:1;}
+.prev-close{background:none;border:none;color:var(--white);font-size:22px;cursor:pointer;opacity:0.7;padding:0 4px;}.prev-close:hover{opacity:1;}
 .prev-body{flex:1;position:relative;background:var(--gray-100);}.prev-body iframe{width:100%;height:100%;border:none;}
 .prev-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;color:var(--gray-600);font-size:14px;text-align:center;padding:24px;}
 .modal-ov{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.7);z-index:250;align-items:center;justify-content:center;}.modal-ov.show{display:flex;}
@@ -268,130 +84,18 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,30,53,0.6);z-index:200;align-items:center;justify-content:center;}.modal-overlay.show{display:flex;}
 .modal{background:var(--white);border-radius:var(--radius-lg);width:90%;max-width:640px;max-height:85vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
 .modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid var(--gray-200);background:var(--navy);color:var(--white);border-radius:var(--radius-lg) var(--radius-lg) 0 0;}.modal-head h3{font-size:16px;font-weight:700;}
-.modal-close{background:none;border:none;color:var(--white);font-size:20px;cursor:pointer;opacity:0.7;font-family:inherit;}.modal-close:hover{opacity:1;}
+.modal-close{background:none;border:none;color:var(--white);font-size:20px;cursor:pointer;opacity:0.7;}.modal-close:hover{opacity:1;}
 .modal-body{padding:24px;}.form-group{margin-bottom:16px;}.form-group label{display:block;font-size:12px;font-weight:600;color:var(--gray-700);margin-bottom:5px;}
 .form-group input,.form-group select{width:100%;padding:9px 12px;border:1px solid var(--gray-300);border-radius:var(--radius-sm);font-family:inherit;font-size:13px;background:var(--gray-50);}.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--blue);background:var(--white);}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--gray-200);}.btn-cancel{padding:9px 18px;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-700);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}.btn-save{padding:9px 18px;border:none;background:var(--gold);color:var(--navy-dark);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}.btn-save:hover{background:var(--gold-dark);}
+.modal-foot{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid var(--gray-200);}.btn-cancel{padding:9px 18px;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-700);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;}.btn-save{padding:9px 18px;border:none;background:var(--gold);color:var(--navy-dark);border-radius:var(--radius-sm);font-size:13px;font-weight:600;cursor:pointer;}.btn-save:hover{background:var(--gold-dark);}
 .toast{position:fixed;bottom:24px;right:24px;background:var(--navy);color:var(--white);padding:12px 20px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;box-shadow:var(--shadow-lg);transform:translateY(80px);opacity:0;transition:all 0.3s;z-index:400;}.toast.show{transform:translateY(0);opacity:1;}.toast.error{background:var(--red);}
 .loading-bar{position:fixed;top:0;left:0;height:3px;background:var(--gold);z-index:999;transition:width 0.3s;width:0;}.loading-bar.active{width:60%;}.loading-bar.done{width:100%;}
 .error-state{text-align:center;padding:60px 24px;color:var(--gray-600);}.error-state .err-icon{font-size:48px;margin-bottom:16px;opacity:0.5;}.error-state h3{font-size:18px;color:var(--navy);margin-bottom:8px;}.error-state p{font-size:14px;max-width:480px;margin:0 auto;line-height:1.6;}
-
-@media(max-width:768px){
-  .login-card{padding:36px 24px;margin:16px;}
-  .login-logo img{width:220px;}
-  .dash-nav{padding:12px 16px;}.dash-hero{padding:32px 16px 40px;}
-  .dash-hero h2{font-size:24px;}.dash-stats{gap:10px;}
-  .dash-body{padding:20px 16px;}.dash-grid{grid-template-columns:1fr;}
-  .dash-filters{gap:6px;}.dash-search input{width:180px;}
-  .dash-search input:focus{width:220px;}
-  .top-bar{padding:12px 16px;flex-wrap:wrap;gap:8px;}.summary-strip{padding:14px 16px;gap:12px;}.toolbar{padding:12px 16px;}.project-grid{padding:16px;}.overview-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.search-box{max-width:100%;}.card-header{padding:12px 14px;}.tab-panel{padding:14px;}.deck-files-strip{flex-direction:column;}.deck-file-card{min-width:0;}.prev-modal{height:75vh;}
-}
-
-/* Loading spinner */
-.auth-loading{display:flex;align-items:center;justify-content:center;min-height:100vh;background:var(--navy-dark);}
-.spinner{width:40px;height:40px;border:3px solid rgba(201,168,76,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;}
-@keyframes spin{to{transform:rotate(360deg);}}
+@media(max-width:768px){.top-bar{padding:12px 16px;flex-wrap:wrap;gap:8px;}.summary-strip{padding:14px 16px;gap:12px;}.toolbar{padding:12px 16px;}.project-grid{padding:16px;}.overview-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.search-box{max-width:100%;}.card-header{padding:12px 14px;}.tab-panel{padding:14px;}.deck-files-strip{flex-direction:column;}.deck-file-card{min-width:0;}.prev-modal{height:75vh;}}
 </style>
 </head>
 <body>
-
-<!-- AUTH LOADING STATE -->
-<div class="auth-loading" id="authLoading"><div class="spinner"></div></div>
-
-<!-- ═══════════════════════════════════
-     PAGE 1: LOGIN
-═══════════════════════════════════ -->
-<div class="page" id="page-login">
-  <div class="login-bg"></div>
-  <div class="login-card">
-    <div class="login-logo">
-      <img src="https://lh3.googleusercontent.com/d/1h3AciZW4bmJCSeJKOUw8r1_CIyAD0rg_" alt="Mortgage Marketplace">
-      <div class="login-divider"></div>
-    </div>
-    <div class="login-title">
-      <h2>Welcome Back</h2>
-      <p>Sign in to access the Presentation Tracker</p>
-    </div>
-    <div class="login-error" id="loginError"></div>
-    <div class="login-form">
-      <div class="login-field">
-        <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email">
-      </div>
-      <div class="login-field">
-        <label>Password</label>
-        <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
-      </div>
-      <button class="login-btn" id="loginBtn" onclick="firebaseLogin()">Sign In</button>
-      <div class="login-sep"><span>or</span></div>
-      <button class="login-google" onclick="googleLogin()">
-        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        Continue with Google
-      </button>
-    </div>
-    <div class="login-footer">Mortgage Marketplace LLC &middot; NMLS #2367229</div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     PAGE 2: DASHBOARD
-═══════════════════════════════════ -->
-<div class="page" id="page-dashboard">
-  <nav class="dash-nav">
-    <div class="dash-nav-left">
-      <img src="https://lh3.googleusercontent.com/d/1h3AciZW4bmJCSeJKOUw8r1_CIyAD0rg_" alt="MM" class="dash-nav-logo">
-      <h1>Class Hub</h1>
-    </div>
-    <div class="dash-nav-right">
-      <span class="dash-user" id="dashUser"></span>
-      <button class="dash-btn dash-btn-gold" onclick="navigateTo('tracker')">Open Tracker</button>
-      <button class="dash-btn dash-btn-red" onclick="firebaseLogout()">Sign Out</button>
-    </div>
-  </nav>
-
-  <div class="dash-hero">
-    <div class="dash-hero-content">
-      <h2>Realtor Education Classes</h2>
-      <p>Browse all classes and their production assets. Click any card to view its full details in the tracker.</p>
-      <div class="dash-stats" id="dashStats"></div>
-    </div>
-  </div>
-
-  <div class="dash-body">
-    <div class="dash-filters" id="dashFilters">
-      <button class="dash-filter-btn active" data-cat="all" onclick="filterDash('all',this)">All Classes</button>
-      <button class="dash-filter-btn" data-cat="marketing" onclick="filterDash('marketing',this)">Marketing</button>
-      <button class="dash-filter-btn" data-cat="tech" onclick="filterDash('tech',this)">Technology &amp; AI</button>
-      <button class="dash-filter-btn" data-cat="loan" onclick="filterDash('loan',this)">Loan Programs</button>
-      <button class="dash-filter-btn" data-cat="growth" onclick="filterDash('growth',this)">Business Growth</button>
-      <div class="dash-search">
-        <span class="dash-search-icon">&#128269;</span>
-        <input type="text" id="dashSearchInput" placeholder="Search classes..." oninput="filterDashSearch()">
-      </div>
-    </div>
-    <div class="dash-grid" id="dashGrid">
-      <div class="dash-empty"><div class="dash-empty-icon">&#9203;</div><p>Loading classes...</p></div>
-    </div>
-  </div>
-
-  <!-- Asset Viewer Modal -->
-  <div class="av-overlay" id="avOverlay" onclick="if(event.target===this)closeAssetViewer()">
-    <div class="av-modal">
-      <div class="av-header" id="avHeader"></div>
-      <div class="av-body" id="avBody"></div>
-      <div class="av-footer">
-        <button class="av-footer-btn av-footer-secondary" onclick="closeAssetViewer()">Close</button>
-        <button class="av-footer-btn av-footer-primary" id="avTrackerBtn">Open in Tracker</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════
-     PAGE 3: TRACKER (existing, unchanged)
-═══════════════════════════════════ -->
-<div class="page" id="page-tracker">
 <div class="loading-bar" id="loadingBar"></div>
 <header class="top-bar">
   <div class="top-bar-left">
@@ -404,7 +108,6 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
     <button class="btn-top gold admin-only" onclick="openAddModal()">+ Add Presentation</button>
     <button class="btn-top admin-only" onclick="openSettings()">&#9881; Settings</button>
     <button class="btn-top admin-only" onclick="syncFromGitHub()">&#8635; Sync</button>
-    <button class="btn-top" onclick="navigateTo('dashboard')" style="background:rgba(255,255,255,0.08);">&#8592; Dashboard</button>
     <button class="btn-top" id="adminBtn" onclick="toggleAdmin()">&#128274; Admin</button>
   </div>
 </header>
@@ -437,378 +140,12 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif;backgroun
 
 <div class="prev-overlay" id="prevOv"><div class="prev-modal"><div class="prev-head"><h3 id="prevTitle">Preview</h3><div class="prev-btns"><a class="prev-btn-dl" id="prevDl" href="#" target="_blank">&#11015; Download</a><a class="prev-btn-tab" id="prevTab" href="#" target="_blank">&#8599; Open in New Tab</a><button class="prev-close" onclick="closePrev()">&times;</button></div></div><div class="prev-body" id="prevBody"></div></div></div>
 
-</div><!-- end page-tracker -->
-
 <div class="toast" id="toast"></div>
 
-<!-- ═══════════════════════════════════
-     FIREBASE CONFIG
-═══════════════════════════════════ -->
 <script>
-/*
-  FIREBASE SETUP
-  Replace the config below with your Firebase project credentials.
-  Go to: Firebase Console > Project Settings > General > Your apps > Web app
-*/
-const firebaseConfig = {
-  apiKey: "AIzaSyC8tx5zowOyDzll82FzN3C_UVWD_QM_JU8",
-  authDomain: "mortgage-marketplace-classes.firebaseapp.com",
-  projectId: "mortgage-marketplace-classes",
-  storageBucket: "mortgage-marketplace-classes.firebasestorage.app",
-  messagingSenderId: "1099035625790",
-  appId: "1:1099035625790:web:69f868b5460f667ba8046f"
-};
-
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-</script>
-
-<!-- ═══════════════════════════════════
-     ROUTING + AUTH
-═══════════════════════════════════ -->
-<script>
-let currentUser = null;
-let trackerInitialized = false;
-let dashDataLoaded = false;
-
-/* Navigation */
-function navigateTo(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('authLoading').style.display = 'none';
-
-  if (page === 'login') {
-    document.getElementById('page-login').classList.add('active');
-  } else if (page === 'dashboard') {
-    document.getElementById('page-dashboard').classList.add('active');
-    if (!dashDataLoaded) loadDashboard();
-  } else if (page === 'tracker') {
-    document.getElementById('page-tracker').classList.add('active');
-    if (!trackerInitialized) { trackerInitialized = true; initTracker(); }
-  }
-  window.location.hash = page;
-}
-
-/* Firebase Auth */
-function firebaseLogin() {
-  const email = document.getElementById('loginEmail').value.trim();
-  const pw = document.getElementById('loginPassword').value;
-  const errEl = document.getElementById('loginError');
-  const btn = document.getElementById('loginBtn');
-
-  if (!email || !pw) { errEl.textContent = 'Enter email and password.'; errEl.classList.add('show'); return; }
-  btn.disabled = true; btn.textContent = 'Signing in...';
-  errEl.classList.remove('show');
-
-  auth.signInWithEmailAndPassword(email, pw)
-    .then(() => { btn.disabled = false; btn.textContent = 'Sign In'; })
-    .catch(err => {
-      btn.disabled = false; btn.textContent = 'Sign In';
-      const msgs = {
-        'auth/invalid-email': 'Invalid email address.',
-        'auth/user-not-found': 'No account found with this email.',
-        'auth/wrong-password': 'Incorrect password.',
-        'auth/invalid-credential': 'Invalid email or password.',
-        'auth/too-many-requests': 'Too many attempts. Try again later.'
-      };
-      errEl.textContent = msgs[err.code] || err.message;
-      errEl.classList.add('show');
-    });
-}
-
-function googleLogin() {
-  auth.signInWithPopup(googleProvider).catch(err => {
-    const errEl = document.getElementById('loginError');
-    errEl.textContent = err.message;
-    errEl.classList.add('show');
-  });
-}
-
-function firebaseLogout() {
-  auth.signOut();
-}
-
-/* Handle Enter key on login form */
-document.addEventListener('DOMContentLoaded', () => {
-  const pwInput = document.getElementById('loginPassword');
-  if (pwInput) pwInput.addEventListener('keydown', e => { if (e.key === 'Enter') firebaseLogin(); });
-  const emInput = document.getElementById('loginEmail');
-  if (emInput) emInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPassword').focus(); });
-});
-
-/* Auth state listener */
-auth.onAuthStateChanged(user => {
-  currentUser = user;
-  if (user) {
-    document.getElementById('dashUser').textContent = user.email;
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'tracker') navigateTo('tracker');
-    else navigateTo('dashboard');
-  } else {
-    trackerInitialized = false;
-    dashDataLoaded = false;
-    navigateTo('login');
-  }
-});
-</script>
-
-<!-- ═══════════════════════════════════
-     DASHBOARD LOGIC
-═══════════════════════════════════ -->
-<script>
-let dashPresentations = [];
-
-/* Category detection based on class title */
-function detectCategory(title) {
-  const t = title.toLowerCase();
-  if (t.includes('facebook') || t.includes('instagram') || t.includes('linkedin') || t.includes('youtube') || t.includes('database marketing') || t.includes('reels')) return 'marketing';
-  if (t.includes('ai') || t.includes('google business') || t.includes('search') || t.includes('technology') || t.includes('agent')) return 'tech';
-  if (t.includes('va loan') || t.includes('down payment') || t.includes('dpa') || t.includes('investor') || t.includes('renovation') || t.includes('loan') || t.includes('financing')) return 'loan';
-  if (t.includes('12 week') || t.includes('business plan') || t.includes('planning') || t.includes('growth')) return 'growth';
-  return 'marketing';
-}
-
-function catLabel(cat) {
-  const m = { marketing: 'Marketing', tech: 'Technology & AI', loan: 'Loan Programs', growth: 'Business Growth' };
-  return m[cat] || 'General';
-}
-
-function catColor(cat) {
-  const m = { marketing: '#2563eb', tech: '#7c3aed', loan: '#059669', growth: '#d97706' };
-  return m[cat] || '#6b7280';
-}
-
-/* Fetch data for dashboard */
-async function loadDashboard() {
-  const DEF_DASH = { owner: 'jeromemmplace', repo: 'mortgagemarketplace', branch: 'main', dataPath: 'data.json' };
-  const owner = localStorage.getItem('mm_gh_owner') || DEF_DASH.owner;
-  const repo = localStorage.getItem('mm_gh_repo') || DEF_DASH.repo;
-  const branch = localStorage.getItem('mm_gh_branch') || DEF_DASH.branch;
-  const dataPath = localStorage.getItem('mm_gh_datapath') || DEF_DASH.dataPath;
-  const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${dataPath}?t=${Date.now()}`;
-
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const data = await res.json();
-    dashPresentations = data.presentations || (Array.isArray(data) ? data : []);
-    dashDataLoaded = true;
-    renderDashboard();
-  } catch (e) {
-    document.getElementById('dashGrid').innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">&#9888;</div><p>Could not load class data. Make sure GitHub settings are configured in the tracker.</p></div>';
-  }
-}
-
-function countAllDash(p) { const mv=(p.marketing.resources||[]).filter(r=>r.group==='canva'||r.group==='class-resources').length; return 2 + p.funnel.resources.length + mv + p.workflow.resources.length + p.checkin.resources.length; }
-function countLinkedDash(p) { let c = 0; if (p.deck.pptx.url) c++; if (p.deck.pdf.url) c++; c+=p.funnel.resources.filter(r=>r.url).length; c+=(p.marketing.resources||[]).filter(r=>(r.group==='canva'||r.group==='class-resources')&&r.url).length; c+=p.workflow.resources.filter(r=>r.url).length; c+=p.checkin.resources.filter(r=>r.url).length; return c; }
-function pctDash(p) { const t = countAllDash(p), f = countLinkedDash(p); return t ? Math.round(f / t * 100) : 0; }
-
-function renderDashboard() {
-  /* Stats */
-  const total = dashPresentations.length;
-  const complete = dashPresentations.filter(p => p.status === 'Complete').length;
-  const totalAssets = dashPresentations.reduce((s, p) => s + countAllDash(p), 0);
-  const linkedAssets = dashPresentations.reduce((s, p) => s + countLinkedDash(p), 0);
-
-  document.getElementById('dashStats').innerHTML =
-    `<div class="dash-stat"><div class="dash-stat-num">${total}</div><div class="dash-stat-label">Classes</div></div>` +
-    `<div class="dash-stat"><div class="dash-stat-num">${complete}</div><div class="dash-stat-label">Complete</div></div>` +
-    `<div class="dash-stat"><div class="dash-stat-num">${linkedAssets}</div><div class="dash-stat-label">Assets Linked</div></div>` +
-    `<div class="dash-stat"><div class="dash-stat-num">${totalAssets - linkedAssets}</div><div class="dash-stat-label">Pending</div></div>`;
-
-  renderDashGrid(dashPresentations);
-}
-
-function renderDashGrid(list) {
-  const grid = document.getElementById('dashGrid');
-  if (!list.length) { grid.innerHTML = '<div class="dash-empty"><div class="dash-empty-icon">&#128218;</div><p>No classes match your filter.</p></div>'; return; }
-
-  grid.innerHTML = list.map(p => {
-    const cat = detectCategory(p.title);
-    const color = catColor(cat);
-    const pct = pctDash(p);
-    const linked = countLinkedDash(p);
-    const total = countAllDash(p);
-    const statusMap = { 'Complete': 'badge-complete', 'In Progress': 'badge-progress', 'Needs Review': 'badge-review', 'Not Started': 'badge-not-started', 'Missing Assets': 'badge-missing', 'Waiting on Link': 'badge-waiting-link', 'Waiting on Approval': 'badge-waiting-approval' };
-    const pctColor = pct === 100 ? 'var(--green)' : 'var(--blue)';
-    const desc = p.description || 'Click to view all assets and resources for this class.';
-
-    return `<div class="class-card" data-cat="${cat}" data-title="${p.title.toLowerCase()}" onclick="openClassInTracker('${p.id}')">
-      <div class="class-card-accent" style="background:${color};"></div>
-      <div class="class-card-body">
-        <div class="class-card-status"><span class="badge ${statusMap[p.status] || 'badge-not-started'}">${p.status}</span></div>
-        <div class="class-card-top">
-          <div class="class-card-icon">${p.icon || '&#128218;'}</div>
-          <div class="class-card-info">
-            <div class="class-card-cat" style="color:${color};">${catLabel(cat)}</div>
-            <div class="class-card-title">${escDash(p.title)}</div>
-            <div class="class-card-desc">${escDash(desc)}</div>
-          </div>
-        </div>
-        <div class="class-card-meta">
-          <div class="class-card-progress">
-            <div class="class-card-progress-bar"><div class="class-card-progress-fill" style="width:${pct}%;background:${pctColor};"></div></div>
-            <div class="class-card-progress-text"><span>${pct}% complete</span><span>${linked}/${total} assets</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="class-card-actions">
-        <button class="class-card-action cca-primary" onclick="event.stopPropagation();openAssetViewer('${p.id}')">View Assets</button>
-        <button class="class-card-action cca-secondary" onclick="event.stopPropagation();openClassInTracker('${p.id}')">Open in Tracker</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function escDash(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
-
-function openClassInTracker(id) {
-  navigateTo('tracker');
-  /* Wait for tracker to render, then expand the target card */
-  setTimeout(() => {
-    const card = document.getElementById('card-' + id);
-    if (card) {
-      card.classList.remove('collapsed');
-      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, 600);
-}
-
-/* Dashboard filters */
-let activeDashCat = 'all';
-
-function filterDash(cat, btn) {
-  activeDashCat = cat;
-  document.querySelectorAll('.dash-filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  applyDashFilters();
-}
-
-function filterDashSearch() { applyDashFilters(); }
-
-function applyDashFilters() {
-  const q = document.getElementById('dashSearchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.class-card');
-  cards.forEach(c => {
-    let show = true;
-    if (activeDashCat !== 'all' && c.dataset.cat !== activeDashCat) show = false;
-    if (q && !c.dataset.title.includes(q)) show = false;
-    c.style.display = show ? '' : 'none';
-  });
-}
-
 /* ═══════════════════════════════════
-   ASSET VIEWER MODAL
+   CONFIG — localStorage for settings ONLY
 ═══════════════════════════════════ */
-function openAssetViewer(id) {
-  const p = dashPresentations.find(x => x.id === id);
-  if (!p) return;
-
-  const cat = detectCategory(p.title);
-  const color = catColor(cat);
-  const pct = pctDash(p);
-  const linked = countLinkedDash(p);
-  const total = countAllDash(p);
-  const statusMap = { 'Complete': 'badge-complete', 'In Progress': 'badge-progress', 'Needs Review': 'badge-review', 'Not Started': 'badge-not-started', 'Missing Assets': 'badge-missing', 'Waiting on Link': 'badge-waiting-link', 'Waiting on Approval': 'badge-waiting-approval' };
-
-  /* Header */
-  document.getElementById('avHeader').innerHTML = `
-    <div class="av-header-icon">${p.icon || '&#128218;'}</div>
-    <div class="av-header-info">
-      <div class="av-header-title">${escDash(p.title)}</div>
-      <div class="av-header-sub">
-        <span class="badge ${statusMap[p.status] || 'badge-not-started'}">${p.status}</span>
-        <span>${linked}/${total} assets linked</span>
-        <span>${pct}% complete</span>
-      </div>
-    </div>
-    <button class="av-close" onclick="closeAssetViewer()">&times;</button>`;
-
-  /* Body - build sections */
-  let html = '';
-
-  /* Deck Files */
-  const deckItems = [
-    { label: 'Presentation (PPTX)', url: p.deck.pptx.url, status: p.deck.pptx.status, notes: p.deck.pptx.notes },
-    { label: 'Presentation (PDF)', url: p.deck.pdf.url, status: p.deck.pdf.status, notes: p.deck.pdf.notes }
-  ];
-  html += avSection('Deck Files', 'si-deck', '&#128196;', deckItems);
-
-  /* Funnel */
-  html += avSection('Funnel Resources', 'si-funnel', '&#9889;', p.funnel.resources);
-
-  /* Marketing - Canva */
-  const canvaRes = (p.marketing.resources || []).filter(r => r.group === 'canva');
-  if (canvaRes.length) html += avSection('Canva Resources', 'si-canva', '&#127912;', canvaRes);
-
-  /* Marketing - Class Resources */
-  const classRes = (p.marketing.resources || []).filter(r => r.group === 'class-resources');
-  if (classRes.length) html += avSection('Class Resources', 'si-bonus', '&#128218;', classRes);
-
-  /* Workflow */
-  html += avSection('Workflow', 'si-workflow', '&#9881;', p.workflow.resources);
-
-  /* Check-in */
-  html += avSection('Check-in Forms', 'si-checkin', '&#9745;', p.checkin.resources);
-
-  document.getElementById('avBody').innerHTML = html;
-
-  /* Footer button */
-  document.getElementById('avTrackerBtn').onclick = function() {
-    closeAssetViewer();
-    openClassInTracker(id);
-  };
-
-  document.getElementById('avOverlay').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeAssetViewer() {
-  document.getElementById('avOverlay').classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-function avSection(title, iconClass, iconChar, items) {
-  if (!items || !items.length) return '';
-  const linked = items.filter(r => r.url).length;
-  const rbMap = { 'Added': 'rb-added', 'Missing': 'rb-missing', 'Needs Review': 'rb-review', 'Draft': 'rb-draft', 'Final': 'rb-final' };
-
-  let rows = items.map(r => {
-    const hasUrl = !!r.url;
-    const badge = `<span class="resource-badge ${rbMap[r.status] || 'rb-draft'}">${r.status || 'Added'}</span>`;
-    const noteText = r.notes && r.notes !== 'Placeholder' ? r.notes : (hasUrl ? 'Ready' : 'Pending');
-    const actionBtn = hasUrl
-      ? `<a class="av-btn-open" href="${escDash(r.url)}" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#8599; Open</a>`
-      : `<span class="av-btn-empty">Pending</span>`;
-    return `<div class="av-asset">
-      <div class="av-asset-info">
-        <div class="av-asset-name">${escDash(r.label)}</div>
-        <div class="av-asset-note">${escDash(noteText)}</div>
-      </div>
-      <div class="av-asset-actions">${badge} ${actionBtn}</div>
-    </div>`;
-  }).join('');
-
-  return `<div class="av-section">
-    <div class="av-section-head">
-      <div class="av-section-icon ${iconClass}">${iconChar}</div>
-      <div class="av-section-title">${title}</div>
-      <div class="av-section-count">${linked}/${items.length} linked</div>
-    </div>
-    <div class="av-assets">${rows}</div>
-  </div>`;
-}
-
-/* Close on Escape key */
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.getElementById('avOverlay').classList.contains('show')) closeAssetViewer();
-});
-</script>
-
-<!-- ═══════════════════════════════════
-     TRACKER LOGIC (existing, unchanged)
-═══════════════════════════════════ -->
-<script>
 const ADMIN_PASS='mm2026';
 const DEF={owner:'jeromemmplace',repo:'mortgagemarketplace',branch:'main',dataPath:'data.json'};
 let isAdmin=false, presentations=[], dataSha=null, saving=false;
@@ -826,15 +163,20 @@ function saveCfg(c){
   localStorage.setItem('mm_gh_datapath',c.dataPath);
 }
 
+/* ═══════════════════════════════════
+   GITHUB API
+═══════════════════════════════════ */
 function rawUrl(path){const c=getCfg();return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${path||c.dataPath}?t=${Date.now()}`;}
 function apiUrl(path){const c=getCfg();return`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${path}`;}
 function apiH(){const c=getCfg();const h={'Content-Type':'application/json'};if(c.token)h['Authorization']='token '+c.token;return h;}
 
+/* Check if a URL points to a file inside this repo */
 function isRepoFile(url){
   if(!url)return false;
   const c=getCfg();
   return url.includes(`raw.githubusercontent.com/${c.owner}/${c.repo}/`)||url.includes(`github.com/${c.owner}/${c.repo}/`);
 }
+/* Extract repo path from a raw GitHub URL */
 function repoPathFromUrl(url){
   const c=getCfg();
   const prefix=`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/`;
@@ -843,16 +185,17 @@ function repoPathFromUrl(url){
 }
 
 async function fetchDataFromGitHub(){
-  setLoading(true);const c=getCfg();let data=null;
-  try{const lr=await fetch('./'+c.dataPath+'?t='+Date.now());if(lr.ok){data=await lr.json();console.log('Loaded from local path');}}catch(e){console.log('Local fetch failed');}
-  if(!data){try{const res=await fetch(rawUrl());if(res.ok){data=await res.json();console.log('Loaded from raw GitHub');}}catch(e){console.log('Raw GitHub fetch failed');}}
-  if(data){
+  setLoading(true);
+  const c=getCfg();
+  try{
+    const res=await fetch(rawUrl());
+    if(!res.ok)throw new Error('data.json not found (HTTP '+res.status+')');
+    const data=await res.json();
     if(data.presentations){presentations=data.presentations;if(data.header){saveHeaderLocal(data.header);applyHeader();}}
     else if(Array.isArray(data)){presentations=data;}
-    try{const mr=await fetch(apiUrl(c.dataPath)+'?ref='+c.branch,{headers:apiH()});if(mr.ok){const m=await mr.json();dataSha=m.sha;}}catch(e){}
+    try{const mr=await fetch(apiUrl(c.dataPath)+'?ref='+c.branch);if(mr.ok){const m=await mr.json();dataSha=m.sha;}}catch(e){}
     runMigration();setLoading(false);return true;
-  }
-  console.error('All fetch attempts failed');setLoading(false);return false;
+  }catch(e){console.error('Fetch failed:',e);setLoading(false);return false;}
 }
 
 async function saveDataToGitHub(){
@@ -898,45 +241,59 @@ async function deleteFileFromGitHub(filePath){
 async function renameFileInGitHub(oldPath,newPath){
   const c=getCfg();if(!c.token)return null;
   try{
+    // Fetch old file content
     const ck=await fetch(apiUrl(oldPath)+'?ref='+c.branch,{headers:apiH()});
     if(!ck.ok)return null;const m=await ck.json();
+    // Create new file with same content
     const res=await fetch(apiUrl(newPath),{method:'PUT',headers:apiH(),body:JSON.stringify({message:'Rename '+oldPath+' to '+newPath,content:m.content,branch:c.branch})});
     if(!res.ok)return null;
+    // Delete old file
     await fetch(apiUrl(oldPath),{method:'DELETE',headers:apiH(),body:JSON.stringify({message:'Delete old '+oldPath,sha:m.sha,branch:c.branch})});
     return`https://raw.githubusercontent.com/${c.owner}/${c.repo}/${c.branch}/${newPath}`;
   }catch(e){showToast('Rename failed: '+e.message,'error');return null;}
 }
 
+/* ═══════════════════════════════════
+   HEADER
+═══════════════════════════════════ */
 function loadHeaderLocal(){try{const r=localStorage.getItem('mm_tracker_header');if(r)return JSON.parse(r);}catch(e){}return{title:'Mortgage Marketplace LLC',subtitle:'Presentation Tracker & Resource Hub',logo:'M'};}
 function saveHeaderLocal(hd){try{localStorage.setItem('mm_tracker_header',JSON.stringify(hd));}catch(e){}}
 function applyHeader(){const hd=loadHeaderLocal();document.getElementById('headerTitle').textContent=hd.title;document.getElementById('headerSub').textContent=hd.subtitle;document.getElementById('logoMark').textContent=hd.logo;document.title=hd.title+' | '+hd.subtitle;}
 function editHeader(){if(!isAdmin)return;const hd=loadHeaderLocal();const t=prompt('Company / Site Title:',hd.title);if(t===null)return;const s=prompt('Subtitle:',hd.subtitle);if(s===null)return;const l=prompt('Logo Letter (1-2 chars):',hd.logo);if(l===null)return;hd.title=t.trim()||'Mortgage Marketplace LLC';hd.subtitle=s.trim()||'Presentation Tracker & Resource Hub';hd.logo=l.trim().substring(0,2)||'M';saveHeaderLocal(hd);applyHeader();saveDataToGitHub();showToast('Header updated');}
 
+/* ═══════════════════════════════════
+   MIGRATION
+═══════════════════════════════════ */
 function runMigration(){
   presentations.forEach(p=>{if(!p.marketing)return;const labels=p.marketing.resources.map(r=>r.label);
-    const canvaNeeded=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Post',group:'canva'},{label:'Instagram Story',group:'canva'}];
-    canvaNeeded.forEach(n=>{if(!labels.includes(n.label))p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});});
-    p.marketing.resources.forEach(r=>{if(r.label==='Instagram Story Post')r.label='Instagram Story';if(r.label==='Instagram Feed Post')r.label='Instagram Post';});
-    const crCount=p.marketing.resources.filter(r=>r.group==='class-resources').length;
-    if(crCount<3){for(let i=crCount;i<3;i++)p.marketing.resources.push({label:'Class Resource '+(i+1),description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'});}
-    p.marketing.resources.forEach(r=>{if(!r.group)r.group='canva';});
+    const needed=[{label:'Class Flyer',group:'canva'},{label:'Facebook Post',group:'canva'},{label:'Instagram Story Post',group:'canva'},{label:'Instagram Feed Post',group:'canva'},{label:'Email Banner',group:'canva'},{label:'Class Bonus / Lead Magnet',group:'bonus'},{label:'Promotional Email 1',group:'emails'},{label:'Promotional Email 2',group:'emails'},{label:'Promotional Email 3',group:'emails'},{label:'Confirmation & Reminders Email 1',group:'emails'},{label:'Confirmation & Reminders Email 2',group:'emails'},{label:'Confirmation & Reminders Email 3',group:'emails'},{label:'Thank You Email - After Attending Class',group:'emails'},{label:'Missed Class Email',group:'emails'}];
+    needed.forEach(n=>{if(!labels.includes(n.label))p.marketing.resources.push({label:n.label,url:'',status:'Added',notes:'Placeholder',group:n.group});});
+    p.marketing.resources.forEach(r=>{if(!r.group){const eL=['Promotional Email 1','Promotional Email 2','Promotional Email 3','Confirmation & Reminders Email 1','Confirmation & Reminders Email 2','Confirmation & Reminders Email 3','Thank You Email - After Attending Class','Missed Class Email'];const cL=['Class Flyer','Facebook Post','Instagram Story Post','Instagram Feed Post','Email Banner','Email Banners','Social Graphics'];const bL=['Class Bonus / Lead Magnet','AI Content System & Playbook'];if(eL.includes(r.label))r.group='emails';else if(cL.includes(r.label))r.group='canva';else if(bL.includes(r.label))r.group='bonus';else r.group='canva';}});
   });
-  presentations.forEach(p=>{if(!p.workflow)return;const wL=p.workflow.resources.map(r=>r.label);if(!wL.includes('Workflow Link'))p.workflow.resources.unshift({label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'});});
 }
 
+/* ═══════════════════════════════════
+   HELPERS
+═══════════════════════════════════ */
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function statusBadge(s){const m={'Complete':'badge-complete','In Progress':'badge-progress','Needs Review':'badge-review','Not Started':'badge-not-started','Missing Assets':'badge-missing','Waiting on Link':'badge-waiting-link','Waiting on Approval':'badge-waiting-approval'};return'<span class="badge '+(m[s]||'badge-not-started')+'">'+s+'</span>';}
 function resBadge(s){const m={'Added':'rb-added','Missing':'rb-missing','Needs Review':'rb-review','Draft':'rb-draft','Final':'rb-final'};return'<span class="resource-badge '+(m[s]||'rb-draft')+'">'+s+'</span>';}
-function countAll(p){const mv=p.marketing.resources.filter(r=>r.group==='canva'||r.group==='class-resources').length;return 2+p.funnel.resources.length+mv+p.workflow.resources.length+p.checkin.resources.length;}
-function countLinked(p){let c=0;if(p.deck.pptx.url)c++;if(p.deck.pdf.url)c++;c+=p.funnel.resources.filter(r=>r.url).length;c+=p.marketing.resources.filter(r=>(r.group==='canva'||r.group==='class-resources')&&r.url).length;c+=p.workflow.resources.filter(r=>r.url).length;c+=p.checkin.resources.filter(r=>r.url).length;return c;}
+function countAll(p){return 2+p.funnel.resources.length+p.marketing.resources.length+p.workflow.resources.length+p.checkin.resources.length;}
+function countLinked(p){let c=0;if(p.deck.pptx.url)c++;if(p.deck.pdf.url)c++;[p.funnel,p.marketing,p.workflow,p.checkin].forEach(cat=>c+=cat.resources.filter(r=>r.url).length);return c;}
 function pctVal(p){const t=countAll(p),f=countLinked(p);return t?Math.round(f/t*100):0;}
 function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type==='error'?' error':'');setTimeout(()=>t.classList.remove('show'),3500);}
 function setLoading(on){const b=document.getElementById('loadingBar');b.className='loading-bar '+(on?'active':'done');if(!on)setTimeout(()=>b.className='loading-bar',500);}
 function setSaveStatus(msg,isErr){const s=document.getElementById('saveIndicator');s.textContent=msg;s.style.color=isErr?'var(--red)':'var(--green)';s.classList.add('show');setTimeout(()=>{s.classList.remove('show');s.style.color='var(--green)';},3000);}
 
+/* ═══════════════════════════════════
+   ADMIN / LOGIN
+═══════════════════════════════════ */
 function toggleAdmin(){if(isAdmin){isAdmin=false;document.body.classList.remove('is-admin');document.getElementById('adminBtn').innerHTML='&#128274; Admin';document.getElementById('adminBtn').className='btn-top';renderAll();showToast('Viewer mode');return;}document.getElementById('loginOv').classList.add('show');document.getElementById('adminPass').value='';document.getElementById('loginErr').style.display='none';setTimeout(()=>document.getElementById('adminPass').focus(),100);}
 function doLogin(){if(document.getElementById('adminPass').value===ADMIN_PASS){isAdmin=true;document.body.classList.add('is-admin');document.getElementById('loginOv').classList.remove('show');document.getElementById('adminBtn').innerHTML='&#128275; Logout';document.getElementById('adminBtn').className='btn-top logout';renderAll();showToast('Admin mode activated');}else{document.getElementById('loginErr').style.display='block';}}
 
+/* ═══════════════════════════════════
+   SETTINGS
+═══════════════════════════════════ */
 function openSettings(){const c=getCfg();document.getElementById('cfgToken').value=c.token;document.getElementById('cfgOwner').value=c.owner;document.getElementById('cfgRepo').value=c.repo;document.getElementById('cfgBranch').value=c.branch;document.getElementById('cfgDataPath').value=c.dataPath;document.getElementById('settingsOv').classList.add('show');}
 function closeSettings(){document.getElementById('settingsOv').classList.remove('show');}
 function saveSettings(){saveCfg({token:document.getElementById('cfgToken').value.trim(),owner:document.getElementById('cfgOwner').value.trim()||DEF.owner,repo:document.getElementById('cfgRepo').value.trim()||DEF.repo,branch:document.getElementById('cfgBranch').value.trim()||DEF.branch,dataPath:document.getElementById('cfgDataPath').value.trim()||DEF.dataPath});closeSettings();showToast('Settings saved');}
@@ -944,9 +301,13 @@ async function testConnection(){const c=getCfg();if(!c.token){showToast('Enter a
 async function importLegacy(){const raw=localStorage.getItem('mm_presentation_tracker');if(!raw){showToast('No legacy data found in localStorage');return;}let d;try{d=JSON.parse(raw);}catch(e){showToast('Legacy data is corrupted','error');return;}if(!Array.isArray(d)||!d.length){showToast('No presentations found');return;}if(!confirm('Found '+d.length+' presentations in browser storage.\n\nThis will REPLACE current shared data.\n\nContinue?'))return;presentations=d;runMigration();const ok=await saveDataToGitHub();if(ok){showToast('Imported '+presentations.length+' presentations');renderAll();}}
 async function syncFromGitHub(){const ok=await fetchDataFromGitHub();renderAll();showToast(ok?'Synced from GitHub':'Sync failed — check settings',ok?undefined:'error');}
 
+/* ═══════════════════════════════════
+   EDITING — DECK FILES
+═══════════════════════════════════ */
 function showEditDeck(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input[type="url"]').value=p.deck[type].url;el.querySelector('input[type="url"]').focus();}}
 async function saveDeckUrl(pid,type){const el=document.getElementById('edit-deck-'+pid+'-'+type);const url=el.querySelector('input[type="url"]').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p.deck[type].url=url;p.deck[type].status=status;p.deck[type].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast(type.toUpperCase()+' saved');}
 
+/* Upload new deck file (when empty) */
 function uploadDeckFile(pid,type){
   if(!isAdmin)return;
   const input=document.createElement('input');input.type='file';input.accept='.'+type+',.pptx,.pdf';
@@ -960,6 +321,7 @@ function uploadDeckFile(pid,type){
     };reader.readAsDataURL(file);};input.click();
 }
 
+/* Replace existing deck file */
 function replaceDeckFile(pid,type){
   if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
   const input=document.createElement('input');input.type='file';input.accept='.'+type+',.pptx,.pdf';
@@ -967,6 +329,7 @@ function replaceDeckFile(pid,type){
     const reader=new FileReader();reader.onload=async function(){
       const b64=reader.result.split(',')[1];const ext=file.name.split('.').pop().toLowerCase();
       const safe=file.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+      // If old file is in repo, overwrite same path; otherwise create new
       const oldPath=repoPathFromUrl(p.deck[type].url);
       const path=oldPath||'assets/'+(ext==='pdf'?'pdf':'pptx')+'/'+pid.substring(0,10)+'_'+safe;
       const url=await uploadFileToGitHub(path,b64,'Replace '+safe);
@@ -974,17 +337,23 @@ function replaceDeckFile(pid,type){
     };reader.readAsDataURL(file);};input.click();
 }
 
+/* Delete deck file */
 async function deleteDeckFile(pid,type){
   if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
   if(!confirm('Remove '+type.toUpperCase()+' file from "'+p.title+'"?'))return;
+  // If stored in repo, delete actual file
   if(isRepoFile(p.deck[type].url)){const rp=repoPathFromUrl(p.deck[type].url);if(rp)await deleteFileFromGitHub(rp);}
   p.deck[type].url='';p.deck[type].status='Added';p.deck[type].notes='Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);
   await saveDataToGitHub();renderAll();showToast(type.toUpperCase()+' file removed');
 }
 
+/* ═══════════════════════════════════
+   EDITING — RESOURCES
+═══════════════════════════════════ */
 function showEditRes(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);el.querySelector('input[type="url"]').value=p[cat].resources[idx].url;el.querySelector('input[type="url"]').focus();}}
 async function saveResUrl(pid,cat,idx){const el=document.getElementById('edit-res-'+pid+'-'+cat+'-'+idx);const url=el.querySelector('input[type="url"]').value.trim();const status=el.querySelector('select').value;const p=presentations.find(x=>x.id===pid);p[cat].resources[idx].url=url;p[cat].resources[idx].status=status;p[cat].resources[idx].notes=url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Link saved');}
 
+/* Upload resource file (when empty) */
 function uploadResFile(pid,cat,idx){
   if(!isAdmin)return;
   const input=document.createElement('input');input.type='file';
@@ -997,6 +366,7 @@ function uploadResFile(pid,cat,idx){
     };reader.readAsDataURL(file);};input.click();
 }
 
+/* Replace existing resource file */
 function replaceResFile(pid,cat,idx){
   if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
   const input=document.createElement('input');input.type='file';
@@ -1010,11 +380,13 @@ function replaceResFile(pid,cat,idx){
     };reader.readAsDataURL(file);};input.click();
 }
 
+/* Rename resource — label + optional GitHub file rename */
 async function renameRes(pid,cat,idx){
   if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
   const r=p[cat].resources[idx];const nm=prompt('Rename resource:',r.label);
   if(!nm||!nm.trim()||nm.trim()===r.label)return;
   const newLabel=nm.trim();
+  // If file is in repo, also rename the actual file
   if(isRepoFile(r.url)){
     const oldPath=repoPathFromUrl(r.url);
     if(oldPath){
@@ -1032,6 +404,7 @@ async function renameRes(pid,cat,idx){
   await saveDataToGitHub();renderAll();showToast('Renamed to: '+newLabel);
 }
 
+/* Delete resource — with optional GitHub file deletion */
 async function deleteRes(pid,cat,idx){
   if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;
   const r=p[cat].resources[idx];
@@ -1044,20 +417,27 @@ async function deleteRes(pid,cat,idx){
 }
 
 async function addResource(pid,cat,group){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;const nm=prompt('Enter resource name:');if(!nm||!nm.trim())return;const r={label:nm.trim(),url:'',status:'Added',notes:'Placeholder'};if(group)r.group=group;p[cat].resources.push(r);p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Added: '+nm.trim());}
-
 function updateField(id,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p){p[f]=v;p.lastUpdated=new Date().toISOString().slice(0,10);}}
 function updateCatField(id,cat,f,v){if(!isAdmin)return;const p=presentations.find(x=>x.id===id);if(p&&p[cat]){p[cat][f]=v;p.lastUpdated=new Date().toISOString().slice(0,10);}}
 let saveTimer;function debouncedSave(){clearTimeout(saveTimer);saveTimer=setTimeout(()=>saveDataToGitHub(),2000);}
 
+/* ═══════════════════════════════════
+   PREVIEW
+═══════════════════════════════════ */
 function openPrev(url,label){document.getElementById('prevTitle').textContent=label;document.getElementById('prevDl').href=url;document.getElementById('prevTab').href=url;const body=document.getElementById('prevBody');const ok=url.includes('canva.com')||url.includes('google.com')||url.includes('gamma.app')||url.includes('connectionincorporated.com')||url.includes('leadconnectorhq.com')||url.includes('githubusercontent.com')||url.endsWith('.pdf')||url.endsWith('.html');body.innerHTML=ok?'<iframe src="'+url+'" allow="fullscreen"></iframe>':'<div class="prev-fallback"><div style="font-size:48px;opacity:0.4;">&#128196;</div><div>Preview not available for this file type.<br>Use the buttons above to download or open in a new tab.</div></div>';document.getElementById('prevOv').classList.add('show');}
 function closePrev(){document.getElementById('prevOv').classList.remove('show');document.getElementById('prevBody').innerHTML='';}
 
+/* ═══════════════════════════════════
+   RENDER
+═══════════════════════════════════ */
 function renderAll(){renderSummary();renderGrid();}
 function renderSummary(){const t=presentations.length,c=presentations.filter(p=>p.status==='Complete').length,ip=presentations.filter(p=>p.status==='In Progress').length,nr=presentations.filter(p=>p.status==='Needs Review').length,ta=presentations.reduce((s,p)=>s+countAll(p),0),lk=presentations.reduce((s,p)=>s+countLinked(p),0);document.getElementById('summaryStrip').innerHTML='<div class="stat-card"><div class="stat-num">'+t+'</div><div class="stat-label">Total<br>Presentations</div></div><div class="stat-card"><div class="stat-num" style="color:var(--green);">'+c+'</div><div class="stat-label">Complete</div></div><div class="stat-card"><div class="stat-num" style="color:var(--blue);">'+ip+'</div><div class="stat-label">In Progress</div></div><div class="stat-card"><div class="stat-num" style="color:var(--orange);">'+nr+'</div><div class="stat-label">Needs Review</div></div><div class="stat-card"><div class="stat-num">'+lk+'</div><div class="stat-label">Assets<br>Linked</div></div><div class="stat-card"><div class="stat-num">'+(ta-lk)+'</div><div class="stat-label">Assets<br>Pending</div></div>';}
 
 function deckCard(p,type){
   const f=p.deck[type],ph=!f.url,ext=type.toUpperCase(),nm=p.title.replace(/[^a-zA-Z0-9 ]/g,'').replace(/ /g,'-'),su=esc(f.url);
+  // Viewer buttons: Preview + Download when URL exists, Coming Soon when empty
   let vb=ph?'<span class="btn-placeholder">Coming Soon</span>':'<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(nm)+'.'+type+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';
+  // Admin buttons: Upload (empty) OR Replace (has file) + Edit + Delete
   let ab='';
   if(ph){ab='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadDeckFile(\''+p.id+'\',\''+type+'\')">&#8679; Upload</button>';}
   else{ab='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceDeckFile(\''+p.id+'\',\''+type+'\')">&#8635; Replace</button><button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteDeckFile(\''+p.id+'\',\''+type+'\')">&#10005;</button>';}
@@ -1069,7 +449,9 @@ function resRow(p,cat,r,idx){
   const ph=!r.url,icons={funnel:'\u26A1',marketing:'\u{1F3A8}',workflow:'\u2699',checkin:'\u2611'},su=esc(r.url);
   const grp=r.group||'';const iconCls=grp==='emails'?'email':grp==='canva'?'canva':grp==='bonus'?'bonus':cat;
   const iconChar=grp==='emails'?'\u{1F4E7}':grp==='canva'?'\u{1F3A8}':grp==='bonus'?'\u{1F381}':icons[cat]||'\u2611';
+  // Viewer buttons
   let vb=ph?'<span class="btn-placeholder">Coming Soon</span>':'<button class="btn-preview" onclick="event.stopPropagation();openPrev(\''+su+'\',\''+esc(r.label)+'\')">&#128065; Preview</button><a class="btn-dl" href="'+su+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">&#11015; Download</a>';
+  // Admin buttons: Upload/Replace + Edit + Rename + Delete
   let ab='';
   if(ph){ab='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadResFile(\''+p.id+'\',\''+cat+'\','+idx+')">&#8679; Upload</button>';}
   else{ab='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceResFile(\''+p.id+'\',\''+cat+'\','+idx+')">&#8635; Replace</button>';}
@@ -1079,27 +461,12 @@ function resRow(p,cat,r,idx){
   return'<div class="resource-row"><div class="resource-icon '+iconCls+'">'+iconChar+'</div><div class="resource-info"><div class="resource-label">'+esc(r.label)+'</div><div class="resource-note">'+(r.notes&&r.notes!=='Placeholder'?esc(r.notes):(ph?'Pending':'Ready'))+'</div></div>'+resBadge(r.status)+' '+vb+' '+ab+'</div><div class="edit-row admin-only" id="edit-res-'+p.id+'-'+cat+'-'+idx+'"><input type="url" placeholder="Paste URL..." value="'+su+'"><select><option '+(r.status==='Added'?'selected':'')+'>Added</option><option '+(r.status==='Missing'?'selected':'')+'>Missing</option><option '+(r.status==='Draft'?'selected':'')+'>Draft</option><option '+(r.status==='Final'?'selected':'')+'>Final</option><option '+(r.status==='Needs Review'?'selected':'')+'>Needs Review</option></select><button class="btn-save-url" onclick="saveResUrl(\''+p.id+'\',\''+cat+'\','+idx+')">Save</button><button class="btn-cancel-url" onclick="showEditRes(\''+p.id+'\',\''+cat+'\','+idx+')">Cancel</button></div>';
 }
 
-/* CLASS RESOURCE CARDS */
-function classResCard(p,r,idx){
-  const realIdx=p.marketing.resources.indexOf(r);const ph=!r.url,su=esc(r.url);
-  let linkHtml=ph?'<span style="font-size:12px;color:var(--gray-500);">No link yet</span>':'<a class="class-res-link" href="'+su+'" target="_blank" onclick="event.stopPropagation();">\u{1F517} '+su+'</a>';
-  let ab='<button class="btn-edit admin-only" onclick="event.stopPropagation();showEditClassRes(\''+p.id+'\','+realIdx+')">&#9998; Edit</button>';
-  ab+='<button class="btn-rename admin-only" onclick="event.stopPropagation();renameRes(\''+p.id+'\',\'marketing\','+realIdx+')">Rename</button>';
-  ab+='<button class="btn-delete-res admin-only" onclick="event.stopPropagation();deleteRes(\''+p.id+'\',\'marketing\','+realIdx+')">&#10005;</button>';
-  if(ph){ab+='<button class="btn-upload admin-only" onclick="event.stopPropagation();uploadResFile(\''+p.id+'\',\'marketing\','+realIdx+')">&#8679; Upload</button>';}
-  else{ab+='<button class="btn-replace admin-only" onclick="event.stopPropagation();replaceResFile(\''+p.id+'\',\'marketing\','+realIdx+')">&#8635; Replace</button>';}
-  return'<div class="class-res-card"><div class="class-res-title">'+(r.label?esc(r.label):'Untitled')+'</div><div class="class-res-desc">'+(r.description?esc(r.description):'<span style="color:var(--gray-400);font-style:italic;">No description</span>')+'</div>'+linkHtml+'<div class="class-res-actions">'+resBadge(r.status)+' '+ab+'</div><div class="class-res-edit-area" id="edit-cr-'+p.id+'-'+realIdx+'"><label>Title</label><input type="text" id="cr-title-'+p.id+'-'+realIdx+'" value="'+esc(r.label)+'" placeholder="Resource title"><label>Description</label><textarea id="cr-desc-'+p.id+'-'+realIdx+'" placeholder="What is this resource?">'+(r.description?esc(r.description):'')+'</textarea><label>Link</label><input type="url" id="cr-url-'+p.id+'-'+realIdx+'" value="'+su+'" placeholder="https://..."><div style="display:flex;gap:8px;margin-top:8px;"><button class="btn-save-url" onclick="saveClassRes(\''+p.id+'\','+realIdx+')">Save</button><button class="btn-cancel-url" onclick="showEditClassRes(\''+p.id+'\','+realIdx+')">Cancel</button></div></div></div>';
-}
-function showEditClassRes(pid,idx){const el=document.getElementById('edit-cr-'+pid+'-'+idx);el.classList.toggle('visible');if(el.classList.contains('visible')){const p=presentations.find(x=>x.id===pid);const r=p.marketing.resources[idx];document.getElementById('cr-title-'+pid+'-'+idx).value=r.label||'';document.getElementById('cr-desc-'+pid+'-'+idx).value=r.description||'';document.getElementById('cr-url-'+pid+'-'+idx).value=r.url||'';}}
-async function saveClassRes(pid,idx){const p=presentations.find(x=>x.id===pid);if(!p)return;const r=p.marketing.resources[idx];r.label=document.getElementById('cr-title-'+pid+'-'+idx).value.trim()||'Untitled';r.description=document.getElementById('cr-desc-'+pid+'-'+idx).value.trim();r.url=document.getElementById('cr-url-'+pid+'-'+idx).value.trim();r.notes=r.url?'':'Placeholder';p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Class resource saved');}
-async function addClassResource(pid){if(!isAdmin)return;const p=presentations.find(x=>x.id===pid);if(!p)return;const nm=prompt('Enter resource title:');if(!nm||!nm.trim())return;p.marketing.resources.push({label:nm.trim(),description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'});p.lastUpdated=new Date().toISOString().slice(0,10);await saveDataToGitHub();renderAll();showToast('Added: '+nm.trim());}
-
 function renderCard(p){
   const pc=pctVal(p),col=pc===100?'var(--green)':'var(--blue)';
   return'<div class="project-card collapsed" id="card-'+p.id+'" data-status="'+p.status+'" data-title="'+p.title.toLowerCase()+'"><div class="card-header" onclick="toggleCard(\''+p.id+'\')"><div class="card-chevron">\u25BC</div><div class="card-icon">'+p.icon+'</div><div class="card-title-area"><div class="card-title">'+esc(p.title)+'</div><div class="card-subtitle">'+esc(p.owner)+' \u00B7 Updated '+p.lastUpdated+'</div></div>'+statusBadge(p.status)+'<div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:'+pc+'%;background:'+col+'"></div></div><span style="font-size:11px;color:var(--gray-500);min-width:36px;text-align:right;">'+pc+'%</span></div><div class="card-body"><div class="tab-strip"><button class="tab-btn active" onclick="switchTab(this,\''+p.id+'\',\'overview\')">Overview</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'funnel\')">\u26A1 Funnel</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'marketing\')">\u{1F3A8} Marketing</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'workflow\')">\u2699 Workflow</button><button class="tab-btn" onclick="switchTab(this,\''+p.id+'\',\'checkin\')">\u2611 Check-in Forms</button></div>'+
   '<div class="tab-panel active" id="tab-'+p.id+'-overview"><div class="overview-grid"><div class="ov-field"><label>Title</label><div class="val">'+esc(p.title)+'</div></div><div class="ov-field"><label>Owner</label><div class="val">'+esc(p.owner)+'</div></div><div class="ov-field ov-full"><label>Description</label><div class="val">'+esc(p.description)+'</div></div><div class="ov-field"><label>Status</label><div class="val">'+statusBadge(p.status)+'</div></div><div class="ov-field"><label>Last Updated</label><div class="val">'+p.lastUpdated+'</div></div><div class="deck-files-strip"><div class="strip-label">Presentation Files</div>'+deckCard(p,'pptx')+deckCard(p,'pdf')+'</div><div class="ov-field ov-full admin-only"><label>Notes</label><textarea class="ov-notes" placeholder="Add notes..." oninput="updateField(\''+p.id+'\',\'notes\',this.value);debouncedSave()">'+esc(p.notes)+'</textarea></div><div class="ov-field admin-only"><label>Missing Items</label><textarea class="ov-notes" style="min-height:40px" placeholder="Missing items..." oninput="updateField(\''+p.id+'\',\'missingItems\',this.value);debouncedSave()">'+esc(p.missingItems)+'</textarea></div><div class="ov-field admin-only"><label>Next Action</label><textarea class="ov-notes" style="min-height:40px" placeholder="Next action..." oninput="updateField(\''+p.id+'\',\'nextAction\',this.value);debouncedSave()">'+esc(p.nextAction)+'</textarea></div></div></div>'+
   '<div class="tab-panel" id="tab-'+p.id+'-funnel"><div class="resource-header"><h4>\u26A1 Funnel Resources</h4>'+resBadge(p.funnel.status)+'</div><div class="resource-list">'+p.funnel.resources.map((r,i)=>resRow(p,'funnel',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'funnel\')">+ Add Funnel Resource</button><div class="tab-notes-area admin-only"><label>Funnel Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'funnel\',\'notes\',this.value);debouncedSave()">'+esc(p.funnel.notes)+'</textarea></div></div>'+
-  '<div class="tab-panel" id="tab-'+p.id+'-marketing"><div class="resource-header"><h4>\u{1F3A8} Canva Resources</h4>'+resBadge(p.marketing.status)+'</div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='canva').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'canva\')">+ Add Canva Resource</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F4DA} Class Resources</h4></div><p style="font-size:13px;color:var(--gray-500);margin-bottom:16px;">Handouts, guides, bonus materials, and links shared with attendees.</p></div><div class="resource-list" style="gap:14px;">'+p.marketing.resources.filter(r=>r.group==='class-resources').map((r,i)=>classResCard(p,r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addClassResource(\''+p.id+'\')">+ Add Class Resource</button><div class="tab-notes-area admin-only"><label>Marketing Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'marketing\',\'notes\',this.value);debouncedSave()">'+esc(p.marketing.notes)+'</textarea></div></div>'+
+  '<div class="tab-panel" id="tab-'+p.id+'-marketing"><div class="resource-header"><h4>\u{1F3A8} Canva Resources</h4>'+resBadge(p.marketing.status)+'</div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='canva').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'canva\')">+ Add Canva Resource</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F381} Class Bonus + Lead Magnet</h4></div></div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='bonus').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'bonus\')">+ Add Bonus / Lead Magnet</button><div style="border-top:2px solid var(--gray-200);margin:20px 0 16px;padding-top:16px;"><div class="resource-header"><h4>\u{1F4E7} Email Templates</h4></div></div><div class="resource-list">'+p.marketing.resources.filter(r=>r.group==='emails').map(r=>resRow(p,'marketing',r,p.marketing.resources.indexOf(r))).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'marketing\',\'emails\')">+ Add Email Template</button><div class="tab-notes-area admin-only"><label>Marketing Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'marketing\',\'notes\',this.value);debouncedSave()">'+esc(p.marketing.notes)+'</textarea></div></div>'+
   '<div class="tab-panel" id="tab-'+p.id+'-workflow"><div class="resource-header"><h4>\u2699 Workflow inside the CRM</h4>'+resBadge(p.workflow.status)+'</div><div class="resource-list">'+p.workflow.resources.map((r,i)=>resRow(p,'workflow',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'workflow\')">+ Add Workflow Resource</button><div class="tab-notes-area admin-only"><label>Workflow Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'workflow\',\'notes\',this.value);debouncedSave()">'+esc(p.workflow.notes)+'</textarea></div></div>'+
   '<div class="tab-panel" id="tab-'+p.id+'-checkin"><div class="resource-header"><h4>\u2611 Check-in Forms</h4>'+resBadge(p.checkin.status)+'</div><div class="resource-list">'+p.checkin.resources.map((r,i)=>resRow(p,'checkin',r,i)).join('')+'</div><button class="btn-add-res admin-only" onclick="addResource(\''+p.id+'\',\'checkin\')">+ Add Check-in Resource</button><div class="tab-notes-area admin-only"><label>Check-in Notes</label><textarea class="ov-notes" placeholder="Notes..." oninput="updateCatField(\''+p.id+'\',\'checkin\',\'notes\',this.value);debouncedSave()">'+esc(p.checkin.notes)+'</textarea></div></div></div></div>';
 }
@@ -1120,11 +487,13 @@ function applyFilters(){const q=document.getElementById('searchInput').value.toL
 
 function openAddModal(){document.getElementById('fTitle').value='';document.getElementById('fDesc').value='';document.getElementById('fOwner').value='Mike Gillett';document.getElementById('fStatus').value='Complete';document.getElementById('fIcon').value='\u{1F4DA}';document.getElementById('modalOverlay').classList.add('show');}
 function closeModal(){document.getElementById('modalOverlay').classList.remove('show');}
-function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Resource 1',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'},{label:'Class Resource 2',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'},{label:'Class Resource 3',description:'',url:'',status:'Added',notes:'Placeholder',group:'class-resources'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
+function makePresentation(t,d,i){return{id:'p'+Date.now()+'_'+Math.random().toString(36).substr(2,5),title:t,description:d||'',icon:i||'\u{1F4DA}',owner:'Mike Gillett',status:'Complete',lastUpdated:new Date().toISOString().slice(0,10),notes:'',nextAction:'',missingItems:'',deck:{pptx:{url:'',status:'Added',notes:'Placeholder'},pdf:{url:'',status:'Added',notes:'Placeholder'}},funnel:{status:'Final',notes:'',resources:[{label:'Landing Page',url:'',status:'Added',notes:'Placeholder'},{label:'Thank You Page',url:'',status:'Added',notes:'Placeholder'}]},marketing:{status:'Final',notes:'',resources:[{label:'Class Flyer',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Facebook Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Story Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Instagram Feed Post',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Email Banner',url:'',status:'Added',notes:'Placeholder',group:'canva'},{label:'Class Bonus / Lead Magnet',url:'',status:'Added',notes:'Placeholder',group:'bonus'},{label:'Promotional Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Promotional Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 1',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 2',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Confirmation & Reminders Email 3',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Thank You Email - After Attending Class',url:'',status:'Added',notes:'Placeholder',group:'emails'},{label:'Missed Class Email',url:'',status:'Added',notes:'Placeholder',group:'emails'}]},workflow:{status:'Final',notes:'',resources:[{label:'Workflow Link',url:'',status:'Added',notes:'Placeholder'},{label:'Automation Doc',url:'',status:'Added',notes:'Placeholder'}]},checkin:{status:'Final',notes:'',resources:[{label:'Check-in Page',url:'',status:'Added',notes:'Placeholder'},{label:'Form Link',url:'',status:'Added',notes:'Placeholder'}]}};}
 async function addPresentation(){const title=document.getElementById('fTitle').value.trim();if(!title){showToast('Title is required','error');return;}const p=makePresentation(title,document.getElementById('fDesc').value.trim(),document.getElementById('fIcon').value||'\u{1F4DA}');p.owner=document.getElementById('fOwner').value.trim()||'Mike Gillett';p.status=document.getElementById('fStatus').value;presentations.push(p);await saveDataToGitHub();closeModal();renderAll();showToast('Added: '+title);}
 
-/* TRACKER INIT — called when navigating to tracker page */
-async function initTracker(){
+/* ═══════════════════════════════════
+   INIT
+═══════════════════════════════════ */
+(async function(){
   applyHeader();
   const ok=await fetchDataFromGitHub();
   if(!ok){
@@ -1133,8 +502,7 @@ async function initTracker(){
     else{g.innerHTML='<div class="error-state"><div class="err-icon">&#9888;</div><h3>Data Unavailable</h3><p>The shared presentation data could not be loaded right now. This may be a temporary issue. Try refreshing the page. If the problem continues, please contact the site administrator.</p></div>';}
   }
   renderAll();
-}
+})();
 </script>
-
 </body>
 </html>
